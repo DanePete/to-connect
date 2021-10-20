@@ -65,7 +65,7 @@ const Profile = () => {
         await Auth.updateUserAttributes(user, { picture: imgName, user_name: 'admin' });
         console.log('success!', user);
       } catch (error) {
-        console.log('Error uploading users: ', error);
+        console.log('Error uploading user: ', error);
       }  
     }
   }
