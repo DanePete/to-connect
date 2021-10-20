@@ -26,7 +26,7 @@ function Layout({ setLocale }) {
 
   return (
     <div className={`flex bg-gray-700 space-x-4 h-screen app ${rtl ? 'rtl' : ''} ${toggled ? 'toggled' : ''}`}>
-
+      
       <Aside
         image={image}
         collapsed={collapsed}

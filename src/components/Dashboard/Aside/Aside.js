@@ -136,7 +136,7 @@ checkUser();
         >
 
           { isLogged ?
-            <button onCLick={() =>{signOut()}}>LOG OUT</button>
+            <button onCLick={() =>{signOut()}}>LOG OUT <AmplifySignOut /></button>
            :
           //  <button onCLick={() =>{signOut()}}> LOG IN<AmplifySignOut /></button>
            null

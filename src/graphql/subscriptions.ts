@@ -12,11 +12,18 @@ export const onCreateBlog = /* GraphQL */ `
           id
           title
           blogID
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
+        startedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -32,11 +39,18 @@ export const onUpdateBlog = /* GraphQL */ `
           id
           title
           blogID
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
+        startedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -52,11 +66,18 @@ export const onDeleteBlog = /* GraphQL */ `
           id
           title
           blogID
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
+        startedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -73,7 +94,11 @@ export const onCreatePost = /* GraphQL */ `
         name
         posts {
           nextToken
+          startedAt
         }
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -82,11 +107,18 @@ export const onCreatePost = /* GraphQL */ `
           id
           postID
           content
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
+        startedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -103,7 +135,11 @@ export const onUpdatePost = /* GraphQL */ `
         name
         posts {
           nextToken
+          startedAt
         }
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -112,11 +148,18 @@ export const onUpdatePost = /* GraphQL */ `
           id
           postID
           content
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
+        startedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -133,7 +176,11 @@ export const onDeletePost = /* GraphQL */ `
         name
         posts {
           nextToken
+          startedAt
         }
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -142,11 +189,18 @@ export const onDeletePost = /* GraphQL */ `
           id
           postID
           content
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
         }
         nextToken
+        startedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -164,16 +218,26 @@ export const onCreateComment = /* GraphQL */ `
         blog {
           id
           name
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
         }
         comments {
           nextToken
+          startedAt
         }
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
       }
       content
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -191,16 +255,26 @@ export const onUpdateComment = /* GraphQL */ `
         blog {
           id
           name
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
         }
         comments {
           nextToken
+          startedAt
         }
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
       }
       content
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -218,16 +292,26 @@ export const onDeleteComment = /* GraphQL */ `
         blog {
           id
           name
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
         }
         comments {
           nextToken
+          startedAt
         }
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
       }
       content
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }

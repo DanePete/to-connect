@@ -1,22 +1,17 @@
 
-import React, {useCallback} from 'react'
+import {useCallback} from 'react'
 import {useDropzone} from 'react-dropzone'
-import Amplify, { Auth, Storage } from 'aws-amplify';
-// import config from '../../../aws-exports';
+import { Storage } from 'aws-amplify';
+import tempImg from '../../../assets/temp.jpg'
+import { withAuthenticator } from '@aws-amplify/ui-react'
 
-// Storage.configure({
-//   region: config.aws_user_files_s3_bucket_region,
-//   bucket: config.aws_user_files_s3_bucket,
-//   identityPoolId: config.aws_user_pools_id,
-//   level: "protected",
-// });
+Storage.configure({ track: true, level: "private" });
 
 const Profile = () => {
   const onDrop = useCallback(acceptedFiles => {
     // Do something with the files
     acceptedFiles.forEach((file) => {
       const reader = new FileReader()
-
       reader.onabort = () => console.log('file reading was aborted')
       reader.onerror = () => console.log('file reading has failed')
       reader.onload = () => {
@@ -136,14 +131,27 @@ const Profile = () => {
                       </div>
                     </div>
                     <div class="text-center mt-12">
-                    <div {...getRootProps()}>
-              <input {...getInputProps()} />
-              {
-                isDragActive ?
-                  <p>Drop the files here ...</p> :
-                  <p>Drag 'n' drop some files here, or click to select files</p>
-              }
-            </div>
+                      <div className="p-10" {...getRootProps()}>
+                        <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                          <img class="w-full" src={tempImg} alt="Upload"></img>
+                          <div class="px-6 py-4">
+                            <div class="font-bold text-xl mb-2">Upload Images</div>
+                            <p class="text-white bg-gray-400 text-base max-w-sm rounded overflow-hidden shadow-lg cursor-pointer">
+                              <input {...getInputProps()} />
+                                {
+                                isDragActive ?
+                                <p>Drop the files here ...</p> :
+                                <p>Drag 'n' drop some files here, or click to select files</p>
+                                }
+                            </p>
+                          </div>
+                          <div class="px-6 pt-4 pb-2">
+                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
+                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+                          </div>
+                        </div>
+                      </div>
                       <h3
                         class="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2"
                       >
@@ -335,6 +343,6 @@ const Profile = () => {
   )
 };
 
-export default Profile
+export default withAuthenticator(Profile)
 
 
