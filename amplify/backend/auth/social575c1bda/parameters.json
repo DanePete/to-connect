@@ -6,13 +6,13 @@
     "autoVerifiedAttributes": [
         "email"
     ],
-    "mfaConfiguration": "OFF",
+    "mfaConfiguration": "OPTIONAL",
     "mfaTypes": [
-        "SMS Text Message"
+        "TOTP"
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
-    "emailVerificationSubject": "To-Social Email Verification",
+    "emailVerificationSubject": "Your verification code",
     "emailVerificationMessage": "Your verification code is {####}",
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
@@ -88,18 +88,24 @@
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
     "dependsOn": [],
-    "thirdPartyAuth": true,
-    "authProviders": [
-        "accounts.google.com"
-    ],
     "userPoolGroups": false,
-    "adminQueries": true,
+    "adminQueries": false,
     "triggers": "{}",
-    "hostedUI": false,
+    "hostedUI": true,
     "adminQueryGroup": "admin",
     "parentStack": {
         "Ref": "AWS::StackId"
     },
     "breakCircularDependency": true,
-    "permissions": []
+    "permissions": [],
+    "authProviders": [
+        "accounts.google.com"
+    ],
+    "thirdPartyAuth": true,
+    "hostedUIDomainName": "social41d98aaa-41d98aaa",
+    "authProvidersUserPool": [
+        "Google"
+    ],
+    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://main.d2iv0sbhwmqw9o.amplifyapp.com/\"],\"LogoutURLs\":[\"https://main.d2iv0sbhwmqw9o.amplifyapp.com/sign-out/\"]}"
 }

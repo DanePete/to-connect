@@ -12,7 +12,14 @@
               "description": "social"
             }
           },
-          "additionalAuthenticationProviders": []
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authsocial575c1bda"
+              }
+            }
+          ]
         }
       }
     },
