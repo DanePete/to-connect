@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
 import {
   ProSidebar,
@@ -13,9 +13,34 @@ import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } fro
 import sidebarBg from '../../../assets/bg2.jpeg';
 import { BsPlus, BsFillLightningFill, BSGearFill } from 'react-icons/bs';
 import { FaFire, FaPoo } from 'react-icons/fa'
+import { AmplifySignOut } from "@aws-amplify/ui-react";
+import { Auth, signInButtonContent } from 'aws-amplify';
 
 const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
   const intl = useIntl();
+  const [isLogged, set_is_logged] = useState()
+
+
+  async function checkUser() {
+    const user = await Auth.currentAuthenticatedUser();
+    console.log('user', user);
+    if (user) {
+      console.log('got here');
+      set_is_logged(true);
+    }
+  }
+
+  async function signOut() {
+    try {
+        await Auth.signOut();
+        set_is_logged(false);
+    } catch (error) {
+        console.log('error signing out: ', error);
+    }
+  }
+  
+
+checkUser();
   return (
 
 
@@ -99,14 +124,22 @@ const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
         </Menu>
       </SidebarContent>
 
-      {/* <SidebarFooter style={{ textAlign: 'center' }}>
+      <SidebarFooter style={{ textAlign: 'center' }}>
         <div
           className="sidebar-btn-wrapper"
           style={{
             padding: '20px 24px',
           }}
         >
-          <a
+
+          { isLogged ?
+            <button onCLick={() =>{signOut()}}> LOG OUT<AmplifySignOut /></button>
+           :
+          //  <button onCLick={() =>{signOut()}}> LOG IN<AmplifySignOut /></button>
+           null
+          }
+          
+          {/* <a
             href="https://github.com/azouaoui-med/react-pro-sidebar"
             target="_blank"
             className="sidebar-btn"
@@ -116,9 +149,9 @@ const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
             <span style={{ whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
               {intl.formatMessage({ id: 'viewSource' })}
             </span>
-          </a>
+          </a> */}
         </div>
-      </SidebarFooter> */}
+      </SidebarFooter>
     </ProSidebar>
   );
 };
