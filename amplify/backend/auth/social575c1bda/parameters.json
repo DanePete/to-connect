@@ -1,6 +1,6 @@
 {
     "identityPoolName": "social575c1bda_identitypool_575c1bda",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "social575c1bda",
     "userPoolName": "social575c1bda_userpool_575c1bda",
     "autoVerifiedAttributes": [
@@ -84,11 +84,13 @@
         ]
     },
     "useDefault": "manual",
-    "userPoolGroupList": [],
+    "userPoolGroupList": [
+        "user"
+    ],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
     "dependsOn": [],
-    "userPoolGroups": false,
+    "userPoolGroups": true,
     "adminQueries": false,
     "triggers": "{}",
     "hostedUI": true,
@@ -102,7 +104,7 @@
         "accounts.google.com"
     ],
     "thirdPartyAuth": true,
-    "hostedUIDomainName": "social41d98aaa-41d98aaa",
+    "hostedUIDomainName": "social6e9ff367-6e9ff367",
     "authProvidersUserPool": [
         "Google"
     ],
