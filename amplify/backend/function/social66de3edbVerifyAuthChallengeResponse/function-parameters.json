@@ -1,0 +1,18 @@
+{
+  "trigger": true,
+  "modules": [
+    "captcha-verify"
+  ],
+  "parentResource": "social66de3edb",
+  "functionName": "social66de3edbVerifyAuthChallengeResponse",
+  "resourceName": "social66de3edbVerifyAuthChallengeResponse",
+  "parentStack": "auth",
+  "triggerEnvs": [],
+  "triggerDir": "/snapshot/node_modules/amplify-category-auth/provider-utils/awscloudformation/triggers/VerifyAuthChallengeResponse",
+  "triggerTemplate": "VerifyAuthChallengeResponse.json.ejs",
+  "triggerEventPath": "VerifyAuthChallengeResponse.event.json",
+  "roleName": "social66de3edbVerifyAuthChallengeResponse",
+  "skipEdit": true,
+  "RECAPTCHASECRET": "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",
+  "enableCors": false
+}

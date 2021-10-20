@@ -10,6 +10,26 @@
       "StackName": "amplify-social-dev-160313",
       "StackId": "arn:aws:cloudformation:us-east-2:645427258976:stack/amplify-social-dev-160313/2520f2a0-31e9-11ec-934d-0ade5db5f1fa",
       "AmplifyAppId": "d3nsifkrj29sp"
+    },
+    "categories": {
+      "function": {
+        "social66de3edbDefineAuthChallenge": {
+          "deploymentBucketName": "amplify-social-dev-160313-deployment",
+          "s3Key": "amplify-builds/social66de3edbDefineAuthChallenge-6a6c502f67466d344562-build.zip"
+        },
+        "social66de3edbCreateAuthChallenge": {
+          "deploymentBucketName": "amplify-social-dev-160313-deployment",
+          "s3Key": "amplify-builds/social66de3edbCreateAuthChallenge-454b61364639324a3462-build.zip"
+        },
+        "social66de3edbVerifyAuthChallengeResponse": {
+          "RECAPTCHASECRET": "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",
+          "deploymentBucketName": "amplify-social-dev-160313-deployment",
+          "s3Key": "amplify-builds/social66de3edbVerifyAuthChallengeResponse-6b76784a307a525a7263-build.zip"
+        }
+      },
+      "auth": {
+        "social66de3edb": {}
+      }
     }
   }
 }
