@@ -5,6 +5,7 @@ import { FaHeart, FaBars } from 'react-icons/fa';
 import reactLogo from '../../../assets/logo.svg';
 import Dashboard from '../Dashboard';
 import { withAuthenticator } from '@aws-amplify/ui-react'
+import Profile from '../Profile/Profile';
 
 const Main = ({
   collapsed,
@@ -21,7 +22,7 @@ const Main = ({
       <div className="btn-toggle" onClick={() => handleToggleSidebar(true)}>
         <FaBars />
       </div>
-      <Dashboard />
+      <Profile />
       <header>
         {/* <h1>
           <img width={80} src={reactLogo} alt="react logo" /> {intl.formatMessage({ id: 'title' })}

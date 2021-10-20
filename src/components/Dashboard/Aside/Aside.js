@@ -15,6 +15,7 @@ import { BsPlus, BsFillLightningFill, BSGearFill } from 'react-icons/bs';
 import { FaFire, FaPoo } from 'react-icons/fa'
 import { AmplifySignOut } from "@aws-amplify/ui-react";
 import { Auth, signInButtonContent } from 'aws-amplify';
+import Dashboard from '../Dashboard';
 
 const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
   const intl = useIntl();
@@ -78,6 +79,7 @@ checkUser();
         >
           {intl.formatMessage({ id: 'sidebarTitle' })}
         </div>
+        <Dashboard />
       </SidebarHeader>
 
       <SidebarContent>
