@@ -33,6 +33,7 @@ const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
   async function signOut() {
     try {
         await Auth.signOut();
+        console.log('got in here sign out');
         set_is_logged(false);
     } catch (error) {
         console.log('error signing out: ', error);
@@ -82,7 +83,7 @@ checkUser();
       <SidebarContent>
         <Menu iconShape="circle">
           <MenuItem
-            icon={<FaTachometerAlt />}
+            icon={<SideBarIcon icon={<FaFire size="28" />} />}
             suffix={<span className="badge red">{intl.formatMessage({ id: 'new' })}</span>}
           >
             {intl.formatMessage({ id: 'dashboard' })}
@@ -133,12 +134,12 @@ checkUser();
         >
 
           { isLogged ?
-            <button onCLick={() =>{signOut()}}> LOG OUT<AmplifySignOut /></button>
+            <button onCLick={() =>{signOut()}}>LOG OUT</button>
            :
           //  <button onCLick={() =>{signOut()}}> LOG IN<AmplifySignOut /></button>
            null
           }
-          
+
           {/* <a
             href="https://github.com/azouaoui-med/react-pro-sidebar"
             target="_blank"
@@ -155,5 +156,11 @@ checkUser();
     </ProSidebar>
   );
 };
+
+const SideBarIcon = ({ icon }) => (
+  <div className="sidebar-icon">
+    {icon}
+  </div>
+);
 
 export default Aside;

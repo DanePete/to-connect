@@ -18,27 +18,27 @@ const Main = ({
   const intl = useIntl();
   return (
     <main className="bg-gray-800 w-full p-4">
-      <Dashboard />
-      {/* <div className="btn-toggle" onClick={() => handleToggleSidebar(true)}>
+      <div className="btn-toggle" onClick={() => handleToggleSidebar(true)}>
         <FaBars />
-      </div> */}
+      </div>
+      <Dashboard />
       <header>
         {/* <h1>
           <img width={80} src={reactLogo} alt="react logo" /> {intl.formatMessage({ id: 'title' })}
         </h1> */}
         <p>{intl.formatMessage({ id: 'description' })}</p>
         <div className="social-bagdes">
-          <a
+          {/* <a
             href="https://github.com/azouaoui-med/react-pro-sidebar"
             target="_blank"
             rel="noopener noreferrer"
           >
             <img
               alt="GitHub stars"
-              src="https://img.shields.io/github/stars/azouaoui-med/react-pro-sidebar?style=social"
+              src="https://img.shields.io/github/stars/DanePete/react-pro-sidebar?style=social"
             />
-          </a>
-          <a
+          </a> */}
+          {/* <a
             href="https://github.com/azouaoui-med/react-pro-sidebar"
             target="_blank"
             rel="noopener noreferrer"
@@ -47,7 +47,7 @@ const Main = ({
               alt="GitHub forks"
               src="https://img.shields.io/github/forks/azouaoui-med/react-pro-sidebar?style=social"
             />
-          </a>
+          </a> */}
         </div>
       </header>
       <div className="block ">
@@ -102,7 +102,7 @@ const Main = ({
           <a href="https://github.com/azouaoui-med" target="_blank" rel="noopener noreferrer">
             <img
               alt="GitHub followers"
-              src="https://img.shields.io/github/followers/DanePEte?label=github&style=social"
+              src="https://img.shields.io/github/followers/DanePete?label=github&style=social"
             />
           </a>
           {/* <a href="https://twitter.com/azouaoui_med" target="_blank" rel="noopener noreferrer">
