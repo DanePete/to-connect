@@ -4,30 +4,44 @@ import {useDropzone} from 'react-dropzone'
 import { Storage } from 'aws-amplify';
 import { Auth } from 'aws-amplify';
 import { withAuthenticator } from '@aws-amplify/ui-react'
-
 Storage.configure({ track: true });
 
 const Profile = () => {
+  const [user, set_user] = useState();
+  const [userName, set_user_name] = useState('')
+  const [image, setImage] = useState("./assets/img/team-2-800x800.jpg");
+
+  /**
+   * Use Effect
+   * Calls function onPageRendered
+   */
   useEffect(() => {
-    onPageRendered();
+    getUser();
   }, []);
 
   /**
-   * On Page Render
-   * - Calls get Profile Picture Function
+   * get User Function - THIS NEEDS REFACTORING 
+   * Gets the users data if user is authenticated
    */
-  const onPageRendered = async () => {
-    getProfilePicture();
-  };
+  const getUser = async () => {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      console.log('user', user.attributes);
+      set_user_name()
+      set_user(user);
+      getProfilePicture(user.attributes.picture);
+      console.log('success!', user);
+    } catch (error) {
+      console.log('Error uploading user: ', error);
+    }  
+  }
 
   /**
    * Get Profile Picture
    * is successful returns the users profile picture
    */
-  const getProfilePicture = () => {
-    // Storage.get("1611980870964.jpeg")
-    // Storage.get("bg2.jpeg")
-    Storage.get("temp.jpg")
+  const getProfilePicture = (profileImg) => {
+    Storage.get(profileImg)
       .then(url => {
         var myRequest = new Request(url);
         fetch(myRequest).then(function(response) {
@@ -48,7 +62,7 @@ const Profile = () => {
     const user = await Auth.currentAuthenticatedUser();
     if (user) {
       try {
-        await Auth.updateUserAttributes(user, { picture: imgName });
+        await Auth.updateUserAttributes(user, { picture: imgName, user_name: 'admin' });
         console.log('success!', user);
       } catch (error) {
         console.log('Error uploading user: ', error);
@@ -57,11 +71,12 @@ const Profile = () => {
   }
 
 
-
-
-
-
-  const [image, setImage] = useState("./assets/img/team-2-800x800.jpg");
+  /**
+   * On Drop
+   * Allows users to upload 1 or many documents via drag and drop or click and upload
+   * Loops through array of user uploaded files 
+   * for each loop the images are uploaded to an S3 folder for storage
+   */
   const onDrop = useCallback(acceptedFiles => {
     // Do something with the files
     acceptedFiles.forEach((file) => {
@@ -75,13 +90,20 @@ const Profile = () => {
         console.log('accented files', file);
         upLoadToS3(file.name, file);
         setUserProfile(file.name);
-        getProfilePicture();
+        getProfilePicture(file.name);
       }
       reader.readAsArrayBuffer(file)
     })
     console.log('accented files', acceptedFiles);
   }, [])
 
+  /**
+   * Upload to S3
+   * TODO - Description
+   * uploads document to S3
+   * @param {*} fileName 
+   * @param {*} file 
+   */
   async function upLoadToS3(fileName, file) {
     try {
       await Storage.put(fileName, file, {
@@ -96,13 +118,7 @@ const Profile = () => {
 
   return (
     <div className="">
-
-
-
-
-
-            <section className="relative block max-h-96" >
-              
+            <section className="relative block max-h-96">
               <div
                 class="absolute top-0 w-full h-full bg-center bg-cover"
                 // style='background-image: url("https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2710&amp;q=80");'
