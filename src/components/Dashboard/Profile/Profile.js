@@ -1,8 +1,57 @@
 
+import React, {useCallback} from 'react'
+import {useDropzone} from 'react-dropzone'
+import Amplify, { Auth, Storage } from 'aws-amplify';
+// import config from '../../../aws-exports';
+
+// Storage.configure({
+//   region: config.aws_user_files_s3_bucket_region,
+//   bucket: config.aws_user_files_s3_bucket,
+//   identityPoolId: config.aws_user_pools_id,
+//   level: "protected",
+// });
+
 const Profile = () => {
+  const onDrop = useCallback(acceptedFiles => {
+    // Do something with the files
+    acceptedFiles.forEach((file) => {
+      const reader = new FileReader()
+
+      reader.onabort = () => console.log('file reading was aborted')
+      reader.onerror = () => console.log('file reading has failed')
+      reader.onload = () => {
+      // Do whatever you want with the file contents
+        const binaryStr = reader.result
+        console.log(binaryStr)
+        console.log('accented files', file);
+        upLoadToS3(file.name, file);
+      }
+      reader.readAsArrayBuffer(file)
+    })
+    console.log('accented files', acceptedFiles);
+  }, [])
+
+  async function upLoadToS3(fileName, file) {
+    try {
+      await Storage.put(fileName, file, {
+        contentType: 'image/png' // contentType is optional
+      });
+    } catch (error) {
+      console.log('Error uploading file: ', error);
+    }  
+  }
+
+  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+
   return (
     <div className="">
+
+
+
+
+
             <section className="relative block max-h-96" >
+              
               <div
                 class="absolute top-0 w-full h-full bg-center bg-cover"
                 // style='background-image: url("https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2710&amp;q=80");'
@@ -87,6 +136,14 @@ const Profile = () => {
                       </div>
                     </div>
                     <div class="text-center mt-12">
+                    <div {...getRootProps()}>
+              <input {...getInputProps()} />
+              {
+                isDragActive ?
+                  <p>Drop the files here ...</p> :
+                  <p>Drag 'n' drop some files here, or click to select files</p>
+              }
+            </div>
                       <h3
                         class="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2"
                       >
