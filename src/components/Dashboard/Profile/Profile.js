@@ -1,13 +1,52 @@
 
-import {useCallback} from 'react'
+import {useCallback, useState, useEffect} from 'react'
 import {useDropzone} from 'react-dropzone'
 import { Storage } from 'aws-amplify';
-import tempImg from '../../../assets/temp.jpg'
+import { Auth } from 'aws-amplify';
 import { withAuthenticator } from '@aws-amplify/ui-react'
 
-Storage.configure({ track: true, level: "private" });
+Storage.configure({ track: true });
 
 const Profile = () => {
+  useEffect(() => {
+    onPageRendered();
+  }, []);
+
+  const onPageRendered = async () => {
+    getProfilePicture();
+  };
+
+  async function setUserProfile(imgName) {
+    const user = await Auth.currentAuthenticatedUser();
+    if (user) {
+      try {
+        await Auth.updateUserAttributes(user, { picture: imgName });
+        console.log('success!', user);
+      } catch (error) {
+        console.log('Error uploading user: ', error);
+      }  
+    }
+  }
+
+
+  const getProfilePicture = () => {
+    // Storage.get("1611980870964.jpeg")
+    // Storage.get("bg2.jpeg")
+    Storage.get("temp.jpg")
+      .then(url => {
+        var myRequest = new Request(url);
+        fetch(myRequest).then(function(response) {
+          if (response.status === 200) {
+            setImage(url);
+          }
+        });
+      })
+      .catch(err => console.log(err));
+  };
+
+
+
+  const [image, setImage] = useState("./assets/img/team-2-800x800.jpg");
   const onDrop = useCallback(acceptedFiles => {
     // Do something with the files
     acceptedFiles.forEach((file) => {
@@ -20,6 +59,8 @@ const Profile = () => {
         console.log(binaryStr)
         console.log('accented files', file);
         upLoadToS3(file.name, file);
+        setUserProfile(file.name);
+        getProfilePicture();
       }
       reader.readAsArrayBuffer(file)
     })
@@ -88,7 +129,7 @@ const Profile = () => {
                         <div class="relative">
                           <img
                             alt="..."
-                            src="./assets/img/team-2-800x800.jpg"
+                            src={image}
                             class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16"
                             // style={"max-width: 150px;"
                           />
@@ -133,7 +174,7 @@ const Profile = () => {
                     <div class="text-center mt-12">
                       <div className="p-10" {...getRootProps()}>
                         <div class="max-w-sm rounded overflow-hidden shadow-lg">
-                          <img class="w-full" src={tempImg} alt="Upload"></img>
+                          <img class="w-full" src={image} alt="Upload"></img>
                           <div class="px-6 py-4">
                             <div class="font-bold text-xl mb-2">Upload Images</div>
                             <p class="text-white bg-gray-400 text-base max-w-sm rounded overflow-hidden shadow-lg cursor-pointer">
