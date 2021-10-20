@@ -12,23 +12,18 @@ const Profile = () => {
     onPageRendered();
   }, []);
 
+  /**
+   * On Page Render
+   * - Calls get Profile Picture Function
+   */
   const onPageRendered = async () => {
     getProfilePicture();
   };
 
-  async function setUserProfile(imgName) {
-    const user = await Auth.currentAuthenticatedUser();
-    if (user) {
-      try {
-        await Auth.updateUserAttributes(user, { picture: imgName });
-        console.log('success!', user);
-      } catch (error) {
-        console.log('Error uploading user: ', error);
-      }  
-    }
-  }
-
-
+  /**
+   * Get Profile Picture
+   * is successful returns the users profile picture
+   */
   const getProfilePicture = () => {
     // Storage.get("1611980870964.jpeg")
     // Storage.get("bg2.jpeg")
@@ -43,6 +38,26 @@ const Profile = () => {
       })
       .catch(err => console.log(err));
   };
+
+  /**
+   * Set User Profile
+   * - if successful sets the users profile and replaces avatar in state
+   * @param {*} imgName 
+   */
+  async function setUserProfile(imgName) {
+    const user = await Auth.currentAuthenticatedUser();
+    if (user) {
+      try {
+        await Auth.updateUserAttributes(user, { picture: imgName });
+        console.log('success!', user);
+      } catch (error) {
+        console.log('Error uploading user: ', error);
+      }  
+    }
+  }
+
+
+
 
 
 
