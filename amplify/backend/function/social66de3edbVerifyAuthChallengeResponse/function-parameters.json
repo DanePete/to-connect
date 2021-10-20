@@ -7,7 +7,7 @@
   "functionName": "social66de3edbVerifyAuthChallengeResponse",
   "resourceName": "social66de3edbVerifyAuthChallengeResponse",
   "parentStack": "auth",
-  "triggerEnvs": [],
+  "triggerEnvs": "[]",
   "triggerDir": "/snapshot/node_modules/amplify-category-auth/provider-utils/awscloudformation/triggers/VerifyAuthChallengeResponse",
   "triggerTemplate": "VerifyAuthChallengeResponse.json.ejs",
   "triggerEventPath": "VerifyAuthChallengeResponse.event.json",

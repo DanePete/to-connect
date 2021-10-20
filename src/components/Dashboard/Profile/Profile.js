@@ -118,6 +118,12 @@ const Profile = () => {
 
   return (
     <div className="">
+
+
+
+
+
+      
             <section className="relative block max-h-96">
               <div
                 className="absolute top-0 w-full h-full bg-center bg-cover"
