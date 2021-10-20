@@ -17,10 +17,10 @@ export default {
     viewSource: 'عرض الكود',
   },
   en: {
-    title: 'React Pro Sidebar',
-    sidebarTitle: 'Pro Sidebar',
+    title: 'TO SOCIAL',
+    sidebarTitle: 'TO SOCIAL',
     description:
-      'React sidebar library with dropdown menus and unlimited number of nested submenus',
+      'new way to connect',
     dashboard: 'Dashboard',
     components: 'Components',
     dropdown: 'Dropdown',

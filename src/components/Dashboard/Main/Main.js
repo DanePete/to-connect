@@ -3,6 +3,7 @@ import { useIntl } from 'react-intl';
 import Switch from 'react-switch';
 import { FaHeart, FaBars } from 'react-icons/fa';
 import reactLogo from '../../../assets/logo.svg';
+import Dashboard from '../Dashboard';
 
 const Main = ({
   collapsed,
@@ -15,14 +16,15 @@ const Main = ({
 }) => {
   const intl = useIntl();
   return (
-    <main className="bg-gray-800">
-      <div className="btn-toggle" onClick={() => handleToggleSidebar(true)}>
+    <main className="bg-gray-800 w-full p-4">
+      <Dashboard />
+      {/* <div className="btn-toggle" onClick={() => handleToggleSidebar(true)}>
         <FaBars />
-      </div>
+      </div> */}
       <header>
-        <h1>
+        {/* <h1>
           <img width={80} src={reactLogo} alt="react logo" /> {intl.formatMessage({ id: 'title' })}
-        </h1>
+        </h1> */}
         <p>{intl.formatMessage({ id: 'description' })}</p>
         <div className="social-bagdes">
           <a
@@ -91,7 +93,7 @@ const Main = ({
         <small>
           © {new Date().getFullYear()} made with <FaHeart style={{ color: 'red' }} /> by -{' '}
           <a target="_blank" rel="noopener noreferrer" href="https://azouaoui.netlify.com">
-            Mohamed Azouaoui
+            Dane
           </a>
         </small>
         <br />
@@ -99,15 +101,15 @@ const Main = ({
           <a href="https://github.com/azouaoui-med" target="_blank" rel="noopener noreferrer">
             <img
               alt="GitHub followers"
-              src="https://img.shields.io/github/followers/azouaoui-med?label=github&style=social"
+              src="https://img.shields.io/github/followers/DanePEte?label=github&style=social"
             />
           </a>
-          <a href="https://twitter.com/azouaoui_med" target="_blank" rel="noopener noreferrer">
+          {/* <a href="https://twitter.com/azouaoui_med" target="_blank" rel="noopener noreferrer">
             <img
               alt="Twitter Follow"
               src="https://img.shields.io/twitter/follow/azouaoui_med?label=twitter&style=social"
             />
-          </a>
+          </a> */}
         </div>
       </footer>
     </main>

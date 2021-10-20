@@ -11,10 +11,24 @@ import {
 } from 'react-pro-sidebar';
 import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } from 'react-icons/fa';
 import sidebarBg from '../../../assets/bg2.jpeg';
+import { BsPlus, BsFillLightningFill, BSGearFill } from 'react-icons/bs';
+import { FaFire, FaPoo } from 'react-icons/fa'
 
 const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
   const intl = useIntl();
   return (
+
+
+    
+    
+    // <SideBarIcon icon={<FaFire size="28" />} />
+    // <SideBarIcon icon={<BsPlus size="32" />} />
+    // <SideBarIcon icon={<BsFillLightningFill size="20" />} />
+    // <SideBarIcon icon={<FaPoo size="20" />} />
+    
+
+
+
     <ProSidebar
       image={image ? sidebarBg : false}
       rtl={rtl}
@@ -85,7 +99,7 @@ const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
         </Menu>
       </SidebarContent>
 
-      <SidebarFooter style={{ textAlign: 'center' }}>
+      {/* <SidebarFooter style={{ textAlign: 'center' }}>
         <div
           className="sidebar-btn-wrapper"
           style={{
@@ -104,7 +118,7 @@ const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
             </span>
           </a>
         </div>
-      </SidebarFooter>
+      </SidebarFooter> */}
     </ProSidebar>
   );
 };
