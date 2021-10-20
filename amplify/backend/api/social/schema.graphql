@@ -19,15 +19,3 @@ type Comment @model @key(name: "byPost", fields: ["postID", "content"]) {
   content: String!
 }
 
-type Message
-  @model
-  @auth(
-    rules: [
-      # Allow signed in users to perform all actions
-      { allow: private }
-    ]
-  ) {
-  id: ID!
-  owner: String!
-  message: String!
-}

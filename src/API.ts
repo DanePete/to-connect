@@ -189,45 +189,6 @@ export type DeleteCommentInput = {
   _version?: number | null,
 };
 
-export type CreateMessageInput = {
-  id?: string | null,
-  owner: string,
-  message: string,
-  _version?: number | null,
-};
-
-export type ModelMessageConditionInput = {
-  owner?: ModelStringInput | null,
-  message?: ModelStringInput | null,
-  and?: Array< ModelMessageConditionInput | null > | null,
-  or?: Array< ModelMessageConditionInput | null > | null,
-  not?: ModelMessageConditionInput | null,
-};
-
-export type Message = {
-  __typename: "Message",
-  id: string,
-  owner: string,
-  message: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
-  createdAt: string,
-  updatedAt: string,
-};
-
-export type UpdateMessageInput = {
-  id: string,
-  owner?: string | null,
-  message?: string | null,
-  _version?: number | null,
-};
-
-export type DeleteMessageInput = {
-  id: string,
-  _version?: number | null,
-};
-
 export type ModelBlogFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
@@ -259,22 +220,6 @@ export type ModelCommentFilterInput = {
   and?: Array< ModelCommentFilterInput | null > | null,
   or?: Array< ModelCommentFilterInput | null > | null,
   not?: ModelCommentFilterInput | null,
-};
-
-export type ModelMessageFilterInput = {
-  id?: ModelIDInput | null,
-  owner?: ModelStringInput | null,
-  message?: ModelStringInput | null,
-  and?: Array< ModelMessageFilterInput | null > | null,
-  or?: Array< ModelMessageFilterInput | null > | null,
-  not?: ModelMessageFilterInput | null,
-};
-
-export type ModelMessageConnection = {
-  __typename: "ModelMessageConnection",
-  items?:  Array<Message | null > | null,
-  nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type CreateBlogMutationVariables = {
@@ -664,63 +609,6 @@ export type DeleteCommentMutation = {
   } | null,
 };
 
-export type CreateMessageMutationVariables = {
-  input: CreateMessageInput,
-  condition?: ModelMessageConditionInput | null,
-};
-
-export type CreateMessageMutation = {
-  createMessage?:  {
-    __typename: "Message",
-    id: string,
-    owner: string,
-    message: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type UpdateMessageMutationVariables = {
-  input: UpdateMessageInput,
-  condition?: ModelMessageConditionInput | null,
-};
-
-export type UpdateMessageMutation = {
-  updateMessage?:  {
-    __typename: "Message",
-    id: string,
-    owner: string,
-    message: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type DeleteMessageMutationVariables = {
-  input: DeleteMessageInput,
-  condition?: ModelMessageConditionInput | null,
-};
-
-export type DeleteMessageMutation = {
-  deleteMessage?:  {
-    __typename: "Message",
-    id: string,
-    owner: string,
-    message: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
 export type SyncBlogsQueryVariables = {
   filter?: ModelBlogFilterInput | null,
   limit?: number | null,
@@ -1049,75 +937,6 @@ export type ListCommentsQuery = {
         updatedAt: string,
       } | null,
       content: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null > | null,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type GetMessageQueryVariables = {
-  id: string,
-};
-
-export type GetMessageQuery = {
-  getMessage?:  {
-    __typename: "Message",
-    id: string,
-    owner: string,
-    message: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListMessagesQueryVariables = {
-  filter?: ModelMessageFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListMessagesQuery = {
-  listMessages?:  {
-    __typename: "ModelMessageConnection",
-    items?:  Array< {
-      __typename: "Message",
-      id: string,
-      owner: string,
-      message: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null > | null,
-    nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncMessagesQueryVariables = {
-  filter?: ModelMessageFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncMessagesQuery = {
-  syncMessages?:  {
-    __typename: "ModelMessageConnection",
-    items?:  Array< {
-      __typename: "Message",
-      id: string,
-      owner: string,
-      message: string,
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
@@ -1463,48 +1282,6 @@ export type OnDeleteCommentSubscription = {
       updatedAt: string,
     } | null,
     content: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnCreateMessageSubscription = {
-  onCreateMessage?:  {
-    __typename: "Message",
-    id: string,
-    owner: string,
-    message: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdateMessageSubscription = {
-  onUpdateMessage?:  {
-    __typename: "Message",
-    id: string,
-    owner: string,
-    message: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteMessageSubscription = {
-  onDeleteMessage?:  {
-    __typename: "Message",
-    id: string,
-    owner: string,
-    message: string,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
