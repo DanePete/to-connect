@@ -5,13 +5,14 @@ import { Storage } from 'aws-amplify';
 import { Auth } from 'aws-amplify';
 import { withAuthenticator } from '@aws-amplify/ui-react'
 import { FaEdit } from 'react-icons/fa'
-import {GrUserSettings} from 'react-icons/gr'
+import { useHistory } from 'react-router-dom';
 Storage.configure({ track: true });
 
 const Profile = () => {
   const [user, set_user] = useState();
   const [userName, set_user_name] = useState('')
   const [image, setImage] = useState("./assets/img/team-2-800x800.jpg");
+  const history = useHistory();
 
   /**
    * Use Effect
@@ -190,6 +191,9 @@ const Profile = () => {
                           <button
                             className="bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
                             type="button"
+                            onClick={() => {
+                              history.push('/edit-profile')
+                            }}
                             // style="transition: all 0.15s ease 0s;"
                           >
                             <FaEdit size="28" />
@@ -223,16 +227,6 @@ const Profile = () => {
                       <div className="p-10" {...getRootProps()}>
                         <div className="max-w-sm rounded overflow-hidden shadow-lg">
                           <img className="w-full" src={image} alt="Upload"></img>
-                          <div className="px-6 py-4">
-                            <div className="font-bold text-xl mb-2">Upload Images</div>
-                            <p className="text-white bg-gray-400 text-base max-w-sm rounded overflow-hidden shadow-lg cursor-pointer">
-                              <input {...getInputProps()} />
-                                {
-                                isDragActive ?
-                                <span>Drop the files here ...</span> :
-                                <span>Drag 'n' drop some files here, or click to select files</span>
-                              }
-                            </p>
                           </div>
                           <div className="px-6 pt-4 pb-2">
                             <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
@@ -281,7 +275,6 @@ const Profile = () => {
                     </div>
                   </div>
                 </div>
-              </div>
             </section>
     </div>
   )

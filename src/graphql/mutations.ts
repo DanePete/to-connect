@@ -89,6 +89,16 @@ export const createPost = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      author {
+        id
+        userId
+        username
+        posts {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       comments {
         items {
           id
@@ -116,6 +126,16 @@ export const updatePost = /* GraphQL */ `
       blog {
         id
         name
+        posts {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      author {
+        id
+        userId
+        username
         posts {
           nextToken
         }
@@ -155,6 +175,16 @@ export const deletePost = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      author {
+        id
+        userId
+        username
+        posts {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       comments {
         items {
           id
@@ -188,6 +218,13 @@ export const createComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        author {
+          id
+          userId
+          username
+          createdAt
+          updatedAt
+        }
         comments {
           nextToken
         }
@@ -215,6 +252,13 @@ export const updateComment = /* GraphQL */ `
         blog {
           id
           name
+          createdAt
+          updatedAt
+        }
+        author {
+          id
+          userId
+          username
           createdAt
           updatedAt
         }
@@ -248,6 +292,13 @@ export const deleteComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        author {
+          id
+          userId
+          username
+          createdAt
+          updatedAt
+        }
         comments {
           nextToken
         }
@@ -255,6 +306,120 @@ export const deleteComment = /* GraphQL */ `
         updatedAt
       }
       content
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createFriendsList = /* GraphQL */ `
+  mutation CreateFriendsList(
+    $input: CreateFriendsListInput!
+    $condition: ModelFriendsListConditionInput
+  ) {
+    createFriendsList(input: $input, condition: $condition) {
+      id
+      friendsID
+      ownerID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateFriendsList = /* GraphQL */ `
+  mutation UpdateFriendsList(
+    $input: UpdateFriendsListInput!
+    $condition: ModelFriendsListConditionInput
+  ) {
+    updateFriendsList(input: $input, condition: $condition) {
+      id
+      friendsID
+      ownerID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteFriendsList = /* GraphQL */ `
+  mutation DeleteFriendsList(
+    $input: DeleteFriendsListInput!
+    $condition: ModelFriendsListConditionInput
+  ) {
+    deleteFriendsList(input: $input, condition: $condition) {
+      id
+      friendsID
+      ownerID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    createUser(input: $input, condition: $condition) {
+      id
+      userId
+      username
+      posts {
+        items {
+          id
+          title
+          blogID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateUser = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    updateUser(input: $input, condition: $condition) {
+      id
+      userId
+      username
+      posts {
+        items {
+          id
+          title
+          blogID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteUser = /* GraphQL */ `
+  mutation DeleteUser(
+    $input: DeleteUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    deleteUser(input: $input, condition: $condition) {
+      id
+      userId
+      username
+      posts {
+        items {
+          id
+          title
+          blogID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }

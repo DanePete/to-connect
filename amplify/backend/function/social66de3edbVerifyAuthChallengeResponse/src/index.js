@@ -34,6 +34,7 @@ exports.handler = async event => {
    * `await Promise.all(...)`. This would otherwise just be determined by the
    * order of names in the `MODULES` var.
    */
+   console.log('YAY2');
   await Promise.all(modules.map(module => module.handler(event)));
   return event;
 };

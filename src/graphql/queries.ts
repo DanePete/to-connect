@@ -57,6 +57,16 @@ export const getPost = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      author {
+        id
+        userId
+        username
+        posts {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       comments {
         items {
           id
@@ -89,6 +99,13 @@ export const listPosts = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        author {
+          id
+          userId
+          username
+          createdAt
+          updatedAt
+        }
         comments {
           nextToken
         }
@@ -111,6 +128,13 @@ export const getComment = /* GraphQL */ `
         blog {
           id
           name
+          createdAt
+          updatedAt
+        }
+        author {
+          id
+          userId
+          username
           createdAt
           updatedAt
         }
@@ -144,6 +168,77 @@ export const listComments = /* GraphQL */ `
           updatedAt
         }
         content
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getFriendsList = /* GraphQL */ `
+  query GetFriendsList($id: ID!) {
+    getFriendsList(id: $id) {
+      id
+      friendsID
+      ownerID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listFriendsLists = /* GraphQL */ `
+  query ListFriendsLists(
+    $filter: ModelFriendsListFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listFriendsLists(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        friendsID
+        ownerID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getUser = /* GraphQL */ `
+  query GetUser($id: ID!) {
+    getUser(id: $id) {
+      id
+      userId
+      username
+      posts {
+        items {
+          id
+          title
+          blogID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listUsers = /* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        userId
+        username
+        posts {
+          nextToken
+        }
         createdAt
         updatedAt
       }

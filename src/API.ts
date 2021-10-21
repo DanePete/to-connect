@@ -75,7 +75,18 @@ export type Post = {
   title: string,
   blogID: string,
   blog?: Blog | null,
+  author: User,
   comments?: ModelCommentConnection | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type User = {
+  __typename: "User",
+  id: string,
+  userId: string,
+  username?: string | null,
+  posts?: ModelPostConnection | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -109,6 +120,7 @@ export type CreatePostInput = {
   id?: string | null,
   title: string,
   blogID: string,
+  postAuthorId: string,
 };
 
 export type ModelPostConditionInput = {
@@ -139,6 +151,7 @@ export type UpdatePostInput = {
   id: string,
   title?: string | null,
   blogID?: string | null,
+  postAuthorId?: string | null,
 };
 
 export type DeletePostInput = {
@@ -166,6 +179,62 @@ export type UpdateCommentInput = {
 };
 
 export type DeleteCommentInput = {
+  id: string,
+};
+
+export type CreateFriendsListInput = {
+  id?: string | null,
+  friendsID: string,
+  ownerID: string,
+};
+
+export type ModelFriendsListConditionInput = {
+  friendsID?: ModelStringInput | null,
+  ownerID?: ModelIDInput | null,
+  and?: Array< ModelFriendsListConditionInput | null > | null,
+  or?: Array< ModelFriendsListConditionInput | null > | null,
+  not?: ModelFriendsListConditionInput | null,
+};
+
+export type FriendsList = {
+  __typename: "FriendsList",
+  id: string,
+  friendsID: string,
+  ownerID: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateFriendsListInput = {
+  id: string,
+  friendsID?: string | null,
+  ownerID?: string | null,
+};
+
+export type DeleteFriendsListInput = {
+  id: string,
+};
+
+export type CreateUserInput = {
+  id?: string | null,
+  userId: string,
+  username?: string | null,
+};
+
+export type ModelUserConditionInput = {
+  userId?: ModelIDInput | null,
+  username?: ModelStringInput | null,
+  and?: Array< ModelUserConditionInput | null > | null,
+  or?: Array< ModelUserConditionInput | null > | null,
+  not?: ModelUserConditionInput | null,
+};
+
+export type UpdateUserInput = {
+  userId?: string | null,
+  username?: string | null,
+};
+
+export type DeleteUserInput = {
   id: string,
 };
 
@@ -199,6 +268,35 @@ export type ModelCommentFilterInput = {
   and?: Array< ModelCommentFilterInput | null > | null,
   or?: Array< ModelCommentFilterInput | null > | null,
   not?: ModelCommentFilterInput | null,
+};
+
+export type ModelFriendsListFilterInput = {
+  id?: ModelIDInput | null,
+  friendsID?: ModelStringInput | null,
+  ownerID?: ModelIDInput | null,
+  and?: Array< ModelFriendsListFilterInput | null > | null,
+  or?: Array< ModelFriendsListFilterInput | null > | null,
+  not?: ModelFriendsListFilterInput | null,
+};
+
+export type ModelFriendsListConnection = {
+  __typename: "ModelFriendsListConnection",
+  items?:  Array<FriendsList | null > | null,
+  nextToken?: string | null,
+};
+
+export type ModelUserFilterInput = {
+  userId?: ModelIDInput | null,
+  username?: ModelStringInput | null,
+  and?: Array< ModelUserFilterInput | null > | null,
+  or?: Array< ModelUserFilterInput | null > | null,
+  not?: ModelUserFilterInput | null,
+};
+
+export type ModelUserConnection = {
+  __typename: "ModelUserConnection",
+  items?:  Array<User | null > | null,
+  nextToken?: string | null,
 };
 
 export type CreateBlogMutationVariables = {
@@ -304,6 +402,18 @@ export type CreatePostMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    author:  {
+      __typename: "User",
+      id: string,
+      userId: string,
+      username?: string | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
     comments?:  {
       __typename: "ModelCommentConnection",
       items?:  Array< {
@@ -343,6 +453,18 @@ export type UpdatePostMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    author:  {
+      __typename: "User",
+      id: string,
+      userId: string,
+      username?: string | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
     comments?:  {
       __typename: "ModelCommentConnection",
       items?:  Array< {
@@ -382,6 +504,18 @@ export type DeletePostMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    author:  {
+      __typename: "User",
+      id: string,
+      userId: string,
+      username?: string | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
     comments?:  {
       __typename: "ModelCommentConnection",
       items?:  Array< {
@@ -421,6 +555,14 @@ export type CreateCommentMutation = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      author:  {
+        __typename: "User",
+        id: string,
+        userId: string,
+        username?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      },
       comments?:  {
         __typename: "ModelCommentConnection",
         nextToken?: string | null,
@@ -456,6 +598,14 @@ export type UpdateCommentMutation = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      author:  {
+        __typename: "User",
+        id: string,
+        userId: string,
+        username?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      },
       comments?:  {
         __typename: "ModelCommentConnection",
         nextToken?: string | null,
@@ -491,6 +641,14 @@ export type DeleteCommentMutation = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      author:  {
+        __typename: "User",
+        id: string,
+        userId: string,
+        username?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      },
       comments?:  {
         __typename: "ModelCommentConnection",
         nextToken?: string | null,
@@ -499,6 +657,138 @@ export type DeleteCommentMutation = {
       updatedAt: string,
     } | null,
     content: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateFriendsListMutationVariables = {
+  input: CreateFriendsListInput,
+  condition?: ModelFriendsListConditionInput | null,
+};
+
+export type CreateFriendsListMutation = {
+  createFriendsList?:  {
+    __typename: "FriendsList",
+    id: string,
+    friendsID: string,
+    ownerID: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateFriendsListMutationVariables = {
+  input: UpdateFriendsListInput,
+  condition?: ModelFriendsListConditionInput | null,
+};
+
+export type UpdateFriendsListMutation = {
+  updateFriendsList?:  {
+    __typename: "FriendsList",
+    id: string,
+    friendsID: string,
+    ownerID: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteFriendsListMutationVariables = {
+  input: DeleteFriendsListInput,
+  condition?: ModelFriendsListConditionInput | null,
+};
+
+export type DeleteFriendsListMutation = {
+  deleteFriendsList?:  {
+    __typename: "FriendsList",
+    id: string,
+    friendsID: string,
+    ownerID: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateUserMutationVariables = {
+  input: CreateUserInput,
+  condition?: ModelUserConditionInput | null,
+};
+
+export type CreateUserMutation = {
+  createUser?:  {
+    __typename: "User",
+    id: string,
+    userId: string,
+    username?: string | null,
+    posts?:  {
+      __typename: "ModelPostConnection",
+      items?:  Array< {
+        __typename: "Post",
+        id: string,
+        title: string,
+        blogID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateUserMutationVariables = {
+  input: UpdateUserInput,
+  condition?: ModelUserConditionInput | null,
+};
+
+export type UpdateUserMutation = {
+  updateUser?:  {
+    __typename: "User",
+    id: string,
+    userId: string,
+    username?: string | null,
+    posts?:  {
+      __typename: "ModelPostConnection",
+      items?:  Array< {
+        __typename: "Post",
+        id: string,
+        title: string,
+        blogID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteUserMutationVariables = {
+  input: DeleteUserInput,
+  condition?: ModelUserConditionInput | null,
+};
+
+export type DeleteUserMutation = {
+  deleteUser?:  {
+    __typename: "User",
+    id: string,
+    userId: string,
+    username?: string | null,
+    posts?:  {
+      __typename: "ModelPostConnection",
+      items?:  Array< {
+        __typename: "Post",
+        id: string,
+        title: string,
+        blogID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -575,6 +865,18 @@ export type GetPostQuery = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    author:  {
+      __typename: "User",
+      id: string,
+      userId: string,
+      username?: string | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
     comments?:  {
       __typename: "ModelCommentConnection",
       items?:  Array< {
@@ -613,6 +915,14 @@ export type ListPostsQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      author:  {
+        __typename: "User",
+        id: string,
+        userId: string,
+        username?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      },
       comments?:  {
         __typename: "ModelCommentConnection",
         nextToken?: string | null,
@@ -645,6 +955,14 @@ export type GetCommentQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      author:  {
+        __typename: "User",
+        id: string,
+        userId: string,
+        username?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      },
       comments?:  {
         __typename: "ModelCommentConnection",
         nextToken?: string | null,
@@ -680,6 +998,94 @@ export type ListCommentsQuery = {
         updatedAt: string,
       } | null,
       content: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetFriendsListQueryVariables = {
+  id: string,
+};
+
+export type GetFriendsListQuery = {
+  getFriendsList?:  {
+    __typename: "FriendsList",
+    id: string,
+    friendsID: string,
+    ownerID: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListFriendsListsQueryVariables = {
+  filter?: ModelFriendsListFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListFriendsListsQuery = {
+  listFriendsLists?:  {
+    __typename: "ModelFriendsListConnection",
+    items?:  Array< {
+      __typename: "FriendsList",
+      id: string,
+      friendsID: string,
+      ownerID: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetUserQueryVariables = {
+  id: string,
+};
+
+export type GetUserQuery = {
+  getUser?:  {
+    __typename: "User",
+    id: string,
+    userId: string,
+    username?: string | null,
+    posts?:  {
+      __typename: "ModelPostConnection",
+      items?:  Array< {
+        __typename: "Post",
+        id: string,
+        title: string,
+        blogID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListUsersQueryVariables = {
+  filter?: ModelUserFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListUsersQuery = {
+  listUsers?:  {
+    __typename: "ModelUserConnection",
+    items?:  Array< {
+      __typename: "User",
+      id: string,
+      userId: string,
+      username?: string | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -770,6 +1176,18 @@ export type OnCreatePostSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    author:  {
+      __typename: "User",
+      id: string,
+      userId: string,
+      username?: string | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
     comments?:  {
       __typename: "ModelCommentConnection",
       items?:  Array< {
@@ -804,6 +1222,18 @@ export type OnUpdatePostSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    author:  {
+      __typename: "User",
+      id: string,
+      userId: string,
+      username?: string | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
     comments?:  {
       __typename: "ModelCommentConnection",
       items?:  Array< {
@@ -838,6 +1268,18 @@ export type OnDeletePostSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    author:  {
+      __typename: "User",
+      id: string,
+      userId: string,
+      username?: string | null,
+      posts?:  {
+        __typename: "ModelPostConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
     comments?:  {
       __typename: "ModelCommentConnection",
       items?:  Array< {
@@ -872,6 +1314,14 @@ export type OnCreateCommentSubscription = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      author:  {
+        __typename: "User",
+        id: string,
+        userId: string,
+        username?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      },
       comments?:  {
         __typename: "ModelCommentConnection",
         nextToken?: string | null,
@@ -902,6 +1352,14 @@ export type OnUpdateCommentSubscription = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      author:  {
+        __typename: "User",
+        id: string,
+        userId: string,
+        username?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      },
       comments?:  {
         __typename: "ModelCommentConnection",
         nextToken?: string | null,
@@ -932,6 +1390,14 @@ export type OnDeleteCommentSubscription = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      author:  {
+        __typename: "User",
+        id: string,
+        userId: string,
+        username?: string | null,
+        createdAt: string,
+        updatedAt: string,
+      },
       comments?:  {
         __typename: "ModelCommentConnection",
         nextToken?: string | null,
@@ -940,6 +1406,108 @@ export type OnDeleteCommentSubscription = {
       updatedAt: string,
     } | null,
     content: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateFriendsListSubscription = {
+  onCreateFriendsList?:  {
+    __typename: "FriendsList",
+    id: string,
+    friendsID: string,
+    ownerID: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateFriendsListSubscription = {
+  onUpdateFriendsList?:  {
+    __typename: "FriendsList",
+    id: string,
+    friendsID: string,
+    ownerID: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteFriendsListSubscription = {
+  onDeleteFriendsList?:  {
+    __typename: "FriendsList",
+    id: string,
+    friendsID: string,
+    ownerID: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateUserSubscription = {
+  onCreateUser?:  {
+    __typename: "User",
+    id: string,
+    userId: string,
+    username?: string | null,
+    posts?:  {
+      __typename: "ModelPostConnection",
+      items?:  Array< {
+        __typename: "Post",
+        id: string,
+        title: string,
+        blogID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateUserSubscription = {
+  onUpdateUser?:  {
+    __typename: "User",
+    id: string,
+    userId: string,
+    username?: string | null,
+    posts?:  {
+      __typename: "ModelPostConnection",
+      items?:  Array< {
+        __typename: "Post",
+        id: string,
+        title: string,
+        blogID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteUserSubscription = {
+  onDeleteUser?:  {
+    __typename: "User",
+    id: string,
+    userId: string,
+    username?: string | null,
+    posts?:  {
+      __typename: "ModelPostConnection",
+      items?:  Array< {
+        __typename: "Post",
+        id: string,
+        title: string,
+        blogID: string,
+        createdAt: string,
+        updatedAt: string,
+      } | null > | null,
+      nextToken?: string | null,
+    } | null,
     createdAt: string,
     updatedAt: string,
   } | null,

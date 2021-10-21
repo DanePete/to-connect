@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import {
   ProSidebar,
@@ -20,12 +20,14 @@ const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
   const intl = useIntl();
   const [isLogged, set_is_logged] = useState()
 
+  useEffect(() => {
+    checkUser();
+  }, []);
 
   async function checkUser() {
     const user = await Auth.currentAuthenticatedUser();
     console.log('user', user);
     if (user) {
-      console.log('got here');
       set_is_logged(true);
     }
   }
@@ -41,7 +43,6 @@ const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
   }
   
 
-checkUser();
   return (
 
 
@@ -107,9 +108,9 @@ checkUser();
             title={intl.formatMessage({ id: 'Settings' })}
             icon={<FaRegLaughWink />}
           >
-            <MenuItem>{intl.formatMessage({ id: 'Edit Profile' })} 1</MenuItem>
-            <MenuItem>{intl.formatMessage({ id: 'Edit Account' })} 2</MenuItem>
-            <MenuItem>{intl.formatMessage({ id: 'Edit Privacy' })} 3</MenuItem>
+            <MenuItem>{intl.formatMessage({ id: 'Edit_Profile' })} 1</MenuItem>
+            <MenuItem>{intl.formatMessage({ id: 'Edit_Account' })} 2</MenuItem>
+            <MenuItem>{intl.formatMessage({ id: 'Edit_Privacy' })} 3</MenuItem>
           </SubMenu>
 
           {/* <SubMenu
