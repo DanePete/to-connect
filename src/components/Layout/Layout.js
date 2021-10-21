@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Auth } from 'aws-amplify';
 import Aside from '../Aside/Aside';
 import Main from '../Main/Main';
 import EditProfile from '../Profile/EditProfile';
@@ -17,6 +18,7 @@ function Layout({ setLocale }) {
   const [collapsed, setCollapsed] = useState(false);
   const [image, setImage] = useState(true);
   const [toggled, setToggled] = useState(false);
+  const [isLogged, set_is_logged] = useState();
 
   const handleCollapsedChange = (checked) => {
     setCollapsed(checked);
@@ -33,6 +35,18 @@ function Layout({ setLocale }) {
   const handleToggleSidebar = (value) => {
     setToggled(value);
   };
+  
+  useEffect(() => {
+    checkUser();
+  }, []);
+
+  async function checkUser() {
+    const user = await Auth.currentAuthenticatedUser();
+    console.log('user', user);
+    if (user) {
+      set_is_logged(true);
+    }
+  }
 
   return (
     <Router>
@@ -64,13 +78,19 @@ function Layout({ setLocale }) {
             exact
             path="/edit-profile"
           >
-            <Aside
-              image={image}
-              collapsed={collapsed}
-              rtl={rtl}
-              toggled={toggled}
-              handleToggleSidebar={handleToggleSidebar}
-            />
+            { isLogged ?
+              <Aside
+                image={image}
+                collapsed={collapsed}
+                rtl={rtl}
+                toggled={toggled}
+                handleToggleSidebar={handleToggleSidebar}
+              />
+            :
+            //  <button onCLick={() =>{signOut()}}> LOG IN<AmplifySignOut /></button>
+            null
+            }
+
 
             <Main
               image={image}

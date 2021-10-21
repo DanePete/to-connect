@@ -16,47 +16,36 @@ import { FaFire } from 'react-icons/fa'
 import { AmplifySignOut } from "@aws-amplify/ui-react";
 import { Auth } from 'aws-amplify';
 import Dashboard from '../Dashboard/Dashboard';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
   const intl = useIntl();
-  const [isLogged, set_is_logged] = useState()
+  const [isLogged, set_is_logged] = useState(false)
+  const user = useSelector(store => store.user);
+  console.log('user is ', user);
+  // useEffect(() => {
+  //   checkUser();
+  // }, []);
 
-  useEffect(() => {
-    checkUser();
-  }, []);
 
-  async function checkUser() {
-    const user = await Auth.currentAuthenticatedUser();
-    console.log('user', user);
-    if (user) {
-      set_is_logged(true);
-    }
-  }
+  // function checkUser() {
+  //   if(user) {
+  //     set_is_logged(true);
+  //   } 
+  // }
 
-  async function signOut() {
-    try {
-        await Auth.signOut();
-        console.log('got in here sign out');
-        set_is_logged(false);
-    } catch (error) {
-        console.log('error signing out: ', error);
-    }
-  }
-  
+  // function signOut() {
+  //   try {
+  //       // await Auth.signOut();
+  //       console.log('got in here sign out');
+  //       dispatch({ type: 'LOGOUT' });
+  //       set_is_logged(false);
+  //   } catch (error) {
+  //       console.log('error signing out: ', error);
+  //   }
+  // }
 
   return (
-
-
-    
-    
-    // <SideBarIcon icon={<FaFire size="28" />} />
-    // <SideBarIcon icon={<BsPlus size="32" />} />
-    // <SideBarIcon icon={<BsFillLightningFill size="20" />} />
-    // <SideBarIcon icon={<FaPoo size="20" />} />
-    
-
-
-
     <ProSidebar
       image={image ? sidebarBg : false}
       rtl={rtl}
@@ -166,8 +155,9 @@ const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
           }}
         >
 
-          { isLogged ?
-            <button onClick={() =>{signOut()}}>LOG OUT <AmplifySignOut /></button>
+          { user.getUser ?
+          <AmplifySignOut />
+            // <button onClick={() =>{signOut()}}>LOG OUT </button>
            :
           //  <button onCLick={() =>{signOut()}}> LOG IN<AmplifySignOut /></button>
            null

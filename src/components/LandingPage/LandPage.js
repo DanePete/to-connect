@@ -10,6 +10,7 @@ import './LandingPage.css';
 Storage.configure({ track: true });
 
 const LandingPage = () => {
+  const history = useHistory();
   return (
     <div className="landing-container">
     <ul className="circles">
@@ -35,10 +36,13 @@ const LandingPage = () => {
             <div className="pl-lg-5 my-3 my-md-5 my-lg-0 col-lg-6">
               {/* RIGHT COLUMN */}
             </div>
-            <a href="/hikes" className="d-none d-sm-inline-block btn btn-outline-light landing-btn">
+            <button                            onClick={() => {
+                              history.push('/profile')
+                            }}
+                             href="/hikes" className="d-none d-sm-inline-block btn btn-outline-light landing-btn">
               Connect and stuff
               <i className="fa fa-angle-right ml-2"></i>
-              </a>
+              </button>
           </div>
         </div>
       </div>
