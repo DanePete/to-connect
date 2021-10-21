@@ -10,11 +10,11 @@ import {
   SidebarContent,
 } from 'react-pro-sidebar';
 import { FaGem, FaList, FaRegLaughWink, FaHeart } from 'react-icons/fa';
-import sidebarBg from '../../../assets/bg2.jpeg';
+import sidebarBg from '../../assets/bg2.jpeg';
 import { FaFire } from 'react-icons/fa'
 import { AmplifySignOut } from "@aws-amplify/ui-react";
 import { Auth } from 'aws-amplify';
-import Dashboard from '../Dashboard';
+import Dashboard from '../Dashboard/Dashboard';
 
 const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
   const intl = useIntl();
