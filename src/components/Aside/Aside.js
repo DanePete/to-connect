@@ -104,6 +104,15 @@ const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
         </Menu>
 
         <Menu iconShape="circle">
+          <MenuItem
+            icon={<SideBarIcon icon={<FaFire size="28" />} />}
+            suffix={<span className="badge red">{intl.formatMessage({ id: 'new' })}</span>}
+          >
+            <Link to="/edit-profile">{intl.formatMessage({ id: 'Edit_Profile' })}</Link>
+          </MenuItem>
+        </Menu>
+
+        <Menu iconShape="circle">
           <SubMenu
             suffix={<span className="badge yellow">3</span>}
             title={intl.formatMessage({ id: 'Settings' })}
@@ -111,7 +120,7 @@ const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
           >
             <MenuItem
               icon={<SideBarIcon icon={<FaFire size="28" />} />}
-              suffix={<span className="badge red">{intl.formatMessage({ id: 'new' })}</span>}
+              suffix={<span className="badge red">{intl.formatMessage({ id: 'test' })}</span>}
             >
               <Link to="/edit-profile">{intl.formatMessage({ id: 'Edit_Profile' })}</Link>
             </MenuItem>

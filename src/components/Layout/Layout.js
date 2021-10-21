@@ -9,6 +9,7 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
+import LandPage from '../LandingPage/LandPage';
 
 
 function Layout({ setLocale }) {
@@ -38,7 +39,25 @@ function Layout({ setLocale }) {
     <div className={`flex bg-gray-700 space-x-4 h-screen app ${rtl ? 'rtl' : ''} ${toggled ? 'toggled' : ''}`}>
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/" to="/profile" />
+          <Redirect exact from="/" to="/home" />
+
+          <Route
+            // shows AboutPage at all times (logged in or not)
+            exact
+            path="/home"
+          >
+            <Main
+              image={image}
+              toggled={toggled}
+              collapsed={collapsed}
+              rtl={rtl}
+              component={<LandPage />}
+              handleToggleSidebar={handleToggleSidebar}
+              handleCollapsedChange={handleCollapsedChange}
+              handleRtlChange={handleRtlChange}
+              handleImageChange={handleImageChange}
+            />
+          </Route>
 
           <Route
             // shows AboutPage at all times (logged in or not)

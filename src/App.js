@@ -1,14 +1,14 @@
 import './App.css';
 import { useState } from 'react';
 import { IntlProvider } from 'react-intl';
-import Amplify, { API, graphqlOperation, Auth } from 'aws-amplify'
+import { API, graphqlOperation } from 'aws-amplify'
 import * as queries from './graphql/queries';
-// import { Auth, Storage } from 'aws-amplify';
 import Layout from './components/Layout/Layout';
 import { createUser } from './graphql/mutations';
 import Messages from './components/Messages/Messages';
 import 'react-pro-sidebar/dist/css/styles.css';
 import { Hub, Logger } from 'aws-amplify';
+import { useHistory } from 'react-router-dom';
 
 const logger = new Logger('My-Logger');
 
