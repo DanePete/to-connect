@@ -17,7 +17,7 @@ const Main = ({
   const intl = useIntl();
   return (
     <main className="bg-gray-800 w-full p-4">
-      <div className="btn-toggle" onClick={() => handleToggleSidebar(true)}>
+      <div className="btn-toggle flex justify-end text-white text-2xl m-1" onClick={() => handleToggleSidebar(true)}>
         <FaBars />
       </div>
       <Profile />
