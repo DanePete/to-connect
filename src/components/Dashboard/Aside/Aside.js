@@ -82,15 +82,26 @@ checkUser();
       </SidebarHeader>
 
       <SidebarContent>
+
         <Menu iconShape="circle">
           <MenuItem
             icon={<SideBarIcon icon={<FaFire size="28" />} />}
             suffix={<span className="badge red">{intl.formatMessage({ id: 'new' })}</span>}
           >
-            {intl.formatMessage({ id: 'dashboard' })}
+            {intl.formatMessage({ id: 'Home' })}
           </MenuItem>
           <MenuItem icon={<FaGem />}> {intl.formatMessage({ id: 'components' })}</MenuItem>
         </Menu>
+
+        <Menu iconShape="circle">
+          <MenuItem
+            icon={<SideBarIcon icon={<FaFire size="28" />} />}
+            suffix={<span className="badge red">{intl.formatMessage({ id: 'new' })}</span>}
+          >
+            {intl.formatMessage({ id: 'Profile' })}
+          </MenuItem>
+        </Menu>
+
         <Menu iconShape="circle">
           <SubMenu
             suffix={<span className="badge yellow">3</span>}
@@ -124,6 +135,7 @@ checkUser();
             </SubMenu>
           </SubMenu>
         </Menu>
+
       </SidebarContent>
 
       <SidebarFooter style={{ textAlign: 'center' }}>
