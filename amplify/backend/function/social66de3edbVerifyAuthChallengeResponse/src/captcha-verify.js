@@ -16,8 +16,6 @@ exports.handler = async event => {
   const challengeSucceeded = response && response.data && response.data.success;
   event.response.answerCorrect = !!challengeSucceeded;
 
-  console.log('YAY');
-
   if (!challengeSucceeded) {
     throw new Error('CAPTCHA verification error');
   }

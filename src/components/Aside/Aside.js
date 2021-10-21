@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import {
   ProSidebar,
@@ -98,7 +99,7 @@ const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
             icon={<SideBarIcon icon={<FaFire size="28" />} />}
             suffix={<span className="badge red">{intl.formatMessage({ id: 'new' })}</span>}
           >
-            {intl.formatMessage({ id: 'Profile' })}
+            <Link to="/profile">{intl.formatMessage({ id: 'Profile' })}</Link>
           </MenuItem>
         </Menu>
 
@@ -108,9 +109,16 @@ const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
             title={intl.formatMessage({ id: 'Settings' })}
             icon={<FaRegLaughWink />}
           >
-            <MenuItem>{intl.formatMessage({ id: 'Edit_Profile' })} 1</MenuItem>
-            <MenuItem>{intl.formatMessage({ id: 'Edit_Account' })} 2</MenuItem>
-            <MenuItem>{intl.formatMessage({ id: 'Edit_Privacy' })} 3</MenuItem>
+            <MenuItem
+              icon={<SideBarIcon icon={<FaFire size="28" />} />}
+              suffix={<span className="badge red">{intl.formatMessage({ id: 'new' })}</span>}
+            >
+              <Link to="/edit-profile">{intl.formatMessage({ id: 'Edit_Profile' })}</Link>
+            </MenuItem>
+              <Link to="/profile">{intl.formatMessage({ id: 'Edit_Account' })} 3</Link>
+            <MenuItem>
+              <Link to="/profile">{intl.formatMessage({ id: 'Edit_Privacy' })} 3</Link>
+            </MenuItem>
           </SubMenu>
 
           {/* <SubMenu
