@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Auth } from 'aws-amplify';
 import Aside from '../Aside/Aside';
 import Main from '../Main/Main';
 import EditProfile from '../Profile/EditProfile';
@@ -9,6 +10,7 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
+import LandPage from '../LandingPage/LandPage';
 
 
 function Layout({ setLocale }) {
@@ -16,6 +18,7 @@ function Layout({ setLocale }) {
   const [collapsed, setCollapsed] = useState(false);
   const [image, setImage] = useState(true);
   const [toggled, setToggled] = useState(false);
+  const [isLogged, set_is_logged] = useState();
 
   const handleCollapsedChange = (checked) => {
     setCollapsed(checked);
@@ -32,26 +35,62 @@ function Layout({ setLocale }) {
   const handleToggleSidebar = (value) => {
     setToggled(value);
   };
+  
+  useEffect(() => {
+    checkUser();
+  }, []);
+
+  async function checkUser() {
+    const user = await Auth.currentAuthenticatedUser();
+    console.log('user', user);
+    if (user) {
+      set_is_logged(true);
+    }
+  }
 
   return (
     <Router>
     <div className={`flex bg-gray-700 space-x-4 h-screen app ${rtl ? 'rtl' : ''} ${toggled ? 'toggled' : ''}`}>
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/" to="/profile" />
+          <Redirect exact from="/" to="/home" />
+
+          <Route
+            // shows AboutPage at all times (logged in or not)
+            exact
+            path="/home"
+          >
+            <Main
+              image={image}
+              toggled={toggled}
+              collapsed={collapsed}
+              rtl={rtl}
+              component={<LandPage />}
+              handleToggleSidebar={handleToggleSidebar}
+              handleCollapsedChange={handleCollapsedChange}
+              handleRtlChange={handleRtlChange}
+              handleImageChange={handleImageChange}
+            />
+          </Route>
 
           <Route
             // shows AboutPage at all times (logged in or not)
             exact
             path="/edit-profile"
           >
-            <Aside
-              image={image}
-              collapsed={collapsed}
-              rtl={rtl}
-              toggled={toggled}
-              handleToggleSidebar={handleToggleSidebar}
-            />
+            { isLogged ?
+              <Aside
+                image={image}
+                collapsed={collapsed}
+                rtl={rtl}
+                toggled={toggled}
+                handleToggleSidebar={handleToggleSidebar}
+              />
+            :
+            //  <button onCLick={() =>{signOut()}}> LOG IN<AmplifySignOut /></button>
+            null
+            }
+
 
             <Main
               image={image}
