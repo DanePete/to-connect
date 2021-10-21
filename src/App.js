@@ -1,7 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
-import Dashboard from './components/Dashboard/Dashboard';
-import SideBar from './components/Dashboard/SideBar/SideBar';
+import { useState } from 'react';
 import { IntlProvider } from 'react-intl';
 import Layout from './components/Dashboard/Layout/Layout';
 import Messages from './components/Dashboard/Messages/Messages';

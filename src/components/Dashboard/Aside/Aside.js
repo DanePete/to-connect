@@ -9,12 +9,11 @@ import {
   SidebarFooter,
   SidebarContent,
 } from 'react-pro-sidebar';
-import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } from 'react-icons/fa';
+import { FaGem, FaList, FaRegLaughWink, FaHeart } from 'react-icons/fa';
 import sidebarBg from '../../../assets/bg2.jpeg';
-import { BsPlus, BsFillLightningFill, BSGearFill } from 'react-icons/bs';
-import { FaFire, FaPoo } from 'react-icons/fa'
+import { FaFire } from 'react-icons/fa'
 import { AmplifySignOut } from "@aws-amplify/ui-react";
-import { Auth, signInButtonContent } from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 import Dashboard from '../Dashboard';
 
 const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {

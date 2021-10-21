@@ -2,8 +2,6 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import Switch from 'react-switch';
 import { FaHeart, FaBars } from 'react-icons/fa';
-import reactLogo from '../../../assets/logo.svg';
-import Dashboard from '../Dashboard';
 import { withAuthenticator } from '@aws-amplify/ui-react'
 import Profile from '../Profile/Profile';
 
