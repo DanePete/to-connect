@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Aside from '../Aside/Aside';
 import Main from '../Main/Main';
+import EditProfile from '../Profile/EditProfile';
 
 import {
   HashRouter as Router,
@@ -42,11 +43,16 @@ function Layout({ setLocale }) {
           <Route
             // shows AboutPage at all times (logged in or not)
             exact
-            path="/profile/:id"
+            path="/edit-profile"
           >
-            {/* <Hike
-              latLng = {[lat, lng]}
-            /> */}
+            <Aside
+              image={image}
+              collapsed={collapsed}
+              rtl={rtl}
+              toggled={toggled}
+              handleToggleSidebar={handleToggleSidebar}
+            />
+            <EditProfile />
           </Route>
 
           <Route

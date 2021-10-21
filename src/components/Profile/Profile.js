@@ -43,11 +43,13 @@ const Profile = () => {
    * is successful returns the users profile picture
    */
   const getProfilePicture = (profileImg) => {
+    console.log('profile img', profileImg);
     Storage.get(profileImg)
       .then(url => {
         var myRequest = new Request(url);
         fetch(myRequest).then(function(response) {
           if (response.status === 200) {
+            console.log('url', url)
             setImage(url);
           }
         });
@@ -64,7 +66,7 @@ const Profile = () => {
     const user = await Auth.currentAuthenticatedUser();
     if (user) {
       try {
-        await Auth.updateUserAttributes(user, { picture: imgName, user_name: 'admin' });
+        await Auth.updateUserAttributes(user, { picture: imgName, preferred_username: 'admin' });
         console.log('success!', user);
       } catch (error) {
         console.log('Error uploading users: ', error);
@@ -111,6 +113,7 @@ const Profile = () => {
       await Storage.put(fileName, file, {
         contentType: 'image/png' // contentType is optional
       });
+      console.log('success image upload', file, fileName);
     } catch (error) {
       console.log('Error uploading file: ', error);
     }  
@@ -228,7 +231,7 @@ const Profile = () => {
                                 isDragActive ?
                                 <span>Drop the files here ...</span> :
                                 <span>Drag 'n' drop some files here, or click to select files</span>
-                                }
+                              }
                             </p>
                           </div>
                           <div className="px-6 pt-4 pb-2">
