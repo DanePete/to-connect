@@ -4,6 +4,8 @@ import {useDropzone} from 'react-dropzone'
 import { Storage } from 'aws-amplify';
 import { Auth } from 'aws-amplify';
 import { withAuthenticator } from '@aws-amplify/ui-react'
+import { FaEdit } from 'react-icons/fa'
+import {GrUserSettings} from 'react-icons/gr'
 Storage.configure({ track: true });
 
 const Profile = () => {
@@ -116,6 +118,13 @@ const Profile = () => {
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
+  const SideBarIcon = ({ icon }) => (
+    <div className="sidebar-icon">
+      {icon}
+    </div>
+  );
+  
+
   return (
     <div className="">
 
@@ -180,7 +189,7 @@ const Profile = () => {
                             type="button"
                             // style="transition: all 0.15s ease 0s;"
                           >
-                            Connect
+                            <FaEdit size="28" />
                           </button>
                         </div>
                       </div>
