@@ -28,7 +28,7 @@ export default {
     dropdown: 'Dropdown',
     submenu: 'Submenu',
     multiLevel: 'Multi Level',
-    collapsed: 'Collapsed',
+    collapsed: 'Collapse Menu',
     rtl: 'RTL',
     image: 'Background image',
     new: 'NEW',

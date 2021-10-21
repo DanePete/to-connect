@@ -90,7 +90,6 @@ checkUser();
           >
             {intl.formatMessage({ id: 'Home' })}
           </MenuItem>
-          <MenuItem icon={<FaGem />}> {intl.formatMessage({ id: 'components' })}</MenuItem>
         </Menu>
 
         <Menu iconShape="circle">
@@ -105,14 +104,15 @@ checkUser();
         <Menu iconShape="circle">
           <SubMenu
             suffix={<span className="badge yellow">3</span>}
-            title={intl.formatMessage({ id: 'withSuffix' })}
+            title={intl.formatMessage({ id: 'Settings' })}
             icon={<FaRegLaughWink />}
           >
-            <MenuItem>{intl.formatMessage({ id: 'submenu' })} 1</MenuItem>
-            <MenuItem>{intl.formatMessage({ id: 'submenu' })} 2</MenuItem>
-            <MenuItem>{intl.formatMessage({ id: 'submenu' })} 3</MenuItem>
+            <MenuItem>{intl.formatMessage({ id: 'Edit Profile' })} 1</MenuItem>
+            <MenuItem>{intl.formatMessage({ id: 'Edit Account' })} 2</MenuItem>
+            <MenuItem>{intl.formatMessage({ id: 'Edit Privacy' })} 3</MenuItem>
           </SubMenu>
-          <SubMenu
+
+          {/* <SubMenu
             prefix={<span className="badge gray">3</span>}
             title={intl.formatMessage({ id: 'withPrefix' })}
             icon={<FaHeart />}
@@ -120,8 +120,9 @@ checkUser();
             <MenuItem>{intl.formatMessage({ id: 'submenu' })} 1</MenuItem>
             <MenuItem>{intl.formatMessage({ id: 'submenu' })} 2</MenuItem>
             <MenuItem>{intl.formatMessage({ id: 'submenu' })} 3</MenuItem>
-          </SubMenu>
-          <SubMenu title={intl.formatMessage({ id: 'multiLevel' })} icon={<FaList />}>
+          </SubMenu> */}
+
+          {/* <SubMenu title={intl.formatMessage({ id: 'multiLevel' })} icon={<FaList />}>
             <MenuItem>{intl.formatMessage({ id: 'submenu' })} 1 </MenuItem>
             <MenuItem>{intl.formatMessage({ id: 'submenu' })} 2 </MenuItem>
             <SubMenu title={`${intl.formatMessage({ id: 'submenu' })} 3`}>
@@ -133,7 +134,8 @@ checkUser();
                 <MenuItem>{intl.formatMessage({ id: 'submenu' })} 3.3.3 </MenuItem>
               </SubMenu>
             </SubMenu>
-          </SubMenu>
+          </SubMenu> */}
+          
         </Menu>
 
       </SidebarContent>
