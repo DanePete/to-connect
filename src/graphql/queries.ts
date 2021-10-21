@@ -61,6 +61,9 @@ export const getPost = /* GraphQL */ `
         id
         userId
         username
+        picture
+        city
+        state
         posts {
           nextToken
         }
@@ -103,6 +106,9 @@ export const listPosts = /* GraphQL */ `
           id
           userId
           username
+          picture
+          city
+          state
           createdAt
           updatedAt
         }
@@ -135,6 +141,9 @@ export const getComment = /* GraphQL */ `
           id
           userId
           username
+          picture
+          city
+          state
           createdAt
           updatedAt
         }
@@ -210,6 +219,9 @@ export const getUser = /* GraphQL */ `
       id
       userId
       username
+      picture
+      city
+      state
       posts {
         items {
           id
@@ -236,6 +248,9 @@ export const listUsers = /* GraphQL */ `
         id
         userId
         username
+        picture
+        city
+        state
         posts {
           nextToken
         }

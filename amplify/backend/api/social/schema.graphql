@@ -27,7 +27,10 @@ type FriendsList @model {
 }
 
 type User @model { 
-  userId: ID! # cognito.identity.sub
+  userId: ID!
   username: String
+  picture: String
+  city: String
+  state: String 
   posts: [Post] @connection(name: "UserPosts")
 }
