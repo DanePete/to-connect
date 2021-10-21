@@ -124,10 +124,9 @@ const Profile = () => {
 
 
       
-            <section className="relative block max-h-96">
+            <section className="relative block h-96">
               <div
-                className="absolute top-0 w-full h-full bg-center bg-cover"
-                // style='background-image: url("https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2710&amp;q=80");'
+                className="absolute top-0 w-full h-full bg-center bg-cover bg-gray-800"
               >
                 <span
                   id="blackOverlay"
@@ -218,8 +217,8 @@ const Profile = () => {
                               <input {...getInputProps()} />
                                 {
                                 isDragActive ?
-                                <p>Drop the files here ...</p> :
-                                <p>Drag 'n' drop some files here, or click to select files</p>
+                                <span>Drop the files here ...</span> :
+                                <span>Drag 'n' drop some files here, or click to select files</span>
                                 }
                             </p>
                           </div>

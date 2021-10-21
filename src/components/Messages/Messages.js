@@ -23,6 +23,8 @@ export default {
       'new way to connect',
     dashboard: 'Dashboard',
     components: 'Components',
+    Home: 'HOME - IN MESSAGES.JS FIX?',
+    Profile: 'Profile',
     dropdown: 'Dropdown',
     submenu: 'Submenu',
     multiLevel: 'Multi Level',
