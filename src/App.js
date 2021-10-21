@@ -1,8 +1,8 @@
 import './App.css';
 import { useState } from 'react';
 import { IntlProvider } from 'react-intl';
-import Layout from './components/Dashboard/Layout/Layout';
-import Messages from './components/Dashboard/Messages/Messages';
+import Layout from './components/Layout/Layout';
+import Messages from './components/Messages/Messages';
 import 'react-pro-sidebar/dist/css/styles.css';
 
 function App() {

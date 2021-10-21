@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import {
   ProSidebar,
@@ -10,22 +11,24 @@ import {
   SidebarContent,
 } from 'react-pro-sidebar';
 import { FaGem, FaList, FaRegLaughWink, FaHeart } from 'react-icons/fa';
-import sidebarBg from '../../../assets/bg2.jpeg';
+import sidebarBg from '../../assets/bg2.jpeg';
 import { FaFire } from 'react-icons/fa'
 import { AmplifySignOut } from "@aws-amplify/ui-react";
 import { Auth } from 'aws-amplify';
-import Dashboard from '../Dashboard';
+import Dashboard from '../Dashboard/Dashboard';
 
 const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
   const intl = useIntl();
   const [isLogged, set_is_logged] = useState()
 
+  useEffect(() => {
+    checkUser();
+  }, []);
 
   async function checkUser() {
     const user = await Auth.currentAuthenticatedUser();
     console.log('user', user);
     if (user) {
-      console.log('got here');
       set_is_logged(true);
     }
   }
@@ -41,7 +44,6 @@ const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
   }
   
 
-checkUser();
   return (
 
 
@@ -82,26 +84,44 @@ checkUser();
       </SidebarHeader>
 
       <SidebarContent>
+
         <Menu iconShape="circle">
           <MenuItem
             icon={<SideBarIcon icon={<FaFire size="28" />} />}
             suffix={<span className="badge red">{intl.formatMessage({ id: 'new' })}</span>}
           >
-            {intl.formatMessage({ id: 'dashboard' })}
+            {intl.formatMessage({ id: 'Home' })}
           </MenuItem>
-          <MenuItem icon={<FaGem />}> {intl.formatMessage({ id: 'components' })}</MenuItem>
         </Menu>
+
+        <Menu iconShape="circle">
+          <MenuItem
+            icon={<SideBarIcon icon={<FaFire size="28" />} />}
+            suffix={<span className="badge red">{intl.formatMessage({ id: 'new' })}</span>}
+          >
+            <Link to="/profile">{intl.formatMessage({ id: 'Profile' })}</Link>
+          </MenuItem>
+        </Menu>
+
         <Menu iconShape="circle">
           <SubMenu
             suffix={<span className="badge yellow">3</span>}
-            title={intl.formatMessage({ id: 'withSuffix' })}
+            title={intl.formatMessage({ id: 'Settings' })}
             icon={<FaRegLaughWink />}
           >
-            <MenuItem>{intl.formatMessage({ id: 'submenu' })} 1</MenuItem>
-            <MenuItem>{intl.formatMessage({ id: 'submenu' })} 2</MenuItem>
-            <MenuItem>{intl.formatMessage({ id: 'submenu' })} 3</MenuItem>
+            <MenuItem
+              icon={<SideBarIcon icon={<FaFire size="28" />} />}
+              suffix={<span className="badge red">{intl.formatMessage({ id: 'new' })}</span>}
+            >
+              <Link to="/edit-profile">{intl.formatMessage({ id: 'Edit_Profile' })}</Link>
+            </MenuItem>
+              <Link to="/profile">{intl.formatMessage({ id: 'Edit_Account' })} 3</Link>
+            <MenuItem>
+              <Link to="/profile">{intl.formatMessage({ id: 'Edit_Privacy' })} 3</Link>
+            </MenuItem>
           </SubMenu>
-          <SubMenu
+
+          {/* <SubMenu
             prefix={<span className="badge gray">3</span>}
             title={intl.formatMessage({ id: 'withPrefix' })}
             icon={<FaHeart />}
@@ -109,8 +129,9 @@ checkUser();
             <MenuItem>{intl.formatMessage({ id: 'submenu' })} 1</MenuItem>
             <MenuItem>{intl.formatMessage({ id: 'submenu' })} 2</MenuItem>
             <MenuItem>{intl.formatMessage({ id: 'submenu' })} 3</MenuItem>
-          </SubMenu>
-          <SubMenu title={intl.formatMessage({ id: 'multiLevel' })} icon={<FaList />}>
+          </SubMenu> */}
+
+          {/* <SubMenu title={intl.formatMessage({ id: 'multiLevel' })} icon={<FaList />}>
             <MenuItem>{intl.formatMessage({ id: 'submenu' })} 1 </MenuItem>
             <MenuItem>{intl.formatMessage({ id: 'submenu' })} 2 </MenuItem>
             <SubMenu title={`${intl.formatMessage({ id: 'submenu' })} 3`}>
@@ -122,8 +143,10 @@ checkUser();
                 <MenuItem>{intl.formatMessage({ id: 'submenu' })} 3.3.3 </MenuItem>
               </SubMenu>
             </SubMenu>
-          </SubMenu>
+          </SubMenu> */}
+          
         </Menu>
+
       </SidebarContent>
 
       <SidebarFooter style={{ textAlign: 'center' }}>
@@ -135,7 +158,7 @@ checkUser();
         >
 
           { isLogged ?
-            <button onCLick={() =>{signOut()}}>LOG OUT <AmplifySignOut /></button>
+            <button onClick={() =>{signOut()}}>LOG OUT <AmplifySignOut /></button>
            :
           //  <button onCLick={() =>{signOut()}}> LOG IN<AmplifySignOut /></button>
            null

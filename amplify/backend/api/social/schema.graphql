@@ -9,6 +9,7 @@ type Post @model @key(name: "byBlog", fields: ["blogID"]) {
   title: String!
   blogID: ID!
   blog: Blog @connection(fields: ["blogID"])
+  author: User! @connection(name: "UserPosts")
   comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
 }
 
@@ -17,4 +18,16 @@ type Comment @model @key(name: "byPost", fields: ["postID", "content"]) {
   postID: ID!
   post: Post @connection(fields: ["postID"])
   content: String!
+}
+
+type FriendsList @model {
+  id: ID!
+  friendsID: AWSJSON!
+  ownerID: ID!
+}
+
+type User @model { 
+  userId: ID! # cognito.identity.sub
+  username: String
+  posts: [Post] @connection(name: "UserPosts")
 }

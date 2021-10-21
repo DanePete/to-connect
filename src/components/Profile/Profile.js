@@ -4,12 +4,15 @@ import {useDropzone} from 'react-dropzone'
 import { Storage } from 'aws-amplify';
 import { Auth } from 'aws-amplify';
 import { withAuthenticator } from '@aws-amplify/ui-react'
+import { FaEdit } from 'react-icons/fa'
+import { useHistory } from 'react-router-dom';
 Storage.configure({ track: true });
 
 const Profile = () => {
   const [user, set_user] = useState();
   const [userName, set_user_name] = useState('')
   const [image, setImage] = useState("./assets/img/team-2-800x800.jpg");
+  const history = useHistory();
 
   /**
    * Use Effect
@@ -41,11 +44,13 @@ const Profile = () => {
    * is successful returns the users profile picture
    */
   const getProfilePicture = (profileImg) => {
+    console.log('profile img', profileImg);
     Storage.get(profileImg)
       .then(url => {
         var myRequest = new Request(url);
         fetch(myRequest).then(function(response) {
           if (response.status === 200) {
+            console.log('url', url)
             setImage(url);
           }
         });
@@ -62,7 +67,7 @@ const Profile = () => {
     const user = await Auth.currentAuthenticatedUser();
     if (user) {
       try {
-        await Auth.updateUserAttributes(user, { picture: imgName, user_name: 'admin' });
+        await Auth.updateUserAttributes(user, { picture: imgName, preferred_username: 'admin' });
         console.log('success!', user);
       } catch (error) {
         console.log('Error uploading users: ', error);
@@ -109,12 +114,20 @@ const Profile = () => {
       await Storage.put(fileName, file, {
         contentType: 'image/png' // contentType is optional
       });
+      console.log('success image upload', file, fileName);
     } catch (error) {
       console.log('Error uploading file: ', error);
     }  
   }
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+
+  const SideBarIcon = ({ icon }) => (
+    <div className="sidebar-icon">
+      {icon}
+    </div>
+  );
+  
 
   return (
     <div className="">
@@ -124,10 +137,9 @@ const Profile = () => {
 
 
       
-            <section className="relative block max-h-96">
+            <section className="relative block h-96">
               <div
-                className="absolute top-0 w-full h-full bg-center bg-cover"
-                // style='background-image: url("https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2710&amp;q=80");'
+                className="absolute top-0 w-full h-full bg-center bg-cover bg-gray-800"
               >
                 <span
                   id="blackOverlay"
@@ -179,9 +191,12 @@ const Profile = () => {
                           <button
                             className="bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1"
                             type="button"
+                            onClick={() => {
+                              history.push('/edit-profile')
+                            }}
                             // style="transition: all 0.15s ease 0s;"
                           >
-                            Connect
+                            <FaEdit size="28" />
                           </button>
                         </div>
                       </div>
@@ -212,16 +227,6 @@ const Profile = () => {
                       <div className="p-10" {...getRootProps()}>
                         <div className="max-w-sm rounded overflow-hidden shadow-lg">
                           <img className="w-full" src={image} alt="Upload"></img>
-                          <div className="px-6 py-4">
-                            <div className="font-bold text-xl mb-2">Upload Images</div>
-                            <p className="text-white bg-gray-400 text-base max-w-sm rounded overflow-hidden shadow-lg cursor-pointer">
-                              <input {...getInputProps()} />
-                                {
-                                isDragActive ?
-                                <p>Drop the files here ...</p> :
-                                <p>Drag 'n' drop some files here, or click to select files</p>
-                                }
-                            </p>
                           </div>
                           <div className="px-6 pt-4 pb-2">
                             <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
@@ -270,153 +275,7 @@ const Profile = () => {
                     </div>
                   </div>
                 </div>
-              </div>
             </section>
-          <footer className="relative bg-gray-300 pt-8 pb-6">
-            <div
-              className="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20"
-              // style="height: 80px;"
-            >
-              <svg
-                className="absolute bottom-0 overflow-hidden"
-                xmlns="http://www.w3.org/2000/svg"
-                preserveAspectRatio="none"
-                version="1.1"
-                viewBox="0 0 2560 100"
-                x="0"
-                y="0"
-              >
-                <polygon
-                  className="text-gray-300 fill-current"
-                  points="2560 0 2560 100 0 100"
-                ></polygon>
-              </svg>
-            </div>
-            <div className="container mx-auto px-4">
-              <div className="flex flex-wrap">
-                <div className="w-full lg:w-6/12 px-4">
-                  <h4 className="text-3xl font-semibold">Let's keep in touch!</h4>
-                  <h5 className="text-lg mt-0 mb-2 text-gray-700">
-                    Find us on any of these platforms, we respond 1-2 business days.
-                  </h5>
-                  <div className="mt-6">
-                    <button
-                      className="bg-white text-blue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
-                      type="button"
-                    >
-                      <i className="flex fab fa-twitter"></i></button
-                    ><button
-                      className="bg-white text-blue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
-                      type="button"
-                    >
-                      <i className="flex fab fa-facebook-square"></i></button
-                    ><button
-                      className="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
-                      type="button"
-                    >
-                      <i className="flex fab fa-dribbble"></i></button
-                    ><button
-                      className="bg-white text-gray-900 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 p-3"
-                      type="button"
-                    >
-                      <i className="flex fab fa-github"></i>
-                    </button>
-                  </div>
-                </div>
-                <div className="w-full lg:w-6/12 px-4">
-                  <div className="flex flex-wrap items-top mb-6">
-                    <div className="w-full lg:w-4/12 px-4 ml-auto">
-                      <span
-                        className="block uppercase text-gray-600 text-sm font-semibold mb-2"
-                        >Useful Links</span
-                      >
-                      <ul className="list-unstyled">
-                        <li>
-                          <a
-                            className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                            href="https://www.creative-tim.com/presentation"
-                            >About Us</a
-                          >
-                        </li>
-                        <li>
-                          <a
-                            className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                            href="https://blog.creative-tim.com"
-                            >Blog</a
-                          >
-                        </li>
-                        <li>
-                          <a
-                            className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                            href="https://www.github.com/creativetimofficial"
-                            >Github</a
-                          >
-                        </li>
-                        <li>
-                          <a
-                            className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                            href="https://www.creative-tim.com/bootstrap-themes/free"
-                            >Free Products</a
-                          >
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="w-full lg:w-4/12 px-4">
-                      <span
-                        className="block uppercase text-gray-600 text-sm font-semibold mb-2"
-                        >Other Resources</span
-                      >
-                      <ul className="list-unstyled">
-                        <li>
-                          <a
-                            className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                            href="https://github.com/creativetimofficial/argon-design-system/blob/master/LICENSE.md"
-                            >MIT License</a
-                          >
-                        </li>
-                        <li>
-                          <a
-                            className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                            href="https://creative-tim.com/terms"
-                            >Terms &amp; Conditions</a
-                          >
-                        </li>
-                        <li>
-                          <a
-                            className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                            href="https://creative-tim.com/privacy"
-                            >Privacy Policy</a
-                          >
-                        </li>
-                        <li>
-                          <a
-                            className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-                            href="https://creative-tim.com/contact-us"
-                            >Contact Us</a
-                          >
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <hr className="my-6 border-gray-400" />
-              <div
-                className="flex flex-wrap items-center md:justify-between justify-center"
-              >
-                <div className="w-full md:w-4/12 px-4 mx-auto text-center">
-                  <div className="text-sm text-gray-600 font-semibold py-1">
-                    Copyright © 2019 Tailwind Starter Kit by
-                    <a
-                      href="https://www.creative-tim.com"
-                      className="text-gray-600 hover:text-gray-900"
-                      >Creative Tim</a
-                    >.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </footer>
     </div>
   )
 };

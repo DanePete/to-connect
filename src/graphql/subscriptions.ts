@@ -77,6 +77,16 @@ export const onCreatePost = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      author {
+        id
+        userId
+        username
+        posts {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       comments {
         items {
           id
@@ -101,6 +111,16 @@ export const onUpdatePost = /* GraphQL */ `
       blog {
         id
         name
+        posts {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      author {
+        id
+        userId
+        username
         posts {
           nextToken
         }
@@ -137,6 +157,16 @@ export const onDeletePost = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      author {
+        id
+        userId
+        username
+        posts {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
       comments {
         items {
           id
@@ -167,6 +197,13 @@ export const onCreateComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        author {
+          id
+          userId
+          username
+          createdAt
+          updatedAt
+        }
         comments {
           nextToken
         }
@@ -191,6 +228,13 @@ export const onUpdateComment = /* GraphQL */ `
         blog {
           id
           name
+          createdAt
+          updatedAt
+        }
+        author {
+          id
+          userId
+          username
           createdAt
           updatedAt
         }
@@ -221,6 +265,13 @@ export const onDeleteComment = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        author {
+          id
+          userId
+          username
+          createdAt
+          updatedAt
+        }
         comments {
           nextToken
         }
@@ -228,6 +279,102 @@ export const onDeleteComment = /* GraphQL */ `
         updatedAt
       }
       content
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateFriendsList = /* GraphQL */ `
+  subscription OnCreateFriendsList {
+    onCreateFriendsList {
+      id
+      friendsID
+      ownerID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateFriendsList = /* GraphQL */ `
+  subscription OnUpdateFriendsList {
+    onUpdateFriendsList {
+      id
+      friendsID
+      ownerID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteFriendsList = /* GraphQL */ `
+  subscription OnDeleteFriendsList {
+    onDeleteFriendsList {
+      id
+      friendsID
+      ownerID
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateUser = /* GraphQL */ `
+  subscription OnCreateUser {
+    onCreateUser {
+      id
+      userId
+      username
+      posts {
+        items {
+          id
+          title
+          blogID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateUser = /* GraphQL */ `
+  subscription OnUpdateUser {
+    onUpdateUser {
+      id
+      userId
+      username
+      posts {
+        items {
+          id
+          title
+          blogID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteUser = /* GraphQL */ `
+  subscription OnDeleteUser {
+    onDeleteUser {
+      id
+      userId
+      username
+      posts {
+        items {
+          id
+          title
+          blogID
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
