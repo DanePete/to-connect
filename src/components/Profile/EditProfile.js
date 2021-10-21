@@ -2,6 +2,7 @@ import {useCallback, useState, useEffect} from 'react'
 import { Auth, Storage } from 'aws-amplify';
 import { useHistory } from 'react-router-dom';
 import {useDropzone} from 'react-dropzone'
+import { withAuthenticator } from '@aws-amplify/ui-react'
 
 const initialState = { username: '', email: '', profile_photo: ''}
 const EditProfile = () => {
@@ -129,9 +130,9 @@ const EditProfile = () => {
 
   return (
     <div className="relative block h-96">
-      <form class="p-6 flex flex-col justify-center">
-        <div class="flex flex-col">
-          <label for="name" class="hidden">Full Name</label>
+      <form className="p-6 flex flex-col justify-center">
+        <div className="flex flex-col">
+          <label for="name" className="hidden">Full Name</label>
           <input
             onChange={event => setInput('username', event.target.value)}
             className="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 dark:text-gray-50 font-semibold focus:border-blue-500 focus:outline-none" 
@@ -140,8 +141,8 @@ const EditProfile = () => {
           />
         </div>
 
-        <div class="flex flex-col mt-2">
-          <label for="email" class="hidden">Email</label>
+        <div className="flex flex-col mt-2">
+          <label for="email" className="hidden">Email</label>
           <input
             onChange={event => setInput('email', event.target.value)}
             className="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 dark:text-gray-50 font-semibold focus:border-blue-500 focus:outline-none" 
@@ -150,7 +151,7 @@ const EditProfile = () => {
           />     
         </div>
 
-        <div class="flex flex-col mt-2">
+        <div className="flex flex-col mt-2">
         <div className="text-center mt-12">
               <div className="p-10" {...getRootProps()}>
                 <div className="max-w-sm rounded overflow-hidden shadow-lg">
@@ -198,7 +199,7 @@ const EditProfile = () => {
 
 
 
-          <label for="tel" class="hidden">Profile Picture</label>
+          <label for="tel" className="hidden">Profile Picture</label>
           <input {...getInputProps()} />
           {
             isDragActive ?
@@ -218,4 +219,4 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile;
+export default  withAuthenticator(EditProfile);
