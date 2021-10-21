@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Aside from '../Aside/Aside';
 import Main from '../Main/Main';
 import EditProfile from '../Profile/EditProfile';
-
+import Profile from '../Profile/Profile';
 import {
   HashRouter as Router,
   Redirect,
@@ -52,7 +52,18 @@ function Layout({ setLocale }) {
               toggled={toggled}
               handleToggleSidebar={handleToggleSidebar}
             />
-            <EditProfile />
+
+            <Main
+              image={image}
+              toggled={toggled}
+              collapsed={collapsed}
+              rtl={rtl}
+              component={<EditProfile />}
+              handleToggleSidebar={handleToggleSidebar}
+              handleCollapsedChange={handleCollapsedChange}
+              handleRtlChange={handleRtlChange}
+              handleImageChange={handleImageChange}
+            />
           </Route>
 
           <Route
@@ -73,6 +84,7 @@ function Layout({ setLocale }) {
               toggled={toggled}
               collapsed={collapsed}
               rtl={rtl}
+              component={<Profile />} 
               handleToggleSidebar={handleToggleSidebar}
               handleCollapsedChange={handleCollapsedChange}
               handleRtlChange={handleRtlChange}

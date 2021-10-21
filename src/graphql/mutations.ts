@@ -93,6 +93,9 @@ export const createPost = /* GraphQL */ `
         id
         userId
         username
+        picture
+        city
+        state
         posts {
           nextToken
         }
@@ -136,6 +139,9 @@ export const updatePost = /* GraphQL */ `
         id
         userId
         username
+        picture
+        city
+        state
         posts {
           nextToken
         }
@@ -179,6 +185,9 @@ export const deletePost = /* GraphQL */ `
         id
         userId
         username
+        picture
+        city
+        state
         posts {
           nextToken
         }
@@ -222,6 +231,9 @@ export const createComment = /* GraphQL */ `
           id
           userId
           username
+          picture
+          city
+          state
           createdAt
           updatedAt
         }
@@ -259,6 +271,9 @@ export const updateComment = /* GraphQL */ `
           id
           userId
           username
+          picture
+          city
+          state
           createdAt
           updatedAt
         }
@@ -296,6 +311,9 @@ export const deleteComment = /* GraphQL */ `
           id
           userId
           username
+          picture
+          city
+          state
           createdAt
           updatedAt
         }
@@ -362,6 +380,9 @@ export const createUser = /* GraphQL */ `
       id
       userId
       username
+      picture
+      city
+      state
       posts {
         items {
           id
@@ -386,6 +407,9 @@ export const updateUser = /* GraphQL */ `
       id
       userId
       username
+      picture
+      city
+      state
       posts {
         items {
           id
@@ -410,6 +434,9 @@ export const deleteUser = /* GraphQL */ `
       id
       userId
       username
+      picture
+      city
+      state
       posts {
         items {
           id

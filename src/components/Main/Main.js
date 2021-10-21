@@ -3,11 +3,11 @@ import { useIntl } from 'react-intl';
 import Switch from 'react-switch';
 import { FaHeart, FaBars } from 'react-icons/fa';
 import { withAuthenticator } from '@aws-amplify/ui-react'
-import Profile from '../Profile/Profile';
 
 const Main = ({
   collapsed,
   rtl,
+  component,
   image,
   handleToggleSidebar,
   handleCollapsedChange,
@@ -20,7 +20,10 @@ const Main = ({
       <div className="btn-toggle flex justify-end text-white text-2xl m-1" onClick={() => handleToggleSidebar(true)}>
         <FaBars />
       </div>
-      <Profile />
+     {component}
+     {console.log('component', component)}
+
+     here
 
       <div className="block ">
         <Switch

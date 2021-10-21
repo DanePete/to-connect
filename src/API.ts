@@ -86,6 +86,9 @@ export type User = {
   id: string,
   userId: string,
   username?: string | null,
+  picture?: string | null,
+  city?: string | null,
+  state?: string | null,
   posts?: ModelPostConnection | null,
   createdAt: string,
   updatedAt: string,
@@ -219,11 +222,17 @@ export type CreateUserInput = {
   id?: string | null,
   userId: string,
   username?: string | null,
+  picture?: string | null,
+  city?: string | null,
+  state?: string | null,
 };
 
 export type ModelUserConditionInput = {
   userId?: ModelIDInput | null,
   username?: ModelStringInput | null,
+  picture?: ModelStringInput | null,
+  city?: ModelStringInput | null,
+  state?: ModelStringInput | null,
   and?: Array< ModelUserConditionInput | null > | null,
   or?: Array< ModelUserConditionInput | null > | null,
   not?: ModelUserConditionInput | null,
@@ -232,6 +241,9 @@ export type ModelUserConditionInput = {
 export type UpdateUserInput = {
   userId?: string | null,
   username?: string | null,
+  picture?: string | null,
+  city?: string | null,
+  state?: string | null,
 };
 
 export type DeleteUserInput = {
@@ -288,6 +300,9 @@ export type ModelFriendsListConnection = {
 export type ModelUserFilterInput = {
   userId?: ModelIDInput | null,
   username?: ModelStringInput | null,
+  picture?: ModelStringInput | null,
+  city?: ModelStringInput | null,
+  state?: ModelStringInput | null,
   and?: Array< ModelUserFilterInput | null > | null,
   or?: Array< ModelUserFilterInput | null > | null,
   not?: ModelUserFilterInput | null,
@@ -407,6 +422,9 @@ export type CreatePostMutation = {
       id: string,
       userId: string,
       username?: string | null,
+      picture?: string | null,
+      city?: string | null,
+      state?: string | null,
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
@@ -458,6 +476,9 @@ export type UpdatePostMutation = {
       id: string,
       userId: string,
       username?: string | null,
+      picture?: string | null,
+      city?: string | null,
+      state?: string | null,
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
@@ -509,6 +530,9 @@ export type DeletePostMutation = {
       id: string,
       userId: string,
       username?: string | null,
+      picture?: string | null,
+      city?: string | null,
+      state?: string | null,
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
@@ -560,6 +584,9 @@ export type CreateCommentMutation = {
         id: string,
         userId: string,
         username?: string | null,
+        picture?: string | null,
+        city?: string | null,
+        state?: string | null,
         createdAt: string,
         updatedAt: string,
       },
@@ -603,6 +630,9 @@ export type UpdateCommentMutation = {
         id: string,
         userId: string,
         username?: string | null,
+        picture?: string | null,
+        city?: string | null,
+        state?: string | null,
         createdAt: string,
         updatedAt: string,
       },
@@ -646,6 +676,9 @@ export type DeleteCommentMutation = {
         id: string,
         userId: string,
         username?: string | null,
+        picture?: string | null,
+        city?: string | null,
+        state?: string | null,
         createdAt: string,
         updatedAt: string,
       },
@@ -721,6 +754,9 @@ export type CreateUserMutation = {
     id: string,
     userId: string,
     username?: string | null,
+    picture?: string | null,
+    city?: string | null,
+    state?: string | null,
     posts?:  {
       __typename: "ModelPostConnection",
       items?:  Array< {
@@ -749,6 +785,9 @@ export type UpdateUserMutation = {
     id: string,
     userId: string,
     username?: string | null,
+    picture?: string | null,
+    city?: string | null,
+    state?: string | null,
     posts?:  {
       __typename: "ModelPostConnection",
       items?:  Array< {
@@ -777,6 +816,9 @@ export type DeleteUserMutation = {
     id: string,
     userId: string,
     username?: string | null,
+    picture?: string | null,
+    city?: string | null,
+    state?: string | null,
     posts?:  {
       __typename: "ModelPostConnection",
       items?:  Array< {
@@ -870,6 +912,9 @@ export type GetPostQuery = {
       id: string,
       userId: string,
       username?: string | null,
+      picture?: string | null,
+      city?: string | null,
+      state?: string | null,
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
@@ -920,6 +965,9 @@ export type ListPostsQuery = {
         id: string,
         userId: string,
         username?: string | null,
+        picture?: string | null,
+        city?: string | null,
+        state?: string | null,
         createdAt: string,
         updatedAt: string,
       },
@@ -960,6 +1008,9 @@ export type GetCommentQuery = {
         id: string,
         userId: string,
         username?: string | null,
+        picture?: string | null,
+        city?: string | null,
+        state?: string | null,
         createdAt: string,
         updatedAt: string,
       },
@@ -1051,6 +1102,9 @@ export type GetUserQuery = {
     id: string,
     userId: string,
     username?: string | null,
+    picture?: string | null,
+    city?: string | null,
+    state?: string | null,
     posts?:  {
       __typename: "ModelPostConnection",
       items?:  Array< {
@@ -1082,6 +1136,9 @@ export type ListUsersQuery = {
       id: string,
       userId: string,
       username?: string | null,
+      picture?: string | null,
+      city?: string | null,
+      state?: string | null,
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
@@ -1181,6 +1238,9 @@ export type OnCreatePostSubscription = {
       id: string,
       userId: string,
       username?: string | null,
+      picture?: string | null,
+      city?: string | null,
+      state?: string | null,
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
@@ -1227,6 +1287,9 @@ export type OnUpdatePostSubscription = {
       id: string,
       userId: string,
       username?: string | null,
+      picture?: string | null,
+      city?: string | null,
+      state?: string | null,
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
@@ -1273,6 +1336,9 @@ export type OnDeletePostSubscription = {
       id: string,
       userId: string,
       username?: string | null,
+      picture?: string | null,
+      city?: string | null,
+      state?: string | null,
       posts?:  {
         __typename: "ModelPostConnection",
         nextToken?: string | null,
@@ -1319,6 +1385,9 @@ export type OnCreateCommentSubscription = {
         id: string,
         userId: string,
         username?: string | null,
+        picture?: string | null,
+        city?: string | null,
+        state?: string | null,
         createdAt: string,
         updatedAt: string,
       },
@@ -1357,6 +1426,9 @@ export type OnUpdateCommentSubscription = {
         id: string,
         userId: string,
         username?: string | null,
+        picture?: string | null,
+        city?: string | null,
+        state?: string | null,
         createdAt: string,
         updatedAt: string,
       },
@@ -1395,6 +1467,9 @@ export type OnDeleteCommentSubscription = {
         id: string,
         userId: string,
         username?: string | null,
+        picture?: string | null,
+        city?: string | null,
+        state?: string | null,
         createdAt: string,
         updatedAt: string,
       },
@@ -1450,6 +1525,9 @@ export type OnCreateUserSubscription = {
     id: string,
     userId: string,
     username?: string | null,
+    picture?: string | null,
+    city?: string | null,
+    state?: string | null,
     posts?:  {
       __typename: "ModelPostConnection",
       items?:  Array< {
@@ -1473,6 +1551,9 @@ export type OnUpdateUserSubscription = {
     id: string,
     userId: string,
     username?: string | null,
+    picture?: string | null,
+    city?: string | null,
+    state?: string | null,
     posts?:  {
       __typename: "ModelPostConnection",
       items?:  Array< {
@@ -1496,6 +1577,9 @@ export type OnDeleteUserSubscription = {
     id: string,
     userId: string,
     username?: string | null,
+    picture?: string | null,
+    city?: string | null,
+    state?: string | null,
     posts?:  {
       __typename: "ModelPostConnection",
       items?:  Array< {
