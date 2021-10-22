@@ -23,6 +23,24 @@ const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
   const [isLogged, set_is_logged] = useState(false)
   const user = useSelector(store => store.user);
   console.log('user is ', user);
+
+
+  
+  // if(Object.keys(user).length === 0) {
+  //   console.log('NOT user!!!!!!!!!!!!!!!!!!!!!!');
+  // } else {
+  //   console.log(' user !!!!!!!!!!!!!!!!!!!!!!');
+  //   getUser();
+  // }
+
+  // async function getUser() {
+  //   try {
+  //     const user = await Auth.currentAuthenticatedUser();
+      
+  //   } catch (error) {
+  //     console.log('failed user retrieval', error);
+  //   }
+  // }
   // useEffect(() => {
   //   checkUser();
   // }, []);
@@ -154,7 +172,7 @@ const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
             padding: '20px 24px',
           }}
         >
-
+         {/* <AmplifySignOut /> */}
           { user.getUser ?
           <AmplifySignOut />
             // <button onClick={() =>{signOut()}}>LOG OUT </button>

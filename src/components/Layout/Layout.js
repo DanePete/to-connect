@@ -11,7 +11,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import LandPage from '../LandingPage/LandPage';
-
+import { useDispatch, useSelector } from 'react-redux';
 
 function Layout({ setLocale }) {
   const [rtl, setRtl] = useState(false);
@@ -19,6 +19,9 @@ function Layout({ setLocale }) {
   const [image, setImage] = useState(true);
   const [toggled, setToggled] = useState(false);
   const [isLogged, set_is_logged] = useState();
+  const user = useSelector(store => store.user);
+
+  console.log('user is this in layout', user);
 
   const handleCollapsedChange = (checked) => {
     setCollapsed(checked);
@@ -78,7 +81,7 @@ function Layout({ setLocale }) {
             exact
             path="/edit-profile"
           >
-            { isLogged ?
+            { user.getUser ?
               <Aside
                 image={image}
                 collapsed={collapsed}
@@ -110,13 +113,19 @@ function Layout({ setLocale }) {
             exact
             path="/profile"
           >
-            <Aside
-              image={image}
-              collapsed={collapsed}
-              rtl={rtl}
-              toggled={toggled}
-              handleToggleSidebar={handleToggleSidebar}
-            />
+            { user.getUser ?
+              <Aside
+                image={image}
+                collapsed={collapsed}
+                rtl={rtl}
+                toggled={toggled}
+                handleToggleSidebar={handleToggleSidebar}
+              />
+            :
+            //  <button onCLick={() =>{signOut()}}> LOG IN<AmplifySignOut /></button>
+            null
+            }
+
 
             <Main
               image={image}

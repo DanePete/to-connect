@@ -3,12 +3,14 @@ import { Auth, Storage } from 'aws-amplify';
 import { useHistory } from 'react-router-dom';
 import {useDropzone} from 'react-dropzone'
 import { withAuthenticator } from '@aws-amplify/ui-react'
+import { useDispatch, useSelector } from 'react-redux';
 
 const initialState = { username: '', email: '', profile_photo: ''}
 const EditProfile = () => {
   const [formState, setFormState] = useState(initialState)
   const history = useHistory();
-
+  const user2 = useSelector(store => store.user);
+  console.log("user 2", user2);
   /**
    * Use Effect
    * Calls function onPageRendered
@@ -65,7 +67,7 @@ const EditProfile = () => {
    */
      async function upLoadToS3(fileName, file) {
       try {
-        await Storage.put(fileName, file, {
+        await Storage.put(`userimages/${fileName}`, file, {
           contentType: 'image/png' // contentType is optional
         });
       } catch (error) {
@@ -130,6 +132,7 @@ const EditProfile = () => {
 
   return (
     <div className="relative block h-96">
+      <h1 className="text-white">EDIT PROFILE</h1>
       <form className="p-6 flex flex-col justify-center">
         <div className="flex flex-col">
           <label for="name" className="hidden">Full Name</label>

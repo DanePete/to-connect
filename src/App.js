@@ -10,12 +10,32 @@ import 'react-pro-sidebar/dist/css/styles.css';
 import { Hub, Logger } from 'aws-amplify';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { Auth } from 'aws-amplify';
 const logger = new Logger('My-Logger');
 function App() {
   const dispatch = useDispatch();
   const user = useSelector(store => store.user);
-  console.log('why');
-  console.log('user is in app:', user);
+
+  /**
+   * Check to see if our user in store 
+   * otherwise fetch it
+   * added this to handle reload issue until i understand how to do this properly
+   */
+  if(Object.keys(user).length === 0) {
+    getUser();
+  }
+
+  async function getUser() {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      dispatch({ 
+        type: 'FETCH_USER',
+        payload: user.attributes.sub
+      });
+    } catch (error) {
+    }
+  }
+
     /**
    * Listener
    * Listens for Auth Events.
