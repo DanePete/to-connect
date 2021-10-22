@@ -10,6 +10,9 @@ export const createBlog = /* GraphQL */ `
     createBlog(input: $input, condition: $condition) {
       id
       name
+      createdAt
+      updatedAt
+      owner
       posts {
         items {
           id
@@ -17,11 +20,10 @@ export const createBlog = /* GraphQL */ `
           blogID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -33,6 +35,9 @@ export const updateBlog = /* GraphQL */ `
     updateBlog(input: $input, condition: $condition) {
       id
       name
+      createdAt
+      updatedAt
+      owner
       posts {
         items {
           id
@@ -40,11 +45,10 @@ export const updateBlog = /* GraphQL */ `
           blogID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -56,6 +60,9 @@ export const deleteBlog = /* GraphQL */ `
     deleteBlog(input: $input, condition: $condition) {
       id
       name
+      createdAt
+      updatedAt
+      owner
       posts {
         items {
           id
@@ -63,11 +70,10 @@ export const deleteBlog = /* GraphQL */ `
           blogID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -80,14 +86,29 @@ export const createPost = /* GraphQL */ `
       id
       title
       blogID
+      createdAt
+      updatedAt
       blog {
         id
         name
+        createdAt
+        updatedAt
+        owner
         posts {
           nextToken
         }
-        createdAt
-        updatedAt
+      }
+      owner
+      comments {
+        items {
+          id
+          postID
+          content
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
       }
       author {
         id
@@ -96,24 +117,13 @@ export const createPost = /* GraphQL */ `
         picture
         city
         state
+        createdAt
+        updatedAt
         posts {
           nextToken
         }
-        createdAt
-        updatedAt
+        owner
       }
-      comments {
-        items {
-          id
-          postID
-          content
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -126,14 +136,29 @@ export const updatePost = /* GraphQL */ `
       id
       title
       blogID
+      createdAt
+      updatedAt
       blog {
         id
         name
+        createdAt
+        updatedAt
+        owner
         posts {
           nextToken
         }
-        createdAt
-        updatedAt
+      }
+      owner
+      comments {
+        items {
+          id
+          postID
+          content
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
       }
       author {
         id
@@ -142,24 +167,13 @@ export const updatePost = /* GraphQL */ `
         picture
         city
         state
+        createdAt
+        updatedAt
         posts {
           nextToken
         }
-        createdAt
-        updatedAt
+        owner
       }
-      comments {
-        items {
-          id
-          postID
-          content
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -172,14 +186,29 @@ export const deletePost = /* GraphQL */ `
       id
       title
       blogID
+      createdAt
+      updatedAt
       blog {
         id
         name
+        createdAt
+        updatedAt
+        owner
         posts {
           nextToken
         }
-        createdAt
-        updatedAt
+      }
+      owner
+      comments {
+        items {
+          id
+          postID
+          content
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
       }
       author {
         id
@@ -188,24 +217,13 @@ export const deletePost = /* GraphQL */ `
         picture
         city
         state
+        createdAt
+        updatedAt
         posts {
           nextToken
         }
-        createdAt
-        updatedAt
+        owner
       }
-      comments {
-        items {
-          id
-          postID
-          content
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -217,15 +235,25 @@ export const createComment = /* GraphQL */ `
     createComment(input: $input, condition: $condition) {
       id
       postID
+      content
+      createdAt
+      updatedAt
       post {
         id
         title
         blogID
+        createdAt
+        updatedAt
         blog {
           id
           name
           createdAt
           updatedAt
+          owner
+        }
+        owner
+        comments {
+          nextToken
         }
         author {
           id
@@ -236,16 +264,10 @@ export const createComment = /* GraphQL */ `
           state
           createdAt
           updatedAt
+          owner
         }
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
       }
-      content
-      createdAt
-      updatedAt
+      owner
     }
   }
 `;
@@ -257,15 +279,25 @@ export const updateComment = /* GraphQL */ `
     updateComment(input: $input, condition: $condition) {
       id
       postID
+      content
+      createdAt
+      updatedAt
       post {
         id
         title
         blogID
+        createdAt
+        updatedAt
         blog {
           id
           name
           createdAt
           updatedAt
+          owner
+        }
+        owner
+        comments {
+          nextToken
         }
         author {
           id
@@ -276,16 +308,10 @@ export const updateComment = /* GraphQL */ `
           state
           createdAt
           updatedAt
+          owner
         }
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
       }
-      content
-      createdAt
-      updatedAt
+      owner
     }
   }
 `;
@@ -297,15 +323,25 @@ export const deleteComment = /* GraphQL */ `
     deleteComment(input: $input, condition: $condition) {
       id
       postID
+      content
+      createdAt
+      updatedAt
       post {
         id
         title
         blogID
+        createdAt
+        updatedAt
         blog {
           id
           name
           createdAt
           updatedAt
+          owner
+        }
+        owner
+        comments {
+          nextToken
         }
         author {
           id
@@ -316,16 +352,10 @@ export const deleteComment = /* GraphQL */ `
           state
           createdAt
           updatedAt
+          owner
         }
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
       }
-      content
-      createdAt
-      updatedAt
+      owner
     }
   }
 `;
@@ -340,6 +370,7 @@ export const createFriendsList = /* GraphQL */ `
       ownerID
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -354,6 +385,7 @@ export const updateFriendsList = /* GraphQL */ `
       ownerID
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -368,6 +400,7 @@ export const deleteFriendsList = /* GraphQL */ `
       ownerID
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -383,6 +416,8 @@ export const createUser = /* GraphQL */ `
       picture
       city
       state
+      createdAt
+      updatedAt
       posts {
         items {
           id
@@ -390,11 +425,11 @@ export const createUser = /* GraphQL */ `
           blogID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      createdAt
-      updatedAt
+      owner
     }
   }
 `;
@@ -410,6 +445,8 @@ export const updateUser = /* GraphQL */ `
       picture
       city
       state
+      createdAt
+      updatedAt
       posts {
         items {
           id
@@ -417,11 +454,11 @@ export const updateUser = /* GraphQL */ `
           blogID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      createdAt
-      updatedAt
+      owner
     }
   }
 `;
@@ -437,6 +474,8 @@ export const deleteUser = /* GraphQL */ `
       picture
       city
       state
+      createdAt
+      updatedAt
       posts {
         items {
           id
@@ -444,11 +483,11 @@ export const deleteUser = /* GraphQL */ `
           blogID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      createdAt
-      updatedAt
+      owner
     }
   }
 `;

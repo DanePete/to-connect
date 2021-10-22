@@ -7,6 +7,9 @@ export const getBlog = /* GraphQL */ `
     getBlog(id: $id) {
       id
       name
+      createdAt
+      updatedAt
+      owner
       posts {
         items {
           id
@@ -14,11 +17,10 @@ export const getBlog = /* GraphQL */ `
           blogID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -32,11 +34,12 @@ export const listBlogs = /* GraphQL */ `
       items {
         id
         name
+        createdAt
+        updatedAt
+        owner
         posts {
           nextToken
         }
-        createdAt
-        updatedAt
       }
       nextToken
     }
@@ -48,14 +51,29 @@ export const getPost = /* GraphQL */ `
       id
       title
       blogID
+      createdAt
+      updatedAt
       blog {
         id
         name
+        createdAt
+        updatedAt
+        owner
         posts {
           nextToken
         }
-        createdAt
-        updatedAt
+      }
+      owner
+      comments {
+        items {
+          id
+          postID
+          content
+          createdAt
+          updatedAt
+          owner
+        }
+        nextToken
       }
       author {
         id
@@ -64,24 +82,13 @@ export const getPost = /* GraphQL */ `
         picture
         city
         state
+        createdAt
+        updatedAt
         posts {
           nextToken
         }
-        createdAt
-        updatedAt
+        owner
       }
-      comments {
-        items {
-          id
-          postID
-          content
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
-      createdAt
-      updatedAt
     }
   }
 `;
@@ -96,11 +103,18 @@ export const listPosts = /* GraphQL */ `
         id
         title
         blogID
+        createdAt
+        updatedAt
         blog {
           id
           name
           createdAt
           updatedAt
+          owner
+        }
+        owner
+        comments {
+          nextToken
         }
         author {
           id
@@ -111,12 +125,8 @@ export const listPosts = /* GraphQL */ `
           state
           createdAt
           updatedAt
+          owner
         }
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
       }
       nextToken
     }
@@ -127,15 +137,25 @@ export const getComment = /* GraphQL */ `
     getComment(id: $id) {
       id
       postID
+      content
+      createdAt
+      updatedAt
       post {
         id
         title
         blogID
+        createdAt
+        updatedAt
         blog {
           id
           name
           createdAt
           updatedAt
+          owner
+        }
+        owner
+        comments {
+          nextToken
         }
         author {
           id
@@ -146,16 +166,10 @@ export const getComment = /* GraphQL */ `
           state
           createdAt
           updatedAt
+          owner
         }
-        comments {
-          nextToken
-        }
-        createdAt
-        updatedAt
       }
-      content
-      createdAt
-      updatedAt
+      owner
     }
   }
 `;
@@ -169,16 +183,18 @@ export const listComments = /* GraphQL */ `
       items {
         id
         postID
+        content
+        createdAt
+        updatedAt
         post {
           id
           title
           blogID
           createdAt
           updatedAt
+          owner
         }
-        content
-        createdAt
-        updatedAt
+        owner
       }
       nextToken
     }
@@ -192,6 +208,7 @@ export const getFriendsList = /* GraphQL */ `
       ownerID
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -208,6 +225,7 @@ export const listFriendsLists = /* GraphQL */ `
         ownerID
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -222,6 +240,8 @@ export const getUser = /* GraphQL */ `
       picture
       city
       state
+      createdAt
+      updatedAt
       posts {
         items {
           id
@@ -229,11 +249,11 @@ export const getUser = /* GraphQL */ `
           blogID
           createdAt
           updatedAt
+          owner
         }
         nextToken
       }
-      createdAt
-      updatedAt
+      owner
     }
   }
 `;
@@ -251,11 +271,12 @@ export const listUsers = /* GraphQL */ `
         picture
         city
         state
+        createdAt
+        updatedAt
         posts {
           nextToken
         }
-        createdAt
-        updatedAt
+        owner
       }
       nextToken
     }

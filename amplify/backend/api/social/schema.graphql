@@ -1,10 +1,36 @@
-type Blog @model {
+type Blog @model 
+@auth(
+    rules: [
+      { allow: public, operations: [read]},
+      { allow: owner },
+      {
+        allow: groups
+        groups: ["administrator"]
+        operations: [read, update, delete]
+      },
+      { allow: private, operations: [read] }
+    ]
+  ) 
+{
   id: ID!
   name: String!
   posts: [Post] @connection(keyName: "byBlog", fields: ["id"])
 }
 
-type Post @model @key(name: "byBlog", fields: ["blogID"]) {
+type Post @model @key(name: "byBlog", fields: ["blogID"]) 
+@auth(
+    rules: [
+      { allow: public, operations: [read]},
+      { allow: owner },
+      {
+        allow: groups
+        groups: ["administrator"]
+        operations: [read, update, delete]
+      },
+      { allow: private, operations: [read] }
+    ]
+  ) 
+{
   id: ID!
   title: String!
   blogID: ID!
@@ -13,20 +39,59 @@ type Post @model @key(name: "byBlog", fields: ["blogID"]) {
   comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
 }
 
-type Comment @model @key(name: "byPost", fields: ["postID", "content"]) {
+type Comment @model @key(name: "byPost", fields: ["postID", "content"]) 
+@auth(
+    rules: [
+      { allow: public, operations: [read]},
+      { allow: owner },
+      {
+        allow: groups
+        groups: ["administrator"]
+        operations: [read, update, delete]
+      },
+      { allow: private, operations: [read] }
+    ]
+  ) 
+{
   id: ID!
   postID: ID!
   post: Post @connection(fields: ["postID"])
   content: String!
 }
 
-type FriendsList @model {
+type FriendsList @model 
+@auth(
+    rules: [
+      { allow: public, operations: [read]},
+      { allow: owner },
+      {
+        allow: groups
+        groups: ["administrator"]
+        operations: [read, update, delete]
+      },
+      { allow: private, operations: [read] }
+    ]
+  ) 
+{
   id: ID!
   friendsID: AWSJSON!
   ownerID: ID!
 }
 
-type User @model { 
+type User @model
+@auth(
+    rules: [
+      { allow: public, operations: [read]},
+      { allow: owner },
+      {
+        allow: groups
+        groups: ["administrator"]
+        operations: [read, update, delete]
+      },
+      { allow: private, operations: [read] }
+    ]
+  ) 
+ { 
   userId: ID!
   username: String
   picture: String

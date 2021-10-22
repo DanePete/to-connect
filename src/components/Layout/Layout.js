@@ -21,8 +21,6 @@ function Layout({ setLocale }) {
   const [isLogged, set_is_logged] = useState();
   const user = useSelector(store => store.user);
 
-  console.log('user is this in layout', user);
-
   const handleCollapsedChange = (checked) => {
     setCollapsed(checked);
   };
@@ -38,18 +36,6 @@ function Layout({ setLocale }) {
   const handleToggleSidebar = (value) => {
     setToggled(value);
   };
-  
-  useEffect(() => {
-    checkUser();
-  }, []);
-
-  async function checkUser() {
-    const user = await Auth.currentAuthenticatedUser();
-    console.log('user', user);
-    if (user) {
-      set_is_logged(true);
-    }
-  }
 
   return (
     <Router>
@@ -58,11 +44,8 @@ function Layout({ setLocale }) {
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
 
-          <Route
-            // shows AboutPage at all times (logged in or not)
-            exact
-            path="/home"
-          >
+          <Route exact path="/home">
+          { user.getUser ? (
             <Main
               image={image}
               toggled={toggled}
@@ -74,38 +57,49 @@ function Layout({ setLocale }) {
               handleRtlChange={handleRtlChange}
               handleImageChange={handleImageChange}
             />
+          ) :  (
+          
+            <Main
+            image={image}
+            toggled={toggled}
+            collapsed={collapsed}
+            rtl={rtl}
+            component={<LandPage />}
+            handleToggleSidebar={handleToggleSidebar}
+            handleCollapsedChange={handleCollapsedChange}
+            handleRtlChange={handleRtlChange}
+            handleImageChange={handleImageChange}
+          />
+          )}
           </Route>
 
-          <Route
-            // shows AboutPage at all times (logged in or not)
-            exact
-            path="/edit-profile"
-          >
-            { user.getUser ?
-              <Aside
-                image={image}
-                collapsed={collapsed}
-                rtl={rtl}
-                toggled={toggled}
-                handleToggleSidebar={handleToggleSidebar}
-              />
+          <Route exact path="/edit-profile" >
+            { user.getUser ? 
+              (
+                <>
+                  <Aside
+                  image={image}
+                  collapsed={collapsed}
+                  rtl={rtl}
+                  toggled={toggled}
+                  handleToggleSidebar={handleToggleSidebar}
+                  />
+                  <Main
+                  image={image}
+                  toggled={toggled}
+                  collapsed={collapsed}
+                  rtl={rtl}
+                  component={<EditProfile />}
+                  handleToggleSidebar={handleToggleSidebar}
+                  handleCollapsedChange={handleCollapsedChange}
+                  handleRtlChange={handleRtlChange}
+                  handleImageChange={handleImageChange}
+                  />
+                </>
+              )
             :
-            //  <button onCLick={() =>{signOut()}}> LOG IN<AmplifySignOut /></button>
-            null
+              <Redirect to="/" />
             }
-
-
-            <Main
-              image={image}
-              toggled={toggled}
-              collapsed={collapsed}
-              rtl={rtl}
-              component={<EditProfile />}
-              handleToggleSidebar={handleToggleSidebar}
-              handleCollapsedChange={handleCollapsedChange}
-              handleRtlChange={handleRtlChange}
-              handleImageChange={handleImageChange}
-            />
           </Route>
 
           <Route

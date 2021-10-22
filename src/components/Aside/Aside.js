@@ -22,7 +22,6 @@ const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
   const intl = useIntl();
   const [isLogged, set_is_logged] = useState(false)
   const user = useSelector(store => store.user);
-  console.log('user is ', user);
 
 
   

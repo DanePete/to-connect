@@ -16,6 +16,8 @@ function App() {
   const dispatch = useDispatch();
   const user = useSelector(store => store.user);
 
+  console.log('THIS IS OUR USER', user);
+
   /**
    * Check to see if our user in store 
    * otherwise fetch it
@@ -33,6 +35,7 @@ function App() {
         payload: user.attributes.sub
       });
     } catch (error) {
+      console.log('no profile found error', error);
     }
   }
 
@@ -46,7 +49,7 @@ function App() {
   switch (data.payload.event) {
       case 'signIn':
           logger.info('user signed in',);
-          checkIfUserHasProfile();
+          checkIfUserHasProfile(data.payload.data.userSub);
           dispatch({ 
             type: 'FETCH_USER',
             payload: data.payload.data.attributes.sub
@@ -82,8 +85,7 @@ function App() {
    */
   async function checkIfUserHasProfile(user) {
     try {
-      const userProfile = await API.graphql({ query: queries.getUser, variables: { id: '7c04b33b-4368-4691-8cc7-72a20c9427ab' }});
-      console.log('user profile', userProfile);
+      const userProfile = await API.graphql({ query: queries.getUser, variables: { id: user.attributes.sub }});
     } catch (err) {
       console.log('error getting user:', err)
       createUserFunc(user);
@@ -96,9 +98,12 @@ function App() {
    * @param {user sub from aws} user 
    */
   async function createUserFunc(user) {
+    console.log('user in create user func', user);
     try {
       await API.graphql(graphqlOperation(createUser, {input: {id: user, userId: user}}))
+      console.log('got here');
     } catch (err) {
+      console.log('error creating user', err);
     }
   }
 

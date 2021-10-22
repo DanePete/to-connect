@@ -1,36 +1,26 @@
 import {useCallback, useState, useEffect} from 'react'
-import { Auth, Storage } from 'aws-amplify';
+import { Auth, API, Storage } from 'aws-amplify';
+import * as mutations from '../../graphql/mutations';
 import { useHistory } from 'react-router-dom';
 import {useDropzone} from 'react-dropzone'
 import { withAuthenticator } from '@aws-amplify/ui-react'
 import { useDispatch, useSelector } from 'react-redux';
 
-const initialState = { username: '', email: '', profile_photo: ''}
+const initialState = { sub: '', username: '', email: '', picture: ''}
 const EditProfile = () => {
   const [formState, setFormState] = useState(initialState)
   const history = useHistory();
-  const user2 = useSelector(store => store.user);
-  console.log("user 2", user2);
+  const user = useSelector(store => store.user);
   /**
    * Use Effect
    * Calls function onPageRendered
    */
    useEffect(() => {
-    getUser();
+    setFormState({ sub: user.getUser.id})
   }, []);
 
   function setInput(key, value) {
     setFormState({ ...formState, [key]: value })
-  }
-
-  async function getUser() {
-    try {
-      const user = await Auth.currentAuthenticatedUser();
-      setFormState({ username: user.attributes.preferred_username, email: user.attributes.email, profile_photo:user.attributes.picture})
-      getProfilePicture(user.attributes.picture)
-    } catch (error) {
-      console.log('failed user retrieval', error);
-    }
   }
 
     /**
@@ -48,14 +38,11 @@ const EditProfile = () => {
         reader.onload = () => {
         // Do whatever you want with the file contents
           const binaryStr = reader.result
-          console.log(binaryStr)
-          console.log('accented files', file);
           upLoadToS3(file.name, file);
           getProfilePicture(file.name);
         }
         reader.readAsArrayBuffer(file)
       })
-      console.log('accented files', acceptedFiles);
     }, [])
 
     /**
@@ -80,53 +67,36 @@ const EditProfile = () => {
    * is successful returns the users profile picture
    */
      const getProfilePicture = (profileImg) => {
-      console.log('profile img', profileImg);
       Storage.get(profileImg)
         .then(url => {
           var myRequest = new Request(url);
           fetch(myRequest).then(function(response) {
             if (response.status === 200) {
-              console.log('url', url)
-              setInput('profile_photo', url)
+              setInput('picture', url)
             }
           });
         })
         .catch(err => console.log(err));
     };
 
-  console.log('formstate', formState);
-
   /**
    * Update User
    */
   async function updateUser() {
     const user = await Auth.currentAuthenticatedUser();
-    if (user && formState.username && formState.email && formState.profile_photo) {
+    if (user && formState.picture) {
       try {
-        await Auth.updateUserAttributes(user, { preferred_username: formState.username, picture: formState.profile_photo });
+        const details = {
+          userId: "7c04b33b-4368-4691-8cc7-72a20c9427ab",
+          username: "bob"
+        }
+        await API.graphql({ query: mutations.updateUser, variables: {id:"7c04b33b-4368-4691-8cc7-72a20c9427ab", input: details}});
         history.push("/profile");
       } catch (error) {
-        console.log('Error uploading users: ', error);
+        console.log('Error updating users: ', error);
       }  
     }
   }
-
-  /**
-   * Set User Profile
-   * - if successful sets the users profile and replaces avatar in state
-   * @param {*} imgName 
-   */
-  // async function setUserProfile(imgName) {
-  //   const user = await Auth.currentAuthenticatedUser();
-  //   if (user) {
-  //     try {
-  //       await Auth.updateUserAttributes(user, { picture: imgName, preferred_username: 'admin' });
-  //       console.log('success!', user);
-  //     } catch (error) {
-  //       console.log('Error uploading users: ', error);
-  //     }  
-  //   }
-  // }
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
@@ -140,7 +110,7 @@ const EditProfile = () => {
             onChange={event => setInput('username', event.target.value)}
             className="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 dark:text-gray-50 font-semibold focus:border-blue-500 focus:outline-none" 
             value={formState.username}
-            placeholder="Enter A User Name"
+            placeholder="Username"
           />
         </div>
 
@@ -150,15 +120,15 @@ const EditProfile = () => {
             onChange={event => setInput('email', event.target.value)}
             className="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 dark:text-gray-50 font-semibold focus:border-blue-500 focus:outline-none" 
             value={formState.email}
-            placeholder="Enter A User Name"
+            placeholder="Email"
           />     
         </div>
 
         <div className="flex flex-col mt-2">
         <div className="text-center mt-12">
               <div className="p-10" {...getRootProps()}>
-                <div className="max-w-sm rounded overflow-hidden shadow-lg">
-                  <img className="w-full" src={formState.profile_photo} alt="Upload"></img>
+                <div className="max-w-sm rounded overflow-hidden bg-white shadow-lg">
+                  <img className="w-full" src={formState.picture} alt="Upload"></img>
                   <div className="px-6 py-4">
                     <div className="font-bold text-xl mb-2">Upload Images</div>
                     <p className="text-white bg-gray-400 text-base max-w-sm rounded overflow-hidden shadow-lg cursor-pointer">

@@ -25,6 +25,10 @@
           "RECAPTCHASECRET": "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",
           "deploymentBucketName": "amplify-social-dev-160313-deployment",
           "s3Key": "amplify-builds/social66de3edbVerifyAuthChallengeResponse-6b76784a307a525a7263-build.zip"
+        },
+        "S3Triggera064e3d4": {
+          "deploymentBucketName": "amplify-social-dev-160313-deployment",
+          "s3Key": "amplify-builds/S3Triggera064e3d4-666574614c7370617657-build.zip"
         }
       },
       "auth": {

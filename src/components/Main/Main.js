@@ -21,9 +21,6 @@ const Main = ({
         <FaBars />
       </div>
      {component}
-     {console.log('component', component)}
-
-     here
 
       <div className="block ">
         <Switch

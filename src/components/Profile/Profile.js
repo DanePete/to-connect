@@ -6,121 +6,16 @@ import { Auth } from 'aws-amplify';
 import { withAuthenticator } from '@aws-amplify/ui-react'
 import { FaEdit } from 'react-icons/fa'
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
 Storage.configure({ track: true });
 
 const Profile = () => {
-  const [user, set_user] = useState();
+  // const [user, set_user] = useState();
   const [userName, set_user_name] = useState('')
   const [image, setImage] = useState("./assets/img/team-2-800x800.jpg");
   const history = useHistory();
-
-  /**
-   * Use Effect
-   * Calls function onPageRendered
-   */
-  useEffect(() => {
-    getUser();
-  }, []);
-
-  /**
-   * get User Function - THIS NEEDS REFACTORING 
-   * Gets the users data if user is authenticated
-   */
-  const getUser = async () => {
-    try {
-      const user = await Auth.currentAuthenticatedUser();
-      console.log('user', user.attributes);
-      set_user_name()
-      set_user(user);
-      getProfilePicture(user.attributes.picture);
-      console.log('success!', user);
-    } catch (error) {
-      console.log('Error uploading user: ', error);
-    }  
-  }
-
-  /**
-   * Get Profile Picture
-   * is successful returns the users profile picture
-   */
-  const getProfilePicture = (profileImg) => {
-    console.log('profile img', profileImg);
-    Storage.get(profileImg)
-      .then(url => {
-        var myRequest = new Request(url);
-        fetch(myRequest).then(function(response) {
-          if (response.status === 200) {
-            console.log('url', url)
-            setImage(url);
-          }
-        });
-      })
-      .catch(err => console.log(err));
-  };
-
-  /**
-   * Set User Profile
-   * - if successful sets the users profile and replaces avatar in state
-   * @param {*} imgName 
-   */
-  async function setUserProfile(imgName) {
-    const user = await Auth.currentAuthenticatedUser();
-    if (user) {
-      try {
-        await Auth.updateUserAttributes(user, { picture: imgName, preferred_username: 'admin' });
-        console.log('success!', user);
-      } catch (error) {
-        console.log('Error uploading users: ', error);
-      }  
-    }
-  }
-
-
-  /**
-   * On Drop
-   * Allows users to upload 1 or many documents via drag and drop or click and upload
-   * Loops through array of user uploaded files 
-   * for each loop the images are uploaded to an S3 folder for storage
-   */
-  const onDrop = useCallback(acceptedFiles => {
-    // Do something with the files
-    acceptedFiles.forEach((file) => {
-      const reader = new FileReader()
-      reader.onabort = () => console.log('file reading was aborted')
-      reader.onerror = () => console.log('file reading has failed')
-      reader.onload = () => {
-      // Do whatever you want with the file contents
-        const binaryStr = reader.result
-        console.log(binaryStr)
-        console.log('accented files', file);
-        upLoadToS3(file.name, file);
-        setUserProfile(file.name);
-        getProfilePicture(file.name);
-      }
-      reader.readAsArrayBuffer(file)
-    })
-    console.log('accented files', acceptedFiles);
-  }, [])
-
-  /**
-   * Upload to S3
-   * TODO - Description
-   * uploads document to S3
-   * @param {*} fileName 
-   * @param {*} file 
-   */
-  async function upLoadToS3(fileName, file) {
-    try {
-      await Storage.put(fileName, file, {
-        contentType: 'image/png' // contentType is optional
-      });
-      console.log('success image upload', file, fileName);
-    } catch (error) {
-      console.log('Error uploading file: ', error);
-    }  
-  }
-
-  const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+  const user = useSelector(store => store.user);
 
   const SideBarIcon = ({ icon }) => (
     <div className="sidebar-icon">
@@ -224,7 +119,7 @@ const Profile = () => {
                       </div>
                     </div>
                     <div className="text-center mt-12">
-                      <div className="p-10" {...getRootProps()}>
+                      {/* <div className="p-10" {...getRootProps()}>
                         <div className="max-w-sm rounded overflow-hidden shadow-lg">
                           <img className="w-full" src={image} alt="Upload"></img>
                           </div>
@@ -233,7 +128,7 @@ const Profile = () => {
                             <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
                             <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
                           </div>
-                        </div>
+                        </div> */}
                       </div>
                       <h3
                         className="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2"
