@@ -5,12 +5,13 @@ import * as queries from '../../graphql/queries';
 
 function* fetchUser(action) {
   try {
-    const result = yield call([API, 'graphql'], graphqlOperation(queries.getUser, { id: '7c04b33b-4368-4691-8cc7-72a20c9427ab' }))
+    const result = yield call([API, 'graphql'], graphqlOperation(queries.getUser, { id: '4ee21158-5a78-495c-95f2-4032e4dbaa02' }))
     yield put({ type: 'SET_USER', payload: result.data });
   } catch (e) {
     console.log('error is', e);
   }
 }
+
 
 // worker Saga: will be fired on "LOGOUT" actions
 function* logoutUser(action) {

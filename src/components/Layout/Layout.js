@@ -74,7 +74,7 @@ function Layout({ setLocale }) {
           </Route>
 
           <Route exact path="/edit-profile" >
-            { user.getUser ? 
+            {/* { user.getUser ?  */}
               (
                 <>
                   <Aside
@@ -97,9 +97,9 @@ function Layout({ setLocale }) {
                   />
                 </>
               )
-            :
-              <Redirect to="/" />
-            }
+            {/* : */}
+              {/* <Redirect to="/" />
+            } */}
           </Route>
 
           <Route

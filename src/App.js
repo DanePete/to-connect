@@ -8,32 +8,42 @@ import { createUser } from './graphql/mutations';
 import Messages from './components/Messages/Messages';
 import 'react-pro-sidebar/dist/css/styles.css';
 import { Hub, Logger } from 'aws-amplify';
-import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Auth } from 'aws-amplify';
 const logger = new Logger('My-Logger');
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector(store => store.user);
+  const userProfile = useSelector(store => store.user);
 
-  console.log('THIS IS OUR USER', user);
+  console.log('user profile', userProfile);
 
+/**
+ * Notes on flow
+ * User signs in - check if user profile exists in DB
+ * If not, create user profile
+ * 
+ * User signs out - clear state
+ * 
+ * user signs up - create user profile
+ */
+
+  useEffect(() => {
   /**
    * Check to see if our user in store 
    * otherwise fetch it
    * added this to handle reload issue until i understand how to do this properly
    */
-  if(Object.keys(user).length === 0) {
-    getUser();
-  }
+    if(Object.keys(userProfile).length === 0) {
+      getUser();
+    }
+  }, [getUser, userProfile]);
+
+
 
   async function getUser() {
     try {
       const user = await Auth.currentAuthenticatedUser();
-      dispatch({ 
-        type: 'FETCH_USER',
-        payload: user.attributes.sub
-      });
+      checkIfUserHasProfile(user.attributes.sub);
     } catch (error) {
       console.log('no profile found error', error);
     }
@@ -50,10 +60,6 @@ function App() {
       case 'signIn':
           logger.info('user signed in',);
           checkIfUserHasProfile(data.payload.data.userSub);
-          dispatch({ 
-            type: 'FETCH_USER',
-            payload: data.payload.data.attributes.sub
-          });
           break;
       case 'signUp':
           logger.info('user signed up');
@@ -85,7 +91,11 @@ function App() {
    */
   async function checkIfUserHasProfile(user) {
     try {
-      const userProfile = await API.graphql({ query: queries.getUser, variables: { id: user.attributes.sub }});
+      dispatch({ 
+        type: 'FETCH_USER',
+        payload: user
+      });
+      // const userProfile = await API.graphql({ query: queries.getUser, variables: { id: user }});
     } catch (err) {
       console.log('error getting user:', err)
       createUserFunc(user);
@@ -98,10 +108,8 @@ function App() {
    * @param {user sub from aws} user 
    */
   async function createUserFunc(user) {
-    console.log('user in create user func', user);
     try {
       await API.graphql(graphqlOperation(createUser, {input: {id: user, userId: user}}))
-      console.log('got here');
     } catch (err) {
       console.log('error creating user', err);
     }

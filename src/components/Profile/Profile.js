@@ -15,7 +15,9 @@ const Profile = () => {
   const [userName, set_user_name] = useState('')
   const [image, setImage] = useState("./assets/img/team-2-800x800.jpg");
   const history = useHistory();
-  const user = useSelector(store => store.user);
+  const userProfile = useSelector(store => store.user);
+
+  console.log('user profile PROFILE', userProfile);
 
   const SideBarIcon = ({ icon }) => (
     <div className="sidebar-icon">

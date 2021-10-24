@@ -126,7 +126,7 @@ const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
           >
             <MenuItem
               icon={<SideBarIcon icon={<FaFire size="28" />} />}
-              suffix={<span className="badge red">{intl.formatMessage({ id: 'test' })}</span>}
+              suffix={<span className="badge red">{intl.formatMessage({ id: 'Edit_Profile' })}</span>}
             >
               <Link to="/edit-profile">{intl.formatMessage({ id: 'Edit_Profile' })}</Link>
             </MenuItem>
@@ -171,6 +171,7 @@ const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
             padding: '20px 24px',
           }}
         >
+          <AmplifySignOut />
          {/* <AmplifySignOut /> */}
           { user.getUser ?
           <AmplifySignOut />

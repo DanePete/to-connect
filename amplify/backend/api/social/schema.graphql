@@ -91,7 +91,8 @@ type User @model
       { allow: private, operations: [read] }
     ]
   ) 
- { 
+ {
+  id: ID! 
   userId: ID!
   username: String
   picture: String

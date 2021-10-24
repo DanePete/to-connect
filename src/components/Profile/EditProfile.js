@@ -1,6 +1,8 @@
 import {useCallback, useState, useEffect} from 'react'
-import { Auth, API, Storage } from 'aws-amplify';
+import { Auth, API, Storage, graphqlOperation } from 'aws-amplify';
 import * as mutations from '../../graphql/mutations';
+// import { createUser } from '../../graphql/mutations';
+// import { updateUser } from '../../graphql/mutations';
 import { useHistory } from 'react-router-dom';
 import {useDropzone} from 'react-dropzone'
 import { withAuthenticator } from '@aws-amplify/ui-react'
@@ -10,19 +12,31 @@ const initialState = { sub: '', username: '', email: '', picture: ''}
 const EditProfile = () => {
   const [formState, setFormState] = useState(initialState)
   const history = useHistory();
-  const user = useSelector(store => store.user);
+  const userProfile = useSelector(store => store.user);
+  const dispatch = useDispatch();
+  
+  console.log('user profile Edit Profile', userProfile.getUser);
+
+  // react check if userprofile is empty wait to render the
+
   /**
    * Use Effect
    * Calls function onPageRendered
    */
    useEffect(() => {
-    setFormState({ sub: user.getUser.id})
+    // setFormState({ sub: userProfile.getUser.id})
+    if (userProfile.getUser) {
+      setFormState({ sub: userProfile.getUser.id, username: userProfile.getUser.username, email: userProfile.getUser.email, picture: userProfile.getUser.picture});
+    }
   }, []);
 
   function setInput(key, value) {
     setFormState({ ...formState, [key]: value })
   }
 
+
+
+console.log('formState', formState);
     /**
    * On Drop
    * Allows users to upload 1 or many documents via drag and drop or click and upload
@@ -72,7 +86,8 @@ const EditProfile = () => {
           var myRequest = new Request(url);
           fetch(myRequest).then(function(response) {
             if (response.status === 200) {
-              setInput('picture', url)
+              console.log('set PICture', url);
+              setFormState({sub: formState.sub, username: formState.username, email: formState.email, picture: url})
             }
           });
         })
@@ -82,18 +97,23 @@ const EditProfile = () => {
   /**
    * Update User
    */
-  async function updateUser() {
-    const user = await Auth.currentAuthenticatedUser();
-    if (user && formState.picture) {
+  async function updateUserProfile() {
+    if (userProfile.getUser.id) {
       try {
         const details = {
-          userId: "7c04b33b-4368-4691-8cc7-72a20c9427ab",
-          username: "bob"
+          id: userProfile.getUser.id,
+          userId: userProfile.getUser.id,
+          username: formState.username,
         }
-        await API.graphql({ query: mutations.updateUser, variables: {id:"7c04b33b-4368-4691-8cc7-72a20c9427ab", input: details}});
+        
+        await API.graphql({ query: mutations.updateUser, variables: {input: details}});
+        dispatch({ 
+          type: 'FETCH_USER',
+          payload: userProfile.getUser.id
+        });
         history.push("/profile");
       } catch (error) {
-        console.log('Error updating users: ', error);
+        console.log('Error updating user:', error);
       }  
     }
   }
@@ -147,27 +167,7 @@ const EditProfile = () => {
                   </div>
                 </div>
               </div>
-              <h3
-                className="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2"
-              >
-                Jenna Stones
-              </h3>
-              <div
-                className="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
-              >
-                <i
-                  className="fas fa-map-marker-alt mr-2 text-lg text-gray-500"
-                ></i>
-                Los Angeles, California
-              </div>
-              <div className="mb-2 text-gray-700 mt-10">
-                <i className="fas fa-briefcase mr-2 text-lg text-gray-500"></i
-                >Solution Manager - Creative Tim Officer
-              </div>
-              <div className="mb-2 text-gray-700">
-                <i className="fas fa-university mr-2 text-lg text-gray-500"></i
-                >University of Computer Science
-              </div>
+
           </div>
 
 
@@ -186,7 +186,7 @@ const EditProfile = () => {
             placeholder="Enter A User Name"
           />      */}
         </div>
-        <button className="md:w-32 bg-blue-600 dark:bg-gray-100 text-white dark:text-gray-800 font-bold py-3 px-6 rounded-lg mt-4 hover:bg-blue-500 dark:hover:bg-gray-200 transition ease-in-out duration-300" onClick={updateUser}>Save Edits</button>
+        <button className="md:w-32 bg-blue-600 dark:bg-gray-100 text-white dark:text-gray-800 font-bold py-3 px-6 rounded-lg mt-4 hover:bg-blue-500 dark:hover:bg-gray-200 transition ease-in-out duration-300" onClick={updateUserProfile}>Save Edits</button>
       </form>
     </div>
   );

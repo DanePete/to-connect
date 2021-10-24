@@ -244,6 +244,7 @@ export type ModelUserConditionInput = {
 };
 
 export type UpdateUserInput = {
+  id: string,
   userId?: string | null,
   username?: string | null,
   picture?: string | null,
@@ -303,6 +304,7 @@ export type ModelFriendsListConnection = {
 };
 
 export type ModelUserFilterInput = {
+  id?: ModelIDInput | null,
   userId?: ModelIDInput | null,
   username?: ModelStringInput | null,
   picture?: ModelStringInput | null,
