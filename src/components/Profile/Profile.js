@@ -7,18 +7,20 @@ import { withAuthenticator } from '@aws-amplify/ui-react'
 import { FaEdit } from 'react-icons/fa'
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
+import placeholder from '../Profile/temp.jpg'
+console.log('place holder', placeholder
+);
 Storage.configure({ track: true });
 
 const Profile = () => {
   // const [user, set_user] = useState();
   const [userName, set_user_name] = useState('')
-  const [image, setImage] = useState("./assets/img/team-2-800x800.jpg");
+  const [image, setImage] = useState(placeholder);
   const history = useHistory();
   const userProfile = useSelector(store => store.user);
 
   console.log('user profile PROFILE', userProfile);
-
+ 
   const SideBarIcon = ({ icon }) => (
     <div className="sidebar-icon">
       {icon}

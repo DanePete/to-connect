@@ -6,13 +6,16 @@ import reportWebVitals from './reportWebVitals';
 import Amplify from "aws-amplify";
 import awsExports from "./aws-exports";
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react'
 
-import store from './redux/store';
+import {store, persistor}  from './redux/store';
 Amplify.configure(awsExports);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <PersistGate loading={null} persistor={persistor}> 
+      <App />
+    </PersistGate>
   </Provider>,
   document.getElementById('root')
 );

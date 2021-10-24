@@ -14,11 +14,9 @@ const EditProfile = () => {
   const history = useHistory();
   const userProfile = useSelector(store => store.user);
   const dispatch = useDispatch();
+
+  console.log('userprofile', userProfile);
   
-  console.log('user profile Edit Profile', userProfile.getUser);
-
-  // react check if userprofile is empty wait to render the
-
   /**
    * Use Effect
    * Calls function onPageRendered
@@ -26,7 +24,15 @@ const EditProfile = () => {
    useEffect(() => {
     // setFormState({ sub: userProfile.getUser.id})
     if (userProfile.getUser) {
+      console.log('user profile get user use effect', userProfile.getUser);
       setFormState({ sub: userProfile.getUser.id, username: userProfile.getUser.username, email: userProfile.getUser.email, picture: userProfile.getUser.picture});
+    } else {
+      console.log('thats a bummer man');
+      getUser();
+      // dispatch({ 
+      //   type: 'FETCH_USER',
+      //   payload: userProfile.getUser.id
+      // });
     }
   }, []);
 
@@ -34,6 +40,49 @@ const EditProfile = () => {
     setFormState({ ...formState, [key]: value })
   }
 
+
+  async function getUser() {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      checkIfUserHasProfile(user.attributes.sub);
+    } catch (error) {
+      console.log('no profile found error', error);
+    }
+  }
+
+    /**
+   * Check if User Has Profile
+   * This logic needs refactoring but will address that down the road
+   * @param {user sub from aws} user 
+   */
+     async function checkIfUserHasProfile(user) {
+       console.log('user is in check user profile', user);
+      try {
+        dispatch({ 
+          type: 'FETCH_USER',
+          payload: user
+        });
+        console.log('got here yo',userProfile);
+        setFormState({ sub: userProfile.getUser.id, username: userProfile.getUser.username, email: userProfile.getUser.email, picture: userProfile.getUser.picture});
+        // const userProfile = await API.graphql({ query: queries.getUser, variables: { id: user }});
+      } catch (err) {
+        console.log('error getting user:', err)
+        createUserFunc(user);
+      }
+    }
+
+        /**
+   * Create User Function
+   * This creates a record in dynamoDB used for Profile - different from cognito user account
+   * @param {user sub from aws} user 
+   */
+  async function createUserFunc(user) {
+    try {
+      await API.graphql(graphqlOperation(mutations.createUser, {input: {id: user, userId: user}}))
+    } catch (err) {
+      console.log('error creating user', err);
+    }
+  }
 
 
 console.log('formState', formState);
