@@ -96,6 +96,7 @@ function App() {
         payload: user
       });
       // const userProfile = await API.graphql({ query: queries.getUser, variables: { id: user }});
+      console.log('FETCH_USEr user profile', userProfile);
     } catch (err) {
       console.log('error getting user:', err)
       createUserFunc(user);
@@ -108,6 +109,7 @@ function App() {
    * @param {user sub from aws} user 
    */
   async function createUserFunc(user) {
+    console.log('user is,', user);
     try {
       await API.graphql(graphqlOperation(createUser, {input: {id: user, userId: user}}))
     } catch (err) {

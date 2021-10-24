@@ -108,6 +108,7 @@ export type User = {
   picture?: string | null,
   city?: string | null,
   state?: string | null,
+  Bio?: string | null,
   createdAt: string,
   updatedAt: string,
   posts?: ModelPostConnection | null,
@@ -230,6 +231,7 @@ export type CreateUserInput = {
   picture?: string | null,
   city?: string | null,
   state?: string | null,
+  Bio?: string | null,
 };
 
 export type ModelUserConditionInput = {
@@ -238,6 +240,7 @@ export type ModelUserConditionInput = {
   picture?: ModelStringInput | null,
   city?: ModelStringInput | null,
   state?: ModelStringInput | null,
+  Bio?: ModelStringInput | null,
   and?: Array< ModelUserConditionInput | null > | null,
   or?: Array< ModelUserConditionInput | null > | null,
   not?: ModelUserConditionInput | null,
@@ -250,6 +253,7 @@ export type UpdateUserInput = {
   picture?: string | null,
   city?: string | null,
   state?: string | null,
+  Bio?: string | null,
 };
 
 export type DeleteUserInput = {
@@ -310,6 +314,7 @@ export type ModelUserFilterInput = {
   picture?: ModelStringInput | null,
   city?: ModelStringInput | null,
   state?: ModelStringInput | null,
+  Bio?: ModelStringInput | null,
   and?: Array< ModelUserFilterInput | null > | null,
   or?: Array< ModelUserFilterInput | null > | null,
   not?: ModelUserFilterInput | null,
@@ -455,6 +460,7 @@ export type CreatePostMutation = {
       picture?: string | null,
       city?: string | null,
       state?: string | null,
+      Bio?: string | null,
       createdAt: string,
       updatedAt: string,
       posts?:  {
@@ -513,6 +519,7 @@ export type UpdatePostMutation = {
       picture?: string | null,
       city?: string | null,
       state?: string | null,
+      Bio?: string | null,
       createdAt: string,
       updatedAt: string,
       posts?:  {
@@ -571,6 +578,7 @@ export type DeletePostMutation = {
       picture?: string | null,
       city?: string | null,
       state?: string | null,
+      Bio?: string | null,
       createdAt: string,
       updatedAt: string,
       posts?:  {
@@ -623,6 +631,7 @@ export type CreateCommentMutation = {
         picture?: string | null,
         city?: string | null,
         state?: string | null,
+        Bio?: string | null,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -673,6 +682,7 @@ export type UpdateCommentMutation = {
         picture?: string | null,
         city?: string | null,
         state?: string | null,
+        Bio?: string | null,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -723,6 +733,7 @@ export type DeleteCommentMutation = {
         picture?: string | null,
         city?: string | null,
         state?: string | null,
+        Bio?: string | null,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -797,6 +808,7 @@ export type CreateUserMutation = {
     picture?: string | null,
     city?: string | null,
     state?: string | null,
+    Bio?: string | null,
     createdAt: string,
     updatedAt: string,
     posts?:  {
@@ -830,6 +842,7 @@ export type UpdateUserMutation = {
     picture?: string | null,
     city?: string | null,
     state?: string | null,
+    Bio?: string | null,
     createdAt: string,
     updatedAt: string,
     posts?:  {
@@ -863,6 +876,7 @@ export type DeleteUserMutation = {
     picture?: string | null,
     city?: string | null,
     state?: string | null,
+    Bio?: string | null,
     createdAt: string,
     updatedAt: string,
     posts?:  {
@@ -981,6 +995,7 @@ export type GetPostQuery = {
       picture?: string | null,
       city?: string | null,
       state?: string | null,
+      Bio?: string | null,
       createdAt: string,
       updatedAt: string,
       posts?:  {
@@ -1029,6 +1044,7 @@ export type ListPostsQuery = {
         picture?: string | null,
         city?: string | null,
         state?: string | null,
+        Bio?: string | null,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -1078,6 +1094,7 @@ export type GetCommentQuery = {
         picture?: string | null,
         city?: string | null,
         state?: string | null,
+        Bio?: string | null,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -1169,6 +1186,7 @@ export type GetUserQuery = {
     picture?: string | null,
     city?: string | null,
     state?: string | null,
+    Bio?: string | null,
     createdAt: string,
     updatedAt: string,
     posts?:  {
@@ -1205,6 +1223,7 @@ export type ListUsersQuery = {
       picture?: string | null,
       city?: string | null,
       state?: string | null,
+      Bio?: string | null,
       createdAt: string,
       updatedAt: string,
       posts?:  {
@@ -1331,6 +1350,7 @@ export type OnCreatePostSubscription = {
       picture?: string | null,
       city?: string | null,
       state?: string | null,
+      Bio?: string | null,
       createdAt: string,
       updatedAt: string,
       posts?:  {
@@ -1384,6 +1404,7 @@ export type OnUpdatePostSubscription = {
       picture?: string | null,
       city?: string | null,
       state?: string | null,
+      Bio?: string | null,
       createdAt: string,
       updatedAt: string,
       posts?:  {
@@ -1437,6 +1458,7 @@ export type OnDeletePostSubscription = {
       picture?: string | null,
       city?: string | null,
       state?: string | null,
+      Bio?: string | null,
       createdAt: string,
       updatedAt: string,
       posts?:  {
@@ -1484,6 +1506,7 @@ export type OnCreateCommentSubscription = {
         picture?: string | null,
         city?: string | null,
         state?: string | null,
+        Bio?: string | null,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -1529,6 +1552,7 @@ export type OnUpdateCommentSubscription = {
         picture?: string | null,
         city?: string | null,
         state?: string | null,
+        Bio?: string | null,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -1574,6 +1598,7 @@ export type OnDeleteCommentSubscription = {
         picture?: string | null,
         city?: string | null,
         state?: string | null,
+        Bio?: string | null,
         createdAt: string,
         updatedAt: string,
         owner?: string | null,
@@ -1628,6 +1653,7 @@ export type OnCreateUserSubscription = {
     picture?: string | null,
     city?: string | null,
     state?: string | null,
+    Bio?: string | null,
     createdAt: string,
     updatedAt: string,
     posts?:  {
@@ -1656,6 +1682,7 @@ export type OnUpdateUserSubscription = {
     picture?: string | null,
     city?: string | null,
     state?: string | null,
+    Bio?: string | null,
     createdAt: string,
     updatedAt: string,
     posts?:  {
@@ -1684,6 +1711,7 @@ export type OnDeleteUserSubscription = {
     picture?: string | null,
     city?: string | null,
     state?: string | null,
+    Bio?: string | null,
     createdAt: string,
     updatedAt: string,
     posts?:  {

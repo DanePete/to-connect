@@ -117,6 +117,7 @@ export const createPost = /* GraphQL */ `
         picture
         city
         state
+        Bio
         createdAt
         updatedAt
         posts {
@@ -167,6 +168,7 @@ export const updatePost = /* GraphQL */ `
         picture
         city
         state
+        Bio
         createdAt
         updatedAt
         posts {
@@ -217,6 +219,7 @@ export const deletePost = /* GraphQL */ `
         picture
         city
         state
+        Bio
         createdAt
         updatedAt
         posts {
@@ -262,6 +265,7 @@ export const createComment = /* GraphQL */ `
           picture
           city
           state
+          Bio
           createdAt
           updatedAt
           owner
@@ -306,6 +310,7 @@ export const updateComment = /* GraphQL */ `
           picture
           city
           state
+          Bio
           createdAt
           updatedAt
           owner
@@ -350,6 +355,7 @@ export const deleteComment = /* GraphQL */ `
           picture
           city
           state
+          Bio
           createdAt
           updatedAt
           owner
@@ -416,6 +422,7 @@ export const createUser = /* GraphQL */ `
       picture
       city
       state
+      Bio
       createdAt
       updatedAt
       posts {
@@ -445,6 +452,7 @@ export const updateUser = /* GraphQL */ `
       picture
       city
       state
+      Bio
       createdAt
       updatedAt
       posts {
@@ -474,6 +482,7 @@ export const deleteUser = /* GraphQL */ `
       picture
       city
       state
+      Bio
       createdAt
       updatedAt
       posts {

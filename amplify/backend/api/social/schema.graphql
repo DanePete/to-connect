@@ -98,5 +98,6 @@ type User @model
   picture: String
   city: String
   state: String 
+  Bio: String
   posts: [Post] @connection(name: "UserPosts")
 }

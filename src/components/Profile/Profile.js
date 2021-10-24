@@ -137,7 +137,7 @@ const Profile = () => {
                       <h3
                         className="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2"
                       >
-                        Jenna Stones
+                        {userProfile.getUser.username}
                       </h3>
                       <div
                         className="text-sm leading-normal mt-0 mb-2 text-gray-500 font-bold uppercase"
@@ -145,15 +145,15 @@ const Profile = () => {
                         <i
                           className="fas fa-map-marker-alt mr-2 text-lg text-gray-500"
                         ></i>
-                        Los Angeles, California
+                        TODO: LOCATION?
                       </div>
                       <div className="mb-2 text-gray-700 mt-10">
                         <i className="fas fa-briefcase mr-2 text-lg text-gray-500"></i
-                        >Solution Manager - Creative Tim Officer
+                        >Titles....
                       </div>
                       <div className="mb-2 text-gray-700">
                         <i className="fas fa-university mr-2 text-lg text-gray-500"></i
-                        >University of Computer Science
+                        >Roles.... ETC...
                       </div>
                     </div>
                     <div className="mt-10 py-10 border-t border-gray-300 text-center">

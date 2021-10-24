@@ -7,6 +7,8 @@ import { useHistory } from 'react-router-dom';
 import {useDropzone} from 'react-dropzone'
 import { withAuthenticator } from '@aws-amplify/ui-react'
 import { useDispatch, useSelector } from 'react-redux';
+import ReactQuill from 'react-quill';
+import snow from 'react-quill/dist/quill.snow.css';
 
 const initialState = { sub: '', username: '', email: '', picture: ''}
 const EditProfile = () => {
@@ -14,8 +16,10 @@ const EditProfile = () => {
   const history = useHistory();
   const userProfile = useSelector(store => store.user);
   const dispatch = useDispatch();
+  const [value, setValue] = useState('');
 
   console.log('userprofile', userProfile);
+  console.log('quill', value);
   
   /**
    * Use Effect
@@ -182,6 +186,8 @@ console.log('formState', formState);
             placeholder="Username"
           />
         </div>
+        <h1 className="text-white">BIO</h1>
+        <ReactQuill theme="snow" value={formState.bio || ''} onChange={setValue} placeholder="BIO" className="bg-gray-200"/>
 
         <div className="flex flex-col mt-2">
           <label for="email" className="hidden">Email</label>

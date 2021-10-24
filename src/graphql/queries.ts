@@ -82,6 +82,7 @@ export const getPost = /* GraphQL */ `
         picture
         city
         state
+        Bio
         createdAt
         updatedAt
         posts {
@@ -123,6 +124,7 @@ export const listPosts = /* GraphQL */ `
           picture
           city
           state
+          Bio
           createdAt
           updatedAt
           owner
@@ -164,6 +166,7 @@ export const getComment = /* GraphQL */ `
           picture
           city
           state
+          Bio
           createdAt
           updatedAt
           owner
@@ -240,6 +243,7 @@ export const getUser = /* GraphQL */ `
       picture
       city
       state
+      Bio
       createdAt
       updatedAt
       posts {
@@ -271,6 +275,7 @@ export const listUsers = /* GraphQL */ `
         picture
         city
         state
+        Bio
         createdAt
         updatedAt
         posts {

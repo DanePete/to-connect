@@ -105,6 +105,7 @@ export const onCreatePost = /* GraphQL */ `
         picture
         city
         state
+        Bio
         createdAt
         updatedAt
         posts {
@@ -152,6 +153,7 @@ export const onUpdatePost = /* GraphQL */ `
         picture
         city
         state
+        Bio
         createdAt
         updatedAt
         posts {
@@ -199,6 +201,7 @@ export const onDeletePost = /* GraphQL */ `
         picture
         city
         state
+        Bio
         createdAt
         updatedAt
         posts {
@@ -241,6 +244,7 @@ export const onCreateComment = /* GraphQL */ `
           picture
           city
           state
+          Bio
           createdAt
           updatedAt
           owner
@@ -282,6 +286,7 @@ export const onUpdateComment = /* GraphQL */ `
           picture
           city
           state
+          Bio
           createdAt
           updatedAt
           owner
@@ -323,6 +328,7 @@ export const onDeleteComment = /* GraphQL */ `
           picture
           city
           state
+          Bio
           createdAt
           updatedAt
           owner
@@ -377,6 +383,7 @@ export const onCreateUser = /* GraphQL */ `
       picture
       city
       state
+      Bio
       createdAt
       updatedAt
       posts {
@@ -403,6 +410,7 @@ export const onUpdateUser = /* GraphQL */ `
       picture
       city
       state
+      Bio
       createdAt
       updatedAt
       posts {
@@ -429,6 +437,7 @@ export const onDeleteUser = /* GraphQL */ `
       picture
       city
       state
+      Bio
       createdAt
       updatedAt
       posts {
