@@ -156,6 +156,7 @@ export const createBlog = /* GraphQL */ `
           id
           title
           blogID
+          post_text
           _version
           _deleted
           _lastChangedAt
@@ -188,6 +189,7 @@ export const updateBlog = /* GraphQL */ `
           id
           title
           blogID
+          post_text
           _version
           _deleted
           _lastChangedAt
@@ -220,6 +222,7 @@ export const deleteBlog = /* GraphQL */ `
           id
           title
           blogID
+          post_text
           _version
           _deleted
           _lastChangedAt
@@ -242,6 +245,7 @@ export const createPost = /* GraphQL */ `
       id
       title
       blogID
+      post_text
       _version
       _deleted
       _lastChangedAt
@@ -272,6 +276,8 @@ export const createPost = /* GraphQL */ `
         state
         Bio
         created
+        following_count
+        follower_count
         _version
         _deleted
         _lastChangedAt
@@ -295,6 +301,7 @@ export const updatePost = /* GraphQL */ `
       id
       title
       blogID
+      post_text
       _version
       _deleted
       _lastChangedAt
@@ -325,6 +332,8 @@ export const updatePost = /* GraphQL */ `
         state
         Bio
         created
+        following_count
+        follower_count
         _version
         _deleted
         _lastChangedAt
@@ -348,6 +357,7 @@ export const deletePost = /* GraphQL */ `
       id
       title
       blogID
+      post_text
       _version
       _deleted
       _lastChangedAt
@@ -378,6 +388,8 @@ export const deletePost = /* GraphQL */ `
         state
         Bio
         created
+        following_count
+        follower_count
         _version
         _deleted
         _lastChangedAt
@@ -410,6 +422,7 @@ export const createComment = /* GraphQL */ `
         id
         title
         blogID
+        post_text
         _version
         _deleted
         _lastChangedAt
@@ -429,6 +442,8 @@ export const createComment = /* GraphQL */ `
           state
           Bio
           created
+          following_count
+          follower_count
           _version
           _deleted
           _lastChangedAt
@@ -459,6 +474,7 @@ export const updateComment = /* GraphQL */ `
         id
         title
         blogID
+        post_text
         _version
         _deleted
         _lastChangedAt
@@ -478,6 +494,8 @@ export const updateComment = /* GraphQL */ `
           state
           Bio
           created
+          following_count
+          follower_count
           _version
           _deleted
           _lastChangedAt
@@ -508,6 +526,7 @@ export const deleteComment = /* GraphQL */ `
         id
         title
         blogID
+        post_text
         _version
         _deleted
         _lastChangedAt
@@ -527,6 +546,8 @@ export const deleteComment = /* GraphQL */ `
           state
           Bio
           created
+          following_count
+          follower_count
           _version
           _deleted
           _lastChangedAt
@@ -553,6 +574,8 @@ export const createUser = /* GraphQL */ `
       state
       Bio
       created
+      following_count
+      follower_count
       _version
       _deleted
       _lastChangedAt
@@ -563,6 +586,7 @@ export const createUser = /* GraphQL */ `
           id
           title
           blogID
+          post_text
           _version
           _deleted
           _lastChangedAt
@@ -591,6 +615,8 @@ export const updateUser = /* GraphQL */ `
       state
       Bio
       created
+      following_count
+      follower_count
       _version
       _deleted
       _lastChangedAt
@@ -601,6 +627,7 @@ export const updateUser = /* GraphQL */ `
           id
           title
           blogID
+          post_text
           _version
           _deleted
           _lastChangedAt
@@ -629,6 +656,8 @@ export const deleteUser = /* GraphQL */ `
       state
       Bio
       created
+      following_count
+      follower_count
       _version
       _deleted
       _lastChangedAt
@@ -639,6 +668,7 @@ export const deleteUser = /* GraphQL */ `
           id
           title
           blogID
+          post_text
           _version
           _deleted
           _lastChangedAt

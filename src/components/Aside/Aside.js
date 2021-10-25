@@ -127,6 +127,15 @@ const Aside = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
           </MenuItem>
         </Menu>
 
+        <Menu iconShape="circle">
+          <MenuItem
+            icon={<SideBarIcon icon={<FaFire size="28" />} />}
+            suffix={<span className="badge red">{intl.formatMessage({ id: 'new' })}</span>}
+          >
+            <Link to="/admin">{intl.formatMessage({ id: 'Admin' })}</Link>
+          </MenuItem>
+        </Menu>
+
 
         <Menu iconShape="circle">
           <SubMenu

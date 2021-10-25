@@ -13,6 +13,7 @@ import {
 import LandPage from '../LandingPage/LandPage';
 import { useDispatch, useSelector } from 'react-redux';
 import TheWall from '../TheWall/TheWall';
+import TabsRender from '../Admin/Admin';
 
 function Layout({ setLocale }) {
   const [rtl, setRtl] = useState(false);
@@ -153,6 +154,36 @@ function Layout({ setLocale }) {
                   collapsed={collapsed}
                   rtl={rtl}
                   component={<TheWall />}
+                  handleToggleSidebar={handleToggleSidebar}
+                  handleCollapsedChange={handleCollapsedChange}
+                  handleRtlChange={handleRtlChange}
+                  handleImageChange={handleImageChange}
+                  />
+                </>
+              )
+            {/* : */}
+              {/* <Redirect to="/" />
+            } */}
+          </Route>
+
+
+          <Route exact path="/admin" >
+            {/* { user.getUser ?  */}
+              (
+                <>
+                  <Aside
+                  image={image}
+                  collapsed={collapsed}
+                  rtl={rtl}
+                  toggled={toggled}
+                  handleToggleSidebar={handleToggleSidebar}
+                  />
+                  <Main
+                  image={image}
+                  toggled={toggled}
+                  collapsed={collapsed}
+                  rtl={rtl}
+                  component={<TabsRender />}
                   handleToggleSidebar={handleToggleSidebar}
                   handleCollapsedChange={handleCollapsedChange}
                   handleRtlChange={handleRtlChange}

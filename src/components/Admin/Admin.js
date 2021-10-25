@@ -1,56 +1,120 @@
+import React, { useState } from "react";
 
-import {useCallback, useState, useEffect} from 'react'
-import {useDropzone} from 'react-dropzone'
-import { Storage } from 'aws-amplify';
-import { Auth } from 'aws-amplify';
-import { withAuthenticator } from '@aws-amplify/ui-react'
-import { FaEdit } from 'react-icons/fa'
-import { useHistory } from 'react-router-dom';
-import './LandingPage.css';
-Storage.configure({ track: true });
-
-const LandingPage = () => {
-  const history = useHistory();
+const Admin = ({ color }) => {
+  const [openTab, setOpenTab] = useState();
   return (
-    <div className="landing-container">
-    <ul className="circles">
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-    </ul>
-    <div className="h-100 container">
-      <div className="d-flex h-100 text-white overlay-content align-items-center">
-        <div className="w-100">
-          <div className="row">
-            <div className="col-lg-6">
-              <p className="subtitle text-white letter-spacing-3 mb-3 font-weight-light">Too-Social</p>
-              <h2 className="display-3 font-weight-bold mb-3">Yet Another Social Media Platform</h2>
+    <>
+      <div className="flex flex-wrap">
+        <div className="w-full">
+          <ul
+            className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
+            role="tablist"
+          >
+            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+              <a
+                className={
+                  "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
+                  (openTab === 1
+                    ? "text-white bg-" + color + "-600"
+                    : "text-" + color + "-600 bg-white")
+                }
+                onClick={e => {
+                  // e.preventDefault();
+                  setOpenTab(1);
+                }}
+                data-toggle="tab"
+                href="#link1"
+                role="tablist"
+              >
+                Profile
+              </a>
+            </li>
+            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+              <a
+                className={
+                  "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
+                  (openTab === 2
+                    ? "text-white bg-" + color + "-600"
+                    : "text-" + color + "-600 bg-white")
+                }
+                onClick={e => {
+                  // e.preventDefault();
+                  setOpenTab(2);
+                }}
+                data-toggle="tab"
+                href="#link2"
+                role="tablist"
+              >
+                 Settings
+              </a>
+            </li>
+            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+              <a
+                className={
+                  "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
+                  (openTab === 3
+                    ? "text-white bg-" + color + "-600"
+                    : "text-" + color + "-600 bg-white")
+                }
+                onClick={e => {
+                  // e.preventDefault();
+                  setOpenTab(3);
+                }}
+                data-toggle="tab"
+                href="#link3"
+                role="tablist"
+              >
+                 Options
+              </a>
+            </li>
+          </ul>
+          <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+            <div className="px-4 py-5 flex-auto">
+              <div className="tab-content tab-space">
+                <div className={openTab === 1 ? "block" : "hidden"} id="link1">
+                  <p>
+                    Collaboratively administrate empowered markets via
+                    plug-and-play networks. Dynamically procrastinate B2C users
+                    after installed base benefits.
+                    <br />
+                    <br /> Dramatically visualize customer directed convergence
+                    without revolutionary ROI.
+                  </p>
+                </div>
+                <div className={openTab === 2 ? "block" : "hidden"} id="link2">
+                  <p>
+                    Completely synergize resource taxing relationships via
+                    premier niche markets. Professionally cultivate one-to-one
+                    customer service with robust ideas.
+                    <br />
+                    <br />
+                    Dynamically innovate resource-leveling customer service for
+                    state of the art customer service.
+                  </p>
+                </div>
+                <div className={openTab === 3 ? "block" : "hidden"} id="link3">
+                  <p>
+                    Efficiently unleash cross-media information without
+                    cross-media value. Quickly maximize timely deliverables for
+                    real-time schemas.
+                    <br />
+                    <br /> Dramatically maintain clicks-and-mortar solutions
+                    without functional solutions.
+                  </p>
+                </div>
+              </div>
             </div>
-            <div className="pl-lg-5 my-3 my-md-5 my-lg-0 col-lg-6">
-              {/* RIGHT COLUMN */}
-            </div>
-            <button                            onClick={() => {
-                              history.push('/profile')
-                            }}
-                             href="/hikes" className="d-none d-sm-inline-block btn btn-outline-light landing-btn">
-              Connect and stuff
-              <i className="fa fa-angle-right ml-2"></i>
-              </button>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  ) 
+    </>
+  );
 };
 
-export default LandingPage;
-
-
+export default function TabsRender() {
+  return (
+    <>
+      return <Admin color="pink" />;
+    </>
+  );
+}

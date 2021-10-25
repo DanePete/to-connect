@@ -161,6 +161,7 @@ export const getBlog = /* GraphQL */ `
           id
           title
           blogID
+          post_text
           _version
           _deleted
           _lastChangedAt
@@ -238,6 +239,7 @@ export const getPost = /* GraphQL */ `
       id
       title
       blogID
+      post_text
       _version
       _deleted
       _lastChangedAt
@@ -268,6 +270,8 @@ export const getPost = /* GraphQL */ `
         state
         Bio
         created
+        following_count
+        follower_count
         _version
         _deleted
         _lastChangedAt
@@ -293,6 +297,7 @@ export const listPosts = /* GraphQL */ `
         id
         title
         blogID
+        post_text
         _version
         _deleted
         _lastChangedAt
@@ -312,6 +317,8 @@ export const listPosts = /* GraphQL */ `
           state
           Bio
           created
+          following_count
+          follower_count
           _version
           _deleted
           _lastChangedAt
@@ -342,6 +349,7 @@ export const syncPosts = /* GraphQL */ `
         id
         title
         blogID
+        post_text
         _version
         _deleted
         _lastChangedAt
@@ -361,6 +369,8 @@ export const syncPosts = /* GraphQL */ `
           state
           Bio
           created
+          following_count
+          follower_count
           _version
           _deleted
           _lastChangedAt
@@ -389,6 +399,7 @@ export const getComment = /* GraphQL */ `
         id
         title
         blogID
+        post_text
         _version
         _deleted
         _lastChangedAt
@@ -408,6 +419,8 @@ export const getComment = /* GraphQL */ `
           state
           Bio
           created
+          following_count
+          follower_count
           _version
           _deleted
           _lastChangedAt
@@ -440,6 +453,7 @@ export const listComments = /* GraphQL */ `
           id
           title
           blogID
+          post_text
           _version
           _deleted
           _lastChangedAt
@@ -480,6 +494,7 @@ export const syncComments = /* GraphQL */ `
           id
           title
           blogID
+          post_text
           _version
           _deleted
           _lastChangedAt
@@ -505,6 +520,8 @@ export const getUser = /* GraphQL */ `
       state
       Bio
       created
+      following_count
+      follower_count
       _version
       _deleted
       _lastChangedAt
@@ -515,6 +532,7 @@ export const getUser = /* GraphQL */ `
           id
           title
           blogID
+          post_text
           _version
           _deleted
           _lastChangedAt
@@ -545,6 +563,8 @@ export const listUsers = /* GraphQL */ `
         state
         Bio
         created
+        following_count
+        follower_count
         _version
         _deleted
         _lastChangedAt
@@ -583,6 +603,8 @@ export const syncUsers = /* GraphQL */ `
         state
         Bio
         created
+        following_count
+        follower_count
         _version
         _deleted
         _lastChangedAt

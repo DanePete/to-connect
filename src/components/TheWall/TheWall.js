@@ -13,7 +13,6 @@ const initialState = { title: '' }
 const TheWall = () => {
   const [posts, setPosts] = useState([]);
   const [formState, setFormState] = useState(initialState)
-  const [user, setUser] = useState(null);
 
   useEffect(() => {
     fetchPosts()
@@ -27,21 +26,19 @@ const TheWall = () => {
     } catch (err) { console.log('error fetching todos') }
   }
 
-  console.log('posts', posts);
-
   function setInput(key, value) {
     setFormState({ ...formState, [key]: value })
   }
 
   async function addPost() {
     try {
-      if (!formState.name) return
+      if (!formState.title) return
       const post = { ...formState }
       setPosts([...posts, post])
       setFormState(initialState)
       await API.graphql(graphqlOperation(createPost, {input: post}))
     } catch (err) {
-      console.log('error creating todo:', err)
+      console.log('error creating post:', err)
     }
   }
 
@@ -60,17 +57,17 @@ const TheWall = () => {
 
 
 <div style={styles.container}>
-      <h2>Amplify Todos</h2>
+      <h2>Post</h2>
       <input
-        onChange={event => setInput('name', event.target.value)}
+        onChange={event => setInput('title', event.target.value)}
         style={styles.input}
         value={formState.name}
-        placeholder="Name"
+        placeholder="title"
       />
       <input
-        onChange={event => setInput('description', event.target.value)}
+        onChange={event => setInput('post_text', event.target.value)}
         style={styles.input}
-        value={formState.description}
+        value={formState.post_text}
         placeholder="Description"
       />
       <button style={styles.button} onClick={addPost}>Add Post</button>

@@ -101,9 +101,10 @@ console.log('hande right before change');
    * This creates a record in dynamoDB used for Profile - different from cognito user account
    * @param {user sub from aws} user 
    */
-  async function createUserFunc(user) {
+  async function createUserFunc(userID) {
+    console.log('user is in create user func', userID);
     try {
-      await API.graphql(graphqlOperation(mutations.createUser, {input: {id: user, userId: user}}))
+      await API.graphql(graphqlOperation(mutations.createUser, {input: {id: userID, userId: userID}}))
     } catch (err) {
       console.log('error creating user', err);
     }

@@ -63,6 +63,7 @@ export declare class Post {
   readonly author?: User;
   readonly comments?: (Comment | null)[];
   readonly blogID?: string;
+  readonly post_text: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Post, PostMetaData>);
@@ -79,6 +80,8 @@ export declare class User {
   readonly Bio?: string;
   readonly posts?: (Post | null)[];
   readonly created?: string;
+  readonly following_count?: number;
+  readonly follower_count?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<User, UserMetaData>);

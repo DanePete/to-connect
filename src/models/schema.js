@@ -293,6 +293,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "post_text": {
+                    "name": "post_text",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -442,6 +449,20 @@ export const schema = {
                     "name": "created",
                     "isArray": false,
                     "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "following_count": {
+                    "name": "following_count",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "follower_count": {
+                    "name": "follower_count",
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -628,5 +649,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "5d0f0e484970d1cfaa86e250b380939f"
+    "version": "d39084d7a1be28c8f16a67aa7fb704ed"
 };

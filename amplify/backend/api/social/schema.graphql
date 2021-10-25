@@ -21,6 +21,7 @@ type Post @model @auth(rules: [{allow: public, operations: [read]}, {allow: owne
   author: User @connection(name: "UserPosts")
   comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
   blogID: ID
+  post_text: String!
 }
 
 type Comment @model @key(name: "byPost", fields: ["postID", "content"]) @auth(rules: [{allow: public, operations: [read]}, {allow: owner}, {allow: groups, groups: ["administrator"], operations: [read, update, delete]}, {allow: private, operations: [read]}]) {
@@ -40,5 +41,7 @@ type User @model @auth(rules: [{allow: public, operations: [read]}, {allow: owne
   Bio: String
   posts: [Post] @connection(name: "UserPosts")
   created: AWSDateTime
+  following_count: Int
+  follower_count: String
 }
  

@@ -135,6 +135,7 @@ export const onCreateBlog = /* GraphQL */ `
           id
           title
           blogID
+          post_text
           _version
           _deleted
           _lastChangedAt
@@ -164,6 +165,7 @@ export const onUpdateBlog = /* GraphQL */ `
           id
           title
           blogID
+          post_text
           _version
           _deleted
           _lastChangedAt
@@ -193,6 +195,7 @@ export const onDeleteBlog = /* GraphQL */ `
           id
           title
           blogID
+          post_text
           _version
           _deleted
           _lastChangedAt
@@ -212,6 +215,7 @@ export const onCreatePost = /* GraphQL */ `
       id
       title
       blogID
+      post_text
       _version
       _deleted
       _lastChangedAt
@@ -242,6 +246,8 @@ export const onCreatePost = /* GraphQL */ `
         state
         Bio
         created
+        following_count
+        follower_count
         _version
         _deleted
         _lastChangedAt
@@ -262,6 +268,7 @@ export const onUpdatePost = /* GraphQL */ `
       id
       title
       blogID
+      post_text
       _version
       _deleted
       _lastChangedAt
@@ -292,6 +299,8 @@ export const onUpdatePost = /* GraphQL */ `
         state
         Bio
         created
+        following_count
+        follower_count
         _version
         _deleted
         _lastChangedAt
@@ -312,6 +321,7 @@ export const onDeletePost = /* GraphQL */ `
       id
       title
       blogID
+      post_text
       _version
       _deleted
       _lastChangedAt
@@ -342,6 +352,8 @@ export const onDeletePost = /* GraphQL */ `
         state
         Bio
         created
+        following_count
+        follower_count
         _version
         _deleted
         _lastChangedAt
@@ -371,6 +383,7 @@ export const onCreateComment = /* GraphQL */ `
         id
         title
         blogID
+        post_text
         _version
         _deleted
         _lastChangedAt
@@ -390,6 +403,8 @@ export const onCreateComment = /* GraphQL */ `
           state
           Bio
           created
+          following_count
+          follower_count
           _version
           _deleted
           _lastChangedAt
@@ -417,6 +432,7 @@ export const onUpdateComment = /* GraphQL */ `
         id
         title
         blogID
+        post_text
         _version
         _deleted
         _lastChangedAt
@@ -436,6 +452,8 @@ export const onUpdateComment = /* GraphQL */ `
           state
           Bio
           created
+          following_count
+          follower_count
           _version
           _deleted
           _lastChangedAt
@@ -463,6 +481,7 @@ export const onDeleteComment = /* GraphQL */ `
         id
         title
         blogID
+        post_text
         _version
         _deleted
         _lastChangedAt
@@ -482,6 +501,8 @@ export const onDeleteComment = /* GraphQL */ `
           state
           Bio
           created
+          following_count
+          follower_count
           _version
           _deleted
           _lastChangedAt
@@ -505,6 +526,8 @@ export const onCreateUser = /* GraphQL */ `
       state
       Bio
       created
+      following_count
+      follower_count
       _version
       _deleted
       _lastChangedAt
@@ -515,6 +538,7 @@ export const onCreateUser = /* GraphQL */ `
           id
           title
           blogID
+          post_text
           _version
           _deleted
           _lastChangedAt
@@ -540,6 +564,8 @@ export const onUpdateUser = /* GraphQL */ `
       state
       Bio
       created
+      following_count
+      follower_count
       _version
       _deleted
       _lastChangedAt
@@ -550,6 +576,7 @@ export const onUpdateUser = /* GraphQL */ `
           id
           title
           blogID
+          post_text
           _version
           _deleted
           _lastChangedAt
@@ -575,6 +602,8 @@ export const onDeleteUser = /* GraphQL */ `
       state
       Bio
       created
+      following_count
+      follower_count
       _version
       _deleted
       _lastChangedAt
@@ -585,6 +614,7 @@ export const onDeleteUser = /* GraphQL */ `
           id
           title
           blogID
+          post_text
           _version
           _deleted
           _lastChangedAt

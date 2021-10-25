@@ -25,6 +25,7 @@ export default {
     components: 'Components',
     Home: 'HOME - IN MESSAGES.JS FIX?',
     The_Wall: 'THe Wall',
+    Admin: 'Admin',
     Profile: 'Profile',
     dropdown: 'Dropdown',
 
