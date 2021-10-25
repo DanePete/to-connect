@@ -7,6 +7,7 @@ import { withAuthenticator } from '@aws-amplify/ui-react'
 import { FaEdit } from 'react-icons/fa'
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import parse from 'html-react-parser'
 import placeholder from '../Profile/temp.jpg'
 console.log('place holder', placeholder
 );
@@ -160,15 +161,8 @@ const Profile = () => {
                       <div className="flex flex-wrap justify-center">
                         <div className="w-full lg:w-9/12 px-4">
                           <p className="mb-4 text-lg leading-relaxed text-gray-800">
-                            An artist of considerable range, Jenna the name taken by
-                            Melbourne-raised, Brooklyn-based Nick Murphy writes,
-                            performs and records all of his own music, giving it a
-                            warm, intimate feel with a solid groove structure. An
-                            artist of considerable range.
+                            {parse(userProfile.getUser.Bio)}
                           </p>
-                          <a href="#pablo" className="font-normal text-pink-500"
-                            >Show more</a
-                          >
                         </div>
                       </div>
                     </div>

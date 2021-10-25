@@ -7,10 +7,11 @@ import { useHistory } from 'react-router-dom';
 import {useDropzone} from 'react-dropzone'
 import { withAuthenticator } from '@aws-amplify/ui-react'
 import { useDispatch, useSelector } from 'react-redux';
-import ReactQuill from 'react-quill';
+import ReactQuill, {editor} from 'react-quill';
 import snow from 'react-quill/dist/quill.snow.css';
+import 'react-quill/dist/quill.bubble.css';
 
-const initialState = { sub: '', username: '', email: '', picture: ''}
+const initialState = { sub: '', username: '', email: '', picture: '', bio: ''}
 const EditProfile = () => {
   const [formState, setFormState] = useState(initialState)
   const history = useHistory();
@@ -29,7 +30,7 @@ const EditProfile = () => {
     // setFormState({ sub: userProfile.getUser.id})
     if (userProfile.getUser) {
       console.log('user profile get user use effect', userProfile.getUser);
-      setFormState({ sub: userProfile.getUser.id, username: userProfile.getUser.username, email: userProfile.getUser.email, picture: userProfile.getUser.picture});
+      setFormState({ sub: userProfile.getUser.id, username: userProfile.getUser.username, email: userProfile.getUser.email, picture: userProfile.getUser.picture, bio: userProfile.getUser.Bio});
     } else {
       console.log('thats a bummer man');
       getUser();
@@ -67,7 +68,7 @@ const EditProfile = () => {
           payload: user
         });
         console.log('got here yo',userProfile);
-        setFormState({ sub: userProfile.getUser.id, username: userProfile.getUser.username, email: userProfile.getUser.email, picture: userProfile.getUser.picture});
+        setFormState({ sub: userProfile.getUser.id, username: userProfile.getUser.username, email: userProfile.getUser.email, picture: userProfile.getUser.picture, bio: userProfile.getUser.bio});
         // const userProfile = await API.graphql({ query: queries.getUser, variables: { id: user }});
       } catch (err) {
         console.log('error getting user:', err)
@@ -129,6 +130,21 @@ console.log('formState', formState);
       }  
     }
 
+    function handleChangeEditor(editor) {
+      console.log('background', editor);
+      setInput('bio', editor);
+      // let _postForm = this.state.postForm;
+
+      // _postForm.notesValid = true;
+      // _postForm.notes = editor;
+
+      // if (editor.length < 30) { _postForm.notesValid = false; }
+
+
+
+      // this.setState({ ...this.state, postForm: _postForm });
+  };
+
     /**
    * Get Profile Picture
    * is successful returns the users profile picture
@@ -157,6 +173,7 @@ console.log('formState', formState);
           id: userProfile.getUser.id,
           userId: userProfile.getUser.id,
           username: formState.username,
+          Bio: formState.bio
         }
         
         await API.graphql({ query: mutations.updateUser, variables: {input: details}});
@@ -187,7 +204,7 @@ console.log('formState', formState);
           />
         </div>
         <h1 className="text-white">BIO</h1>
-        <ReactQuill theme="snow" value={formState.bio || ''} onChange={setValue} placeholder="BIO" className="bg-gray-200"/>
+        <ReactQuill theme="snow" value={formState.bio || ''} onChange={handleChangeEditor} placeholder="BIO" className="bg-gray-200"/>
 
         <div className="flex flex-col mt-2">
           <label for="email" className="hidden">Email</label>
