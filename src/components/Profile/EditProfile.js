@@ -178,7 +178,8 @@ console.log('formState', formState);
           id: userProfile.getUser.id,
           userId: userProfile.getUser.id,
           username: formState.username,
-          Bio: formState.bio
+          Bio: formState.bio,
+          picture: formState.picture
         }
         
         await API.graphql({ query: mutations.updateUser, variables: {input: details}});
@@ -218,7 +219,7 @@ console.log('formState', formState);
             // input.onBlur(quill.getHTML());
           }} placeholder="BIO" className="bg-gray-200"/>
 
-        <div className="flex flex-col mt-2">
+        {/* <div className="flex flex-col mt-2">
           <label for="email" className="hidden">Email</label>
           <input
             onChange={event => setInput('email', event.target.value)}
@@ -226,7 +227,7 @@ console.log('formState', formState);
             value={formState.email}
             placeholder="Email"
           />     
-        </div>
+        </div> */}
 
         <div className="flex flex-col mt-2">
         <div className="text-center mt-12">
