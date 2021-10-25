@@ -232,11 +232,11 @@ console.log('formState', formState);
         <div className="flex flex-col mt-2">
         <div className="text-center mt-12">
               <div className="p-10" {...getRootProps()}>
-                <div className="max-w-sm rounded overflow-hidden bg-white shadow-lg">
+                <div className="max-w-sm  relative rounded overflow-hidden bg-white shadow-lg">
                   <img className="w-full" src={formState.picture} alt="Upload"></img>
-                  <div className="px-6 py-4">
+                  <div className="px-6 py-4 absolute bottom-0 left-0 h-full w-full cursor-pointer hover:bg-gray-600 opacity-75 duration-75 transition-all">
                     <div className="font-bold text-xl mb-2">Upload Images</div>
-                    <p className="text-white bg-gray-400 text-base max-w-sm rounded overflow-hidden shadow-lg cursor-pointer">
+                    <p className="text-white transition duration-500 ease-in-out bg-blue-600 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 bg-purple-600 bg-opacity-100 text-base max-w-sm rounded overflow-hidden shadow-lg cursor-pointer">
                       <input {...getInputProps()} />
                         {
                         isDragActive ?

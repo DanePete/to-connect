@@ -1,103 +1,44 @@
-type Blog @model 
-@auth(
-    rules: [
-      { allow: public, operations: [read]},
-      { allow: owner },
-      {
-        allow: groups
-        groups: ["administrator"]
-        operations: [read, update, delete]
-      },
-      { allow: private, operations: [read] }
-    ]
-  ) 
-{
+type Messages @model @auth(rules: [{allow: private}]) @key(name: "byChat", fields: ["chatID"]) {
+  id: ID!
+  chatID: ID
+}
+
+type Chat @model @auth(rules: [{allow: private}]) {
+  id: ID!
+  Messages: [Messages] @connection(keyName: "byChat", fields: ["id"])
+  messageId: ID
+}
+
+type Blog @model @auth(rules: [{allow: public, operations: [read]}, {allow: owner}, {allow: groups, groups: ["administrator"], operations: [read, update, delete]}, {allow: private, operations: [read]}]) {
   id: ID!
   name: String!
-  posts: [Post] @connection(keyName: "byBlog", fields: ["id"])
+  Posts: [Post] @connection(keyName: "byBlog", fields: ["id"])
 }
 
-type Post @model @key(name: "byBlog", fields: ["blogID"]) 
-@auth(
-    rules: [
-      { allow: public, operations: [read]},
-      { allow: owner },
-      {
-        allow: groups
-        groups: ["administrator"]
-        operations: [read, update, delete]
-      },
-      { allow: private, operations: [read] }
-    ]
-  ) 
-{
+type Post @model @auth(rules: [{allow: public, operations: [read]}, {allow: owner}, {allow: groups, groups: ["administrator"], operations: [read, update, delete]}, {allow: private, operations: [read]}]) @key(name: "byBlog", fields: ["blogID"]) {
   id: ID!
   title: String!
-  blogID: ID!
-  blog: Blog @connection(fields: ["blogID"])
-  author: User! @connection(name: "UserPosts")
+  author: User @connection(name: "UserPosts")
   comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
+  blogID: ID
 }
 
-type Comment @model @key(name: "byPost", fields: ["postID", "content"]) 
-@auth(
-    rules: [
-      { allow: public, operations: [read]},
-      { allow: owner },
-      {
-        allow: groups
-        groups: ["administrator"]
-        operations: [read, update, delete]
-      },
-      { allow: private, operations: [read] }
-    ]
-  ) 
-{
+type Comment @model @key(name: "byPost", fields: ["postID", "content"]) @auth(rules: [{allow: public, operations: [read]}, {allow: owner}, {allow: groups, groups: ["administrator"], operations: [read, update, delete]}, {allow: private, operations: [read]}]) {
   id: ID!
   postID: ID!
   post: Post @connection(fields: ["postID"])
   content: String!
 }
 
-type FriendsList @model 
-@auth(
-    rules: [
-      { allow: public, operations: [read]},
-      { allow: owner },
-      {
-        allow: groups
-        groups: ["administrator"]
-        operations: [read, update, delete]
-      },
-      { allow: private, operations: [read] }
-    ]
-  ) 
-{
+type User @model @auth(rules: [{allow: public, operations: [read]}, {allow: owner}, {allow: groups, groups: ["administrator"], operations: [read, update, delete]}, {allow: private, operations: [read]}]) {
   id: ID!
-  friendsID: AWSJSON!
-  ownerID: ID!
-}
-
-type User @model
-@auth(
-    rules: [
-      { allow: public, operations: [read]},
-      { allow: owner },
-      {
-        allow: groups
-        groups: ["administrator"]
-        operations: [read, update, delete]
-      },
-      { allow: private, operations: [read] }
-    ]
-  ) 
- {
-  id: ID! 
   userId: ID!
   username: String
   picture: String
   city: String
-  state: String 
+  state: String
   Bio: String
   posts: [Post] @connection(name: "UserPosts")
+  created: AWSDateTime
 }
+ 

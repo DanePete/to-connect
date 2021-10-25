@@ -2,24 +2,148 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateMessages = /* GraphQL */ `
+  subscription OnCreateMessages {
+    onCreateMessages {
+      id
+      chatID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateMessages = /* GraphQL */ `
+  subscription OnUpdateMessages {
+    onUpdateMessages {
+      id
+      chatID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteMessages = /* GraphQL */ `
+  subscription OnDeleteMessages {
+    onDeleteMessages {
+      id
+      chatID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateChat = /* GraphQL */ `
+  subscription OnCreateChat {
+    onCreateChat {
+      id
+      messageId
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      Messages {
+        items {
+          id
+          chatID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const onUpdateChat = /* GraphQL */ `
+  subscription OnUpdateChat {
+    onUpdateChat {
+      id
+      messageId
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      Messages {
+        items {
+          id
+          chatID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const onDeleteChat = /* GraphQL */ `
+  subscription OnDeleteChat {
+    onDeleteChat {
+      id
+      messageId
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      Messages {
+        items {
+          id
+          chatID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
 export const onCreateBlog = /* GraphQL */ `
   subscription OnCreateBlog {
     onCreateBlog {
       id
       name
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
-      posts {
+      Posts {
         items {
           id
           title
           blogID
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
+        startedAt
       }
     }
   }
@@ -29,19 +153,26 @@ export const onUpdateBlog = /* GraphQL */ `
     onUpdateBlog {
       id
       name
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
-      posts {
+      Posts {
         items {
           id
           title
           blogID
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
+        startedAt
       }
     }
   }
@@ -51,19 +182,26 @@ export const onDeleteBlog = /* GraphQL */ `
     onDeleteBlog {
       id
       name
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
-      posts {
+      Posts {
         items {
           id
           title
           blogID
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
+        startedAt
       }
     }
   }
@@ -74,29 +212,26 @@ export const onCreatePost = /* GraphQL */ `
       id
       title
       blogID
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
-      blog {
-        id
-        name
-        createdAt
-        updatedAt
-        owner
-        posts {
-          nextToken
-        }
-      }
       owner
       comments {
         items {
           id
           postID
           content
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
+        startedAt
       }
       author {
         id
@@ -106,10 +241,15 @@ export const onCreatePost = /* GraphQL */ `
         city
         state
         Bio
+        created
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
         posts {
           nextToken
+          startedAt
         }
         owner
       }
@@ -122,29 +262,26 @@ export const onUpdatePost = /* GraphQL */ `
       id
       title
       blogID
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
-      blog {
-        id
-        name
-        createdAt
-        updatedAt
-        owner
-        posts {
-          nextToken
-        }
-      }
       owner
       comments {
         items {
           id
           postID
           content
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
+        startedAt
       }
       author {
         id
@@ -154,10 +291,15 @@ export const onUpdatePost = /* GraphQL */ `
         city
         state
         Bio
+        created
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
         posts {
           nextToken
+          startedAt
         }
         owner
       }
@@ -170,29 +312,26 @@ export const onDeletePost = /* GraphQL */ `
       id
       title
       blogID
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
-      blog {
-        id
-        name
-        createdAt
-        updatedAt
-        owner
-        posts {
-          nextToken
-        }
-      }
       owner
       comments {
         items {
           id
           postID
           content
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
+        startedAt
       }
       author {
         id
@@ -202,10 +341,15 @@ export const onDeletePost = /* GraphQL */ `
         city
         state
         Bio
+        created
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
         posts {
           nextToken
+          startedAt
         }
         owner
       }
@@ -218,24 +362,24 @@ export const onCreateComment = /* GraphQL */ `
       id
       postID
       content
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       post {
         id
         title
         blogID
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-          owner
-        }
         owner
         comments {
           nextToken
+          startedAt
         }
         author {
           id
@@ -245,6 +389,10 @@ export const onCreateComment = /* GraphQL */ `
           city
           state
           Bio
+          created
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
@@ -260,24 +408,24 @@ export const onUpdateComment = /* GraphQL */ `
       id
       postID
       content
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       post {
         id
         title
         blogID
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-          owner
-        }
         owner
         comments {
           nextToken
+          startedAt
         }
         author {
           id
@@ -287,6 +435,10 @@ export const onUpdateComment = /* GraphQL */ `
           city
           state
           Bio
+          created
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
@@ -302,24 +454,24 @@ export const onDeleteComment = /* GraphQL */ `
       id
       postID
       content
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       post {
         id
         title
         blogID
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-          owner
-        }
         owner
         comments {
           nextToken
+          startedAt
         }
         author {
           id
@@ -329,47 +481,15 @@ export const onDeleteComment = /* GraphQL */ `
           city
           state
           Bio
+          created
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
       }
-      owner
-    }
-  }
-`;
-export const onCreateFriendsList = /* GraphQL */ `
-  subscription OnCreateFriendsList {
-    onCreateFriendsList {
-      id
-      friendsID
-      ownerID
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onUpdateFriendsList = /* GraphQL */ `
-  subscription OnUpdateFriendsList {
-    onUpdateFriendsList {
-      id
-      friendsID
-      ownerID
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const onDeleteFriendsList = /* GraphQL */ `
-  subscription OnDeleteFriendsList {
-    onDeleteFriendsList {
-      id
-      friendsID
-      ownerID
-      createdAt
-      updatedAt
       owner
     }
   }
@@ -384,6 +504,10 @@ export const onCreateUser = /* GraphQL */ `
       city
       state
       Bio
+      created
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       posts {
@@ -391,11 +515,15 @@ export const onCreateUser = /* GraphQL */ `
           id
           title
           blogID
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
+        startedAt
       }
       owner
     }
@@ -411,6 +539,10 @@ export const onUpdateUser = /* GraphQL */ `
       city
       state
       Bio
+      created
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       posts {
@@ -418,11 +550,15 @@ export const onUpdateUser = /* GraphQL */ `
           id
           title
           blogID
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
+        startedAt
       }
       owner
     }
@@ -438,6 +574,10 @@ export const onDeleteUser = /* GraphQL */ `
       city
       state
       Bio
+      created
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       posts {
@@ -445,11 +585,15 @@ export const onDeleteUser = /* GraphQL */ `
           id
           title
           blogID
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
+        startedAt
       }
       owner
     }

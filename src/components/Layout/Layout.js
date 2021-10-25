@@ -12,6 +12,7 @@ import {
 } from 'react-router-dom';
 import LandPage from '../LandingPage/LandPage';
 import { useDispatch, useSelector } from 'react-redux';
+import TheWall from '../TheWall/TheWall';
 
 function Layout({ setLocale }) {
   const [rtl, setRtl] = useState(false);
@@ -133,6 +134,37 @@ function Layout({ setLocale }) {
               handleImageChange={handleImageChange}
             />
           </Route>
+
+
+          <Route exact path="/the-wall" >
+            {/* { user.getUser ?  */}
+              (
+                <>
+                  <Aside
+                  image={image}
+                  collapsed={collapsed}
+                  rtl={rtl}
+                  toggled={toggled}
+                  handleToggleSidebar={handleToggleSidebar}
+                  />
+                  <Main
+                  image={image}
+                  toggled={toggled}
+                  collapsed={collapsed}
+                  rtl={rtl}
+                  component={<TheWall />}
+                  handleToggleSidebar={handleToggleSidebar}
+                  handleCollapsedChange={handleCollapsedChange}
+                  handleRtlChange={handleRtlChange}
+                  handleImageChange={handleImageChange}
+                  />
+                </>
+              )
+            {/* : */}
+              {/* <Redirect to="/" />
+            } */}
+          </Route>
+
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>

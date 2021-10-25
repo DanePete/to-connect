@@ -4,8 +4,9 @@ import { API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../../graphql/queries';
 
 function* fetchUser(action) {
+  console.log('fetchUser', action.payload);
   try {
-    const result = yield call([API, 'graphql'], graphqlOperation(queries.getUser, { id: '4ee21158-5a78-495c-95f2-4032e4dbaa02' }))
+    const result = yield call([API, 'graphql'], graphqlOperation(queries.getUser, { id: action.payload.getUser.id }))
     yield put({ type: 'SET_USER', payload: result.data });
   } catch (e) {
     console.log('error is', e);

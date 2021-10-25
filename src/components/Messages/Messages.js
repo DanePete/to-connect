@@ -24,8 +24,10 @@ export default {
     dashboard: 'Dashboard',
     components: 'Components',
     Home: 'HOME - IN MESSAGES.JS FIX?',
+    The_Wall: 'THe Wall',
     Profile: 'Profile',
     dropdown: 'Dropdown',
+
     submenu: 'Submenu',
     multiLevel: 'Multi Level',
     collapsed: 'Collapse Menu',

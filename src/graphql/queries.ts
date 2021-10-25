@@ -2,24 +2,174 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getMessages = /* GraphQL */ `
+  query GetMessages($id: ID!) {
+    getMessages(id: $id) {
+      id
+      chatID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listMessages = /* GraphQL */ `
+  query ListMessages(
+    $filter: ModelMessagesFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listMessages(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        chatID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncMessages = /* GraphQL */ `
+  query SyncMessages(
+    $filter: ModelMessagesFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncMessages(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        chatID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getChat = /* GraphQL */ `
+  query GetChat($id: ID!) {
+    getChat(id: $id) {
+      id
+      messageId
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      Messages {
+        items {
+          id
+          chatID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const listChats = /* GraphQL */ `
+  query ListChats(
+    $filter: ModelChatFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listChats(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        messageId
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        Messages {
+          nextToken
+          startedAt
+        }
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncChats = /* GraphQL */ `
+  query SyncChats(
+    $filter: ModelChatFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncChats(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        messageId
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        Messages {
+          nextToken
+          startedAt
+        }
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
 export const getBlog = /* GraphQL */ `
   query GetBlog($id: ID!) {
     getBlog(id: $id) {
       id
       name
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
-      posts {
+      Posts {
         items {
           id
           title
           blogID
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
+        startedAt
       }
     }
   }
@@ -34,14 +184,51 @@ export const listBlogs = /* GraphQL */ `
       items {
         id
         name
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
         owner
-        posts {
+        Posts {
           nextToken
+          startedAt
         }
       }
       nextToken
+      startedAt
+    }
+  }
+`;
+export const syncBlogs = /* GraphQL */ `
+  query SyncBlogs(
+    $filter: ModelBlogFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncBlogs(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        name
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+        Posts {
+          nextToken
+          startedAt
+        }
+      }
+      nextToken
+      startedAt
     }
   }
 `;
@@ -51,29 +238,26 @@ export const getPost = /* GraphQL */ `
       id
       title
       blogID
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
-      blog {
-        id
-        name
-        createdAt
-        updatedAt
-        owner
-        posts {
-          nextToken
-        }
-      }
       owner
       comments {
         items {
           id
           postID
           content
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
+        startedAt
       }
       author {
         id
@@ -83,10 +267,15 @@ export const getPost = /* GraphQL */ `
         city
         state
         Bio
+        created
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
         posts {
           nextToken
+          startedAt
         }
         owner
       }
@@ -104,18 +293,15 @@ export const listPosts = /* GraphQL */ `
         id
         title
         blogID
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-          owner
-        }
         owner
         comments {
           nextToken
+          startedAt
         }
         author {
           id
@@ -125,12 +311,66 @@ export const listPosts = /* GraphQL */ `
           city
           state
           Bio
+          created
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
       }
       nextToken
+      startedAt
+    }
+  }
+`;
+export const syncPosts = /* GraphQL */ `
+  query SyncPosts(
+    $filter: ModelPostFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncPosts(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        title
+        blogID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        owner
+        comments {
+          nextToken
+          startedAt
+        }
+        author {
+          id
+          userId
+          username
+          picture
+          city
+          state
+          Bio
+          created
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
+      }
+      nextToken
+      startedAt
     }
   }
 `;
@@ -140,24 +380,24 @@ export const getComment = /* GraphQL */ `
       id
       postID
       content
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       post {
         id
         title
         blogID
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-          owner
-        }
         owner
         comments {
           nextToken
+          startedAt
         }
         author {
           id
@@ -167,6 +407,10 @@ export const getComment = /* GraphQL */ `
           city
           state
           Bio
+          created
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
@@ -187,12 +431,18 @@ export const listComments = /* GraphQL */ `
         id
         postID
         content
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
         post {
           id
           title
           blogID
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
@@ -200,37 +450,47 @@ export const listComments = /* GraphQL */ `
         owner
       }
       nextToken
+      startedAt
     }
   }
 `;
-export const getFriendsList = /* GraphQL */ `
-  query GetFriendsList($id: ID!) {
-    getFriendsList(id: $id) {
-      id
-      friendsID
-      ownerID
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const listFriendsLists = /* GraphQL */ `
-  query ListFriendsLists(
-    $filter: ModelFriendsListFilterInput
+export const syncComments = /* GraphQL */ `
+  query SyncComments(
+    $filter: ModelCommentFilterInput
     $limit: Int
     $nextToken: String
+    $lastSync: AWSTimestamp
   ) {
-    listFriendsLists(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    syncComments(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
       items {
         id
-        friendsID
-        ownerID
+        postID
+        content
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
+        post {
+          id
+          title
+          blogID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          owner
+        }
         owner
       }
       nextToken
+      startedAt
     }
   }
 `;
@@ -244,6 +504,10 @@ export const getUser = /* GraphQL */ `
       city
       state
       Bio
+      created
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       posts {
@@ -251,11 +515,15 @@ export const getUser = /* GraphQL */ `
           id
           title
           blogID
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
+        startedAt
       }
       owner
     }
@@ -276,14 +544,58 @@ export const listUsers = /* GraphQL */ `
         city
         state
         Bio
+        created
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
         posts {
           nextToken
+          startedAt
         }
         owner
       }
       nextToken
+      startedAt
+    }
+  }
+`;
+export const syncUsers = /* GraphQL */ `
+  query SyncUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncUsers(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        userId
+        username
+        picture
+        city
+        state
+        Bio
+        created
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        posts {
+          nextToken
+          startedAt
+        }
+        owner
+      }
+      nextToken
+      startedAt
     }
   }
 `;

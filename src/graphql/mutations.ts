@@ -2,6 +2,141 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createMessages = /* GraphQL */ `
+  mutation CreateMessages(
+    $input: CreateMessagesInput!
+    $condition: ModelMessagesConditionInput
+  ) {
+    createMessages(input: $input, condition: $condition) {
+      id
+      chatID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateMessages = /* GraphQL */ `
+  mutation UpdateMessages(
+    $input: UpdateMessagesInput!
+    $condition: ModelMessagesConditionInput
+  ) {
+    updateMessages(input: $input, condition: $condition) {
+      id
+      chatID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteMessages = /* GraphQL */ `
+  mutation DeleteMessages(
+    $input: DeleteMessagesInput!
+    $condition: ModelMessagesConditionInput
+  ) {
+    deleteMessages(input: $input, condition: $condition) {
+      id
+      chatID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createChat = /* GraphQL */ `
+  mutation CreateChat(
+    $input: CreateChatInput!
+    $condition: ModelChatConditionInput
+  ) {
+    createChat(input: $input, condition: $condition) {
+      id
+      messageId
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      Messages {
+        items {
+          id
+          chatID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const updateChat = /* GraphQL */ `
+  mutation UpdateChat(
+    $input: UpdateChatInput!
+    $condition: ModelChatConditionInput
+  ) {
+    updateChat(input: $input, condition: $condition) {
+      id
+      messageId
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      Messages {
+        items {
+          id
+          chatID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
+export const deleteChat = /* GraphQL */ `
+  mutation DeleteChat(
+    $input: DeleteChatInput!
+    $condition: ModelChatConditionInput
+  ) {
+    deleteChat(input: $input, condition: $condition) {
+      id
+      messageId
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      Messages {
+        items {
+          id
+          chatID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        nextToken
+        startedAt
+      }
+    }
+  }
+`;
 export const createBlog = /* GraphQL */ `
   mutation CreateBlog(
     $input: CreateBlogInput!
@@ -10,19 +145,26 @@ export const createBlog = /* GraphQL */ `
     createBlog(input: $input, condition: $condition) {
       id
       name
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
-      posts {
+      Posts {
         items {
           id
           title
           blogID
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
+        startedAt
       }
     }
   }
@@ -35,19 +177,26 @@ export const updateBlog = /* GraphQL */ `
     updateBlog(input: $input, condition: $condition) {
       id
       name
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
-      posts {
+      Posts {
         items {
           id
           title
           blogID
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
+        startedAt
       }
     }
   }
@@ -60,19 +209,26 @@ export const deleteBlog = /* GraphQL */ `
     deleteBlog(input: $input, condition: $condition) {
       id
       name
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       owner
-      posts {
+      Posts {
         items {
           id
           title
           blogID
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
+        startedAt
       }
     }
   }
@@ -86,29 +242,26 @@ export const createPost = /* GraphQL */ `
       id
       title
       blogID
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
-      blog {
-        id
-        name
-        createdAt
-        updatedAt
-        owner
-        posts {
-          nextToken
-        }
-      }
       owner
       comments {
         items {
           id
           postID
           content
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
+        startedAt
       }
       author {
         id
@@ -118,10 +271,15 @@ export const createPost = /* GraphQL */ `
         city
         state
         Bio
+        created
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
         posts {
           nextToken
+          startedAt
         }
         owner
       }
@@ -137,29 +295,26 @@ export const updatePost = /* GraphQL */ `
       id
       title
       blogID
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
-      blog {
-        id
-        name
-        createdAt
-        updatedAt
-        owner
-        posts {
-          nextToken
-        }
-      }
       owner
       comments {
         items {
           id
           postID
           content
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
+        startedAt
       }
       author {
         id
@@ -169,10 +324,15 @@ export const updatePost = /* GraphQL */ `
         city
         state
         Bio
+        created
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
         posts {
           nextToken
+          startedAt
         }
         owner
       }
@@ -188,29 +348,26 @@ export const deletePost = /* GraphQL */ `
       id
       title
       blogID
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
-      blog {
-        id
-        name
-        createdAt
-        updatedAt
-        owner
-        posts {
-          nextToken
-        }
-      }
       owner
       comments {
         items {
           id
           postID
           content
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
+        startedAt
       }
       author {
         id
@@ -220,10 +377,15 @@ export const deletePost = /* GraphQL */ `
         city
         state
         Bio
+        created
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
         posts {
           nextToken
+          startedAt
         }
         owner
       }
@@ -239,24 +401,24 @@ export const createComment = /* GraphQL */ `
       id
       postID
       content
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       post {
         id
         title
         blogID
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-          owner
-        }
         owner
         comments {
           nextToken
+          startedAt
         }
         author {
           id
@@ -266,6 +428,10 @@ export const createComment = /* GraphQL */ `
           city
           state
           Bio
+          created
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
@@ -284,24 +450,24 @@ export const updateComment = /* GraphQL */ `
       id
       postID
       content
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       post {
         id
         title
         blogID
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-          owner
-        }
         owner
         comments {
           nextToken
+          startedAt
         }
         author {
           id
@@ -311,6 +477,10 @@ export const updateComment = /* GraphQL */ `
           city
           state
           Bio
+          created
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
@@ -329,24 +499,24 @@ export const deleteComment = /* GraphQL */ `
       id
       postID
       content
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       post {
         id
         title
         blogID
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
-        blog {
-          id
-          name
-          createdAt
-          updatedAt
-          owner
-        }
         owner
         comments {
           nextToken
+          startedAt
         }
         author {
           id
@@ -356,56 +526,15 @@ export const deleteComment = /* GraphQL */ `
           city
           state
           Bio
+          created
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
       }
-      owner
-    }
-  }
-`;
-export const createFriendsList = /* GraphQL */ `
-  mutation CreateFriendsList(
-    $input: CreateFriendsListInput!
-    $condition: ModelFriendsListConditionInput
-  ) {
-    createFriendsList(input: $input, condition: $condition) {
-      id
-      friendsID
-      ownerID
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const updateFriendsList = /* GraphQL */ `
-  mutation UpdateFriendsList(
-    $input: UpdateFriendsListInput!
-    $condition: ModelFriendsListConditionInput
-  ) {
-    updateFriendsList(input: $input, condition: $condition) {
-      id
-      friendsID
-      ownerID
-      createdAt
-      updatedAt
-      owner
-    }
-  }
-`;
-export const deleteFriendsList = /* GraphQL */ `
-  mutation DeleteFriendsList(
-    $input: DeleteFriendsListInput!
-    $condition: ModelFriendsListConditionInput
-  ) {
-    deleteFriendsList(input: $input, condition: $condition) {
-      id
-      friendsID
-      ownerID
-      createdAt
-      updatedAt
       owner
     }
   }
@@ -423,6 +552,10 @@ export const createUser = /* GraphQL */ `
       city
       state
       Bio
+      created
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       posts {
@@ -430,11 +563,15 @@ export const createUser = /* GraphQL */ `
           id
           title
           blogID
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
+        startedAt
       }
       owner
     }
@@ -453,6 +590,10 @@ export const updateUser = /* GraphQL */ `
       city
       state
       Bio
+      created
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       posts {
@@ -460,11 +601,15 @@ export const updateUser = /* GraphQL */ `
           id
           title
           blogID
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
+        startedAt
       }
       owner
     }
@@ -483,6 +628,10 @@ export const deleteUser = /* GraphQL */ `
       city
       state
       Bio
+      created
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
       posts {
@@ -490,11 +639,15 @@ export const deleteUser = /* GraphQL */ `
           id
           title
           blogID
+          _version
+          _deleted
+          _lastChangedAt
           createdAt
           updatedAt
           owner
         }
         nextToken
+        startedAt
       }
       owner
     }

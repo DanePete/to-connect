@@ -1,39 +1,47 @@
 {
-  "dev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-social-dev-160313-authRole",
-      "UnauthRoleArn": "arn:aws:iam::645427258976:role/amplify-social-dev-160313-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::645427258976:role/amplify-social-dev-160313-authRole",
-      "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-social-dev-160313-deployment",
-      "UnauthRoleName": "amplify-social-dev-160313-unauthRole",
-      "StackName": "amplify-social-dev-160313",
-      "StackId": "arn:aws:cloudformation:us-east-2:645427258976:stack/amplify-social-dev-160313/2520f2a0-31e9-11ec-934d-0ade5db5f1fa",
-      "AmplifyAppId": "d3nsifkrj29sp"
-    },
-    "categories": {
-      "function": {
-        "social66de3edbDefineAuthChallenge": {
-          "deploymentBucketName": "amplify-social-dev-160313-deployment",
-          "s3Key": "amplify-builds/social66de3edbDefineAuthChallenge-6a6c502f67466d344562-build.zip"
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-social-dev-160313-authRole",
+            "UnauthRoleArn": "arn:aws:iam::645427258976:role/amplify-social-dev-160313-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::645427258976:role/amplify-social-dev-160313-authRole",
+            "Region": "us-east-2",
+            "DeploymentBucketName": "amplify-social-dev-160313-deployment",
+            "UnauthRoleName": "amplify-social-dev-160313-unauthRole",
+            "StackName": "amplify-social-dev-160313",
+            "StackId": "arn:aws:cloudformation:us-east-2:645427258976:stack/amplify-social-dev-160313/2520f2a0-31e9-11ec-934d-0ade5db5f1fa",
+            "AmplifyAppId": "d3nsifkrj29sp"
         },
-        "social66de3edbCreateAuthChallenge": {
-          "deploymentBucketName": "amplify-social-dev-160313-deployment",
-          "s3Key": "amplify-builds/social66de3edbCreateAuthChallenge-454b61364639324a3462-build.zip"
-        },
-        "social66de3edbVerifyAuthChallengeResponse": {
-          "RECAPTCHASECRET": "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",
-          "deploymentBucketName": "amplify-social-dev-160313-deployment",
-          "s3Key": "amplify-builds/social66de3edbVerifyAuthChallengeResponse-6b76784a307a525a7263-build.zip"
-        },
-        "S3Triggera064e3d4": {
-          "deploymentBucketName": "amplify-social-dev-160313-deployment",
-          "s3Key": "amplify-builds/S3Triggera064e3d4-666574614c7370617657-build.zip"
+        "categories": {
+            "function": {
+                "social66de3edbDefineAuthChallenge": {
+                    "deploymentBucketName": "amplify-social-dev-160313-deployment",
+                    "s3Key": "amplify-builds/social66de3edbDefineAuthChallenge-6a6c502f67466d344562-build.zip"
+                },
+                "social66de3edbCreateAuthChallenge": {
+                    "deploymentBucketName": "amplify-social-dev-160313-deployment",
+                    "s3Key": "amplify-builds/social66de3edbCreateAuthChallenge-454b61364639324a3462-build.zip"
+                },
+                "social66de3edbVerifyAuthChallengeResponse": {
+                    "RECAPTCHASECRET": "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",
+                    "deploymentBucketName": "amplify-social-dev-160313-deployment",
+                    "s3Key": "amplify-builds/social66de3edbVerifyAuthChallengeResponse-6b76784a307a525a7263-build.zip"
+                },
+                "S3Triggera064e3d4": {
+                    "deploymentBucketName": "amplify-social-dev-160313-deployment",
+                    "s3Key": "amplify-builds/S3Triggera064e3d4-666574614c7370617657-build.zip"
+                }
+            },
+            "auth": {
+                "socialdf78bbc4": {},
+                "userPoolGroups": {}
+            },
+            "notifications": {
+                "Pinpoint": {
+                    "Name": "socialVomIq-dev",
+                    "Id": "47b961e1734c42da8410c37ed4fa4ffb",
+                    "Region": "us-east-1"
+                }
+            }
         }
-      },
-      "auth": {
-        "socialdf78bbc4": {}
-      }
     }
-  }
 }

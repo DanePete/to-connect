@@ -1,6 +1,6 @@
 {
     "identityPoolName": "socialdf78bbc4_identitypool_df78bbc4",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "socialdf78bbc4",
     "userPoolName": "socialdf78bbc4_userpool_df78bbc4",
     "autoVerifiedAttributes": [

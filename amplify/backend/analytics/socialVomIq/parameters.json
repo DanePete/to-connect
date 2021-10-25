@@ -1,0 +1,22 @@
+{
+    "appName": "socialVomIq",
+    "roleName": "pinpointLambdaRole4e4e7e3f",
+    "cloudformationPolicyName": "cloudformationPolicy4e4e7e3f",
+    "cloudWatchPolicyName": "cloudWatchPolicy4e4e7e3f",
+    "pinpointPolicyName": "pinpointPolicy4e4e7e3f",
+    "authPolicyName": "pinpoint_amplify_4e4e7e3f",
+    "unauthPolicyName": "pinpoint_amplify_4e4e7e3f",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    },
+    "appId": "47b961e1734c42da8410c37ed4fa4ffb"
+}

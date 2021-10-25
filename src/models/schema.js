@@ -1,5 +1,146 @@
 export const schema = {
     "models": {
+        "Messages": {
+            "name": "Messages",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "chatID": {
+                    "name": "chatID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Messages",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byChat",
+                        "fields": [
+                            "chatID"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "private",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "Chat": {
+            "name": "Chat",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "Messages": {
+                    "name": "Messages",
+                    "isArray": true,
+                    "type": {
+                        "model": "Messages"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "chatID"
+                    }
+                },
+                "messageId": {
+                    "name": "messageId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Chats",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "private",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "Blog": {
             "name": "Blog",
             "fields": {
@@ -17,8 +158,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "posts": {
-                    "name": "posts",
+                "Posts": {
+                    "name": "Posts",
                     "isArray": true,
                     "type": {
                         "model": "Post"
@@ -28,7 +169,7 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "blog"
+                        "associatedWith": "blogID"
                     }
                 },
                 "createdAt": {
@@ -54,6 +195,50 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "read"
+                                ]
+                            },
+                            {
+                                "provider": "userPools",
+                                "ownerField": "owner",
+                                "allow": "owner",
+                                "identityClaim": "cognito:username",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            },
+                            {
+                                "groupClaim": "cognito:groups",
+                                "provider": "userPools",
+                                "allow": "groups",
+                                "groups": [
+                                    "administrator"
+                                ],
+                                "operations": [
+                                    "read",
+                                    "update",
+                                    "delete"
+                                ]
+                            },
+                            {
+                                "allow": "private",
+                                "operations": [
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
                 }
             ]
         },
@@ -74,17 +259,17 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "blog": {
-                    "name": "blog",
+                "author": {
+                    "name": "author",
                     "isArray": false,
                     "type": {
-                        "model": "Blog"
+                        "model": "User"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "blogID"
+                        "targetName": "postAuthorId"
                     }
                 },
                 "comments": {
@@ -100,6 +285,13 @@ export const schema = {
                         "connectionType": "HAS_MANY",
                         "associatedWith": "post"
                     }
+                },
+                "blogID": {
+                    "name": "blogID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -131,6 +323,193 @@ export const schema = {
                         "name": "byBlog",
                         "fields": [
                             "blogID"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "read"
+                                ]
+                            },
+                            {
+                                "provider": "userPools",
+                                "ownerField": "owner",
+                                "allow": "owner",
+                                "identityClaim": "cognito:username",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            },
+                            {
+                                "groupClaim": "cognito:groups",
+                                "provider": "userPools",
+                                "allow": "groups",
+                                "groups": [
+                                    "administrator"
+                                ],
+                                "operations": [
+                                    "read",
+                                    "update",
+                                    "delete"
+                                ]
+                            },
+                            {
+                                "allow": "private",
+                                "operations": [
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "User": {
+            "name": "User",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "userId": {
+                    "name": "userId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "username": {
+                    "name": "username",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "picture": {
+                    "name": "picture",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "city": {
+                    "name": "city",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "state": {
+                    "name": "state",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Bio": {
+                    "name": "Bio",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "posts": {
+                    "name": "posts",
+                    "isArray": true,
+                    "type": {
+                        "model": "Post"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "author"
+                    }
+                },
+                "created": {
+                    "name": "created",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Users",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "read"
+                                ]
+                            },
+                            {
+                                "provider": "userPools",
+                                "ownerField": "owner",
+                                "allow": "owner",
+                                "identityClaim": "cognito:username",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            },
+                            {
+                                "groupClaim": "cognito:groups",
+                                "provider": "userPools",
+                                "allow": "groups",
+                                "groups": [
+                                    "administrator"
+                                ],
+                                "operations": [
+                                    "read",
+                                    "update",
+                                    "delete"
+                                ]
+                            },
+                            {
+                                "allow": "private",
+                                "operations": [
+                                    "read"
+                                ]
+                            }
                         ]
                     }
                 }
@@ -199,11 +578,55 @@ export const schema = {
                             "content"
                         ]
                     }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "read"
+                                ]
+                            },
+                            {
+                                "provider": "userPools",
+                                "ownerField": "owner",
+                                "allow": "owner",
+                                "identityClaim": "cognito:username",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            },
+                            {
+                                "groupClaim": "cognito:groups",
+                                "provider": "userPools",
+                                "allow": "groups",
+                                "groups": [
+                                    "administrator"
+                                ],
+                                "operations": [
+                                    "read",
+                                    "update",
+                                    "delete"
+                                ]
+                            },
+                            {
+                                "allow": "private",
+                                "operations": [
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
                 }
             ]
         }
     },
     "enums": {},
     "nonModels": {},
-    "version": "d3657e3b9ae60a408b0b5cc13d8c739b"
+    "version": "5d0f0e484970d1cfaa86e250b380939f"
 };
