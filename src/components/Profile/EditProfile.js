@@ -22,6 +22,24 @@ const EditProfile = () => {
   console.log('userprofile', userProfile);
   console.log('quill', value);
   
+console.log('hande right before change');
+  function handleChangeEditor(editor) {
+    console.log('background', editor);
+    console.log('formstateis this man', formState);
+    setFormState({...formState, bio: editor});
+    // let _postForm = this.state.postForm;
+
+    // _postForm.notesValid = true;
+    // _postForm.notes = editor;
+
+    // if (editor.length < 30) { _postForm.notesValid = false; }
+
+
+
+    // this.setState({ ...this.state, postForm: _postForm });
+};
+
+
   /**
    * Use Effect
    * Calls function onPageRendered
@@ -33,7 +51,9 @@ const EditProfile = () => {
       setFormState({ sub: userProfile.getUser.id, username: userProfile.getUser.username, email: userProfile.getUser.email, picture: userProfile.getUser.picture, bio: userProfile.getUser.Bio});
     } else {
       console.log('thats a bummer man');
-      getUser();
+      getUser().then(() => {
+        console.log('then',userProfile.getUser);
+      });
       // dispatch({ 
       //   type: 'FETCH_USER',
       //   payload: userProfile.getUser.id
@@ -130,21 +150,6 @@ console.log('formState', formState);
       }  
     }
 
-    function handleChangeEditor(editor) {
-      console.log('background', editor);
-      setInput('bio', editor);
-      // let _postForm = this.state.postForm;
-
-      // _postForm.notesValid = true;
-      // _postForm.notes = editor;
-
-      // if (editor.length < 30) { _postForm.notesValid = false; }
-
-
-
-      // this.setState({ ...this.state, postForm: _postForm });
-  };
-
     /**
    * Get Profile Picture
    * is successful returns the users profile picture
@@ -204,7 +209,14 @@ console.log('formState', formState);
           />
         </div>
         <h1 className="text-white">BIO</h1>
-        <ReactQuill theme="snow" value={formState.bio || ''} onChange={handleChangeEditor} placeholder="BIO" className="bg-gray-200"/>
+        <ReactQuill theme="snow" value={formState.bio}           onChange={(newValue, delta, source) => {
+            if (source === 'user') {
+              setInput('bio', newValue)
+            }
+          }}
+          onBlur={(range, source, quill) => {
+            // input.onBlur(quill.getHTML());
+          }} placeholder="BIO" className="bg-gray-200"/>
 
         <div className="flex flex-col mt-2">
           <label for="email" className="hidden">Email</label>
